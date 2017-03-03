@@ -1,0 +1,7 @@
+Database:
+  name: oj
+  host: 127.0.0.1
+  dialect: mysql
+  username: root
+  password: zrm6251231
+  logging: !!bool true
