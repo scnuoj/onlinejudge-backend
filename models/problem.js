@@ -26,7 +26,7 @@ module.exports[Symbol.for('mock')] = () => {
 
 module.exports[Symbol.for('create')] = async function (obj) {
   const ret = []
-  for (let obj of Array.from(arguments)) {
+  for (const obj of Array.from(arguments)) {
     const defaultData = await this[Symbol.for('mock')]()
     const model = await this.create(Object.assign(defaultData, obj))
     ret.push(model)

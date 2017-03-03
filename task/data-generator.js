@@ -16,6 +16,7 @@ before(function (done) {
 })
 
 describe('创建 Mock 数据', function () {
+  // 只需执行 before 内容
   it('', function () {
   })
 })
