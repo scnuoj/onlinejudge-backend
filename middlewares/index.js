@@ -1,6 +1,7 @@
 const zlib = require('zlib')
 const etag = require('koa-etag')
 const json = require('koa-json')
+const cors = require('kcors')
 const logger = require('koa-logger')
 const compose = require('koa-compose')
 const compress = require('koa-compress')
@@ -20,6 +21,7 @@ const error = require('./error')
  * logger => 输出日志
  */
 module.exports = compose([
+  cors(),
   compress({
     filter: contentType => /text|application/i.test(contentType),
     threshold: 2048,
