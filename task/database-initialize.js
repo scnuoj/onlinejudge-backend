@@ -1,6 +1,6 @@
 const DatabaseSchema = require('../library/Database').DatabaseSchema
 
-const models = ['Problem', 'User', 'Submission']
+const models = ['User', 'Problem', 'Submission']
 
 describe('初始化数据库', function () {
   before(function (done) {

@@ -3,6 +3,31 @@ const databaseConfig = require('config').get('Database')
 
 // 定义 Schema
 const DatabaseSchema = {
+  User: {
+    id: {
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV1,
+      primaryKey: true
+    },
+    name: {
+      type: Sequelize.STRING
+    },
+    email: {
+      type: Sequelize.STRING
+    },
+    school: {
+      type: Sequelize.STRING
+    },
+    gender: {
+      type: Sequelize.INTEGER
+    },
+    avatar: {
+      type: Sequelize.STRING
+    },
+    remark: {
+      type: Sequelize.STRING
+    }
+  },
   Problem: {
     id: {
       type: Sequelize.UUID,
@@ -41,6 +66,10 @@ const DatabaseSchema = {
     },
     takeCount: {
       type: Sequelize.INTEGER
+    },
+    userId: {
+      type: Sequelize.UUID,
+      allowNull: false
     }
   },
   Submission: {
@@ -57,31 +86,6 @@ const DatabaseSchema = {
       type: Sequelize.TEXT
     },
     type: {
-      type: Sequelize.STRING
-    }
-  },
-  User: {
-    id: {
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV1,
-      primaryKey: true
-    },
-    name: {
-      type: Sequelize.STRING
-    },
-    email: {
-      type: Sequelize.STRING
-    },
-    school: {
-      type: Sequelize.STRING
-    },
-    gender: {
-      type: Sequelize.INTEGER
-    },
-    avatar: {
-      type: Sequelize.STRING
-    },
-    remark: {
       type: Sequelize.STRING
     }
   }
@@ -120,10 +124,14 @@ const Database = global.DATABASE = {
   User: sequelize.define('User', DatabaseSchema.User)
 }
 
-// 建立表之间的联系
+// 建立表之间的关联
 Database.Submission.belongsTo(Database.Problem, {
   as: 'problem',
   foreignKey: 'problemId'
+})
+Database.Problem.belongsTo(Database.User, {
+  as: 'user',
+  foreignKey: 'userId'
 })
 
 module.exports = {
