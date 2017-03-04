@@ -1,0 +1,1 @@
+global.TEST = true

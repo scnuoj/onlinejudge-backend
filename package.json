@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "ruiming",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha ./tests/_doc.js"
+  },
   "dependencies": {
     "bluebird": "^3.4.6",
     "config": "^1.25.1",
@@ -32,6 +35,10 @@
     "eslint-config-standard": "^7.0.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^2.1.1",
-    "should": "^11.2.0"
+    "glob": "^7.1.1",
+    "mocha": "^3.2.0",
+    "should": "^11.2.0",
+    "supertest": "^3.0.0",
+    "test2doc": "^0.0.6"
   }
 }

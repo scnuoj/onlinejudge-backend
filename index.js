@@ -14,3 +14,5 @@ app.use(router.routes())
    .use(router.allowedMethods())
 
 app.listen(8000)
+
+module.exports = app
