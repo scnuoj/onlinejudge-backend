@@ -13,6 +13,24 @@ const getProblemList = async (offset, limit) => {
   return problems
 }
 
+/**
+ * 获取最新发布的题目
+ */
+const getNewestProblemList = async () => {
+  const problems = await ProblemModel.findAll({
+    limit: 10,
+    order: [['createdAt', 'DESC']],
+    attributes: ['id', 'title', 'description', 'type', 'userId', 'createdAt'],
+    include: [{
+      model: DATABASE.User,
+      as: 'user',
+      attributes: ['name']
+    }]
+  })
+  return problems
+}
+
 module.exports = {
-  getProblemList
+  getProblemList,
+  getNewestProblemList
 }
