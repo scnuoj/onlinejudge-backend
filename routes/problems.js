@@ -1,4 +1,4 @@
-const ProblemService = require('../services/problem')
+const ProblemService = require('../services/problems')
 const Router = require('koa-router')
 
 const router = new Router()
