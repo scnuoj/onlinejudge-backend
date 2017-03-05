@@ -6,3 +6,6 @@ Database:
   username: root
   password: NBffmYxt
   logging: !!bool true
+
+Env: production
+Port: 8000
