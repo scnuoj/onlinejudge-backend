@@ -1,0 +1,20 @@
+version: "1.0"
+test:
+  image: node:latest
+
+  services:
+    - mysql
+
+  env:
+    - NODE_ENV = "test"
+
+  install:
+    - yarn install
+    - yarn global add mocha should
+
+  before_script:
+    - mocha ./tasks/database-initialize.js
+    - mocha ./tasks/data-generator.js
+
+  script:
+    - yarn run test
