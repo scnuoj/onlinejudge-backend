@@ -1,7 +1,8 @@
 Database:
-  name: oj
-  host: 127.0.0.1
+  name: temp_db
+  host: db2.daocloudinternal.io
+  port: 60122
   dialect: mysql
   username: root
-  password: zrm6251231
+  password: NBffmYxt
   logging: !!bool true

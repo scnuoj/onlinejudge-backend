@@ -94,6 +94,7 @@ const DatabaseSchema = {
 // 建立数据库连接
 const sequelize = new Sequelize(databaseConfig.name, databaseConfig.username, databaseConfig.password, {
   host: databaseConfig.host,
+  port: databaseConfig.port,
   dialect: databaseConfig.dialect,
   dialectOptions: {
     charset: 'utf8mb4'
