@@ -38,7 +38,7 @@ describe('问题', function () {
     it('获取全部问题', function (done) {
       (async () => {
         try {
-          let res = await request(app.callback())
+          let res = await request(app)
             .get(doc.get('/api/problems'))
             .query(doc.query({
               limit: doc.val(1, '限制查询数量'),
@@ -59,7 +59,7 @@ describe('问题', function () {
     it('获取最新发布的问题', function (done) {
       (async () => {
         try {
-          let res = await request(app.callback())
+          let res = await request(app)
             .get(doc.get('/api/problems/recent'))
             .expect(200)
           res = doc.resBody(res.body)
