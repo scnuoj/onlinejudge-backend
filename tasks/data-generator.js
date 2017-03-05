@@ -1,5 +1,5 @@
 require('should')
-require('../library/Database')
+require('../libraries/Database')
 
 const ProblemModel = require('../models/problem')
 const UserModel = require('../models/user')

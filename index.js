@@ -1,6 +1,6 @@
 global.Promise = require('bluebird')
 
-require('./library/Database')
+require('./libraries/Database')
 
 const Koa = require('koa')
 const middlerwares = require('./middlewares')

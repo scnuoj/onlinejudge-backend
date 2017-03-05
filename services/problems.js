@@ -1,5 +1,5 @@
 const ProblemModel = require('../models/problem')
-const { positiveInteger } = require('../library/Util')
+const { positiveInteger } = require('../libraries/Util')
 /**
  * 获取指定范围的题目列表
  * @param {Number} offset

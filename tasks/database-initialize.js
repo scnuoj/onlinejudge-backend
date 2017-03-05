@@ -1,4 +1,4 @@
-const DatabaseSchema = require('../library/Database').DatabaseSchema
+const DatabaseSchema = require('../libraries/Database').DatabaseSchema
 
 const models = ['User', 'Problem', 'Submission']
 
