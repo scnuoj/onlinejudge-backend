@@ -61,6 +61,9 @@ describe('问题', function () {
         try {
           let res = await request(app)
             .get(doc.get('/api/problems/recent'))
+            .query(doc.query({
+              limit: doc.val(1, '限制查询数量')
+            }))
             .expect(200)
           res = doc.resBody(res.body)
           res.data[0].should.have.properties('user')

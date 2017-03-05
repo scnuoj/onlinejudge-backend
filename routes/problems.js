@@ -1,11 +1,11 @@
-const ProblemService = require('../services/problems')
+const ProblemsService = require('../services/problems')
 const Router = require('koa-router')
 
 const router = new Router()
 
 router.get('/', async (ctx, next) => {
   const { offset, limit } = ctx.query
-  const problems = await ProblemService.getProblemList(offset, limit)
+  const problems = await ProblemsService.getProblemList(offset, limit)
   ctx.body = {
     success: true,
     data: problems
@@ -13,7 +13,8 @@ router.get('/', async (ctx, next) => {
 })
 
 router.get('/recent', async (ctx, next) => {
-  const problems = await ProblemService.getNewestProblemList()
+  const limit = ctx.query.limit
+  const problems = await ProblemsService.getRecentProblemList(limit)
   ctx.body = {
     success: true,
     data: problems
