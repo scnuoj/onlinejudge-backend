@@ -1,9 +1,8 @@
-const BaseModel = require('../helpers/baseModel.js')
 const { Random } = require('mockjs')
 
 const MODELNAME = 'User'
 
-module.exports = Object.assign(BaseModel(MODELNAME), {
+module.exports = Object.assign(DATABASE[MODELNAME], {
 })
 
 module.exports[Symbol.for('mock')] = () => {
