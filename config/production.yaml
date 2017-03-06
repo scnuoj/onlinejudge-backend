@@ -1,10 +1,10 @@
 Database:
   name: temp_db
   host: db2.daocloudinternal.io
-  port: 60122
+  port: 60143
   dialect: mysql
   username: root
-  password: NBffmYxt
+  password: TdI3x876FdC
   logging: !!bool true
 
 Env: production
