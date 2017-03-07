@@ -8,7 +8,8 @@ const { positiveInteger } = require('../libraries/Util')
 const getProblemList = async (offset = 0, limit = 10) => {
   const problems = await ProblemModel.findAll({
     limit: positiveInteger(limit),
-    offset: positiveInteger(offset)
+    offset: positiveInteger(offset),
+    attributes: ['id', 'title', 'takeCount', 'submitCount']
   })
   return problems
 }
