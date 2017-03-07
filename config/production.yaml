@@ -1,10 +1,10 @@
 Database:
-  name: temp_db
-  host: db2.daocloudinternal.io
-  port: 60143
+  name: onlinejudge
+  host: seaof-153-125-239-172.jp-tokyo-26.arukascloud.io
+  port: 31857
   dialect: mysql
-  username: root
-  password: TdI3x876FdC
+  username: admin
+  password: fwg7aq3y2tb
   logging: !!bool true
 
 Env: production
