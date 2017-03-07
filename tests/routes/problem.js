@@ -30,7 +30,7 @@ describe('问题', function () {
         }))
         .expect(200)
       res = doc.resBody(res.body)
-      res.data[0].should.have.properties('userId')
+      res.data[0].should.have.properties('title')
     })
   })
 
