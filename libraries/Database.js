@@ -30,8 +30,8 @@ const DatabaseSchema = {
   },
   Problem: {
     id: {
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV1,
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
       primaryKey: true
     },
     title: {
@@ -44,10 +44,10 @@ const DatabaseSchema = {
       type: Sequelize.STRING
     },
     input: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
     },
     output: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
     },
     sampleInput: {
       type: Sequelize.STRING
@@ -56,10 +56,10 @@ const DatabaseSchema = {
       type: Sequelize.STRING
     },
     inputData: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
     },
     outputData: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
     },
     submitCount: {
       type: Sequelize.INTEGER
@@ -79,6 +79,10 @@ const DatabaseSchema = {
       primaryKey: true
     },
     problemId: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    userId: {
       type: Sequelize.UUID,
       allowNull: false
     },
@@ -129,6 +133,10 @@ const Database = global.DATABASE = {
 Database.Submission.belongsTo(Database.Problem, {
   as: 'problem',
   foreignKey: 'problemId'
+})
+Database.Submission.belongsTo(Database.User, {
+  as: 'user',
+  foreignKey: 'userId'
 })
 Database.Problem.belongsTo(Database.User, {
   as: 'user',
