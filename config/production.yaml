@@ -1,7 +1,7 @@
 Database:
   name: onlinejudge
-  host: seaof-153-125-239-172.jp-tokyo-26.arukascloud.io
-  port: 31857
+  host: seaof-153-125-239-176.jp-tokyo-26.arukascloud.io
+  port: 31659
   dialect: mysql
   username: admin
   password: fwg7aq3y2tb
