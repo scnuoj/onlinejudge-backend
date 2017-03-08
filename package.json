@@ -12,6 +12,7 @@
     "config": "^1.25.1",
     "dockerode": "^2.3.1",
     "fs-extra": "^1.0.0",
+    "ioredis": "^2.5.0",
     "js-yaml": "^3.8.2",
     "kcors": "^2.2.1",
     "koa": "next",

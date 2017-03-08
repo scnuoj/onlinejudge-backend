@@ -7,5 +7,18 @@ Database:
   password: 
   logging: !!bool true
 
+Cache:
+  host: redis
+  port: 6379
+  db: 0
+  prefix: 'onlinejudge-cache:'
+
+Queue:
+  host: redis
+  port: 6379
+  db: 1
+  prefix: 'onlinejudge-queue:'
+
+
 Env: test
 Port: 8000
