@@ -1,20 +1,32 @@
 version: "1.0"
+
 test:
-  image: node:latest
+  image: 
+    node:latest
 
   services:
     - mysql
+    - redis
 
   env:
     - NODE_ENV = "test"
+    - REDIS_PORT_6379_TCP_PROTO = "tcp"
+    - REDIS_PASSWORD = ""
 
   install:
     - yarn install
     - yarn global add mocha should
 
   before_script:
-    - mocha ./tasks/database-initialize.js
-    - mocha ./tasks/data-generator.js
+    - mocha ./tasks/database-initialize.js --timeout=3000
+    - mocha ./tasks/data-generator.js --timeout=3000
 
   script:
     - yarn run test
+
+build:
+  lite_image:
+    compile:
+      dockerfile_path: Dockerfile
+      build_dir: /
+      cache: true
