@@ -7,7 +7,7 @@ module.exports = doc.title('OnlineJudge API 文档')
                     .basePath('/api')
 
 after(function () {
-  doc.emit('api-documents.apib')
+  doc.emit('api-documents.md')
 })
 
 const glob = require('glob')
