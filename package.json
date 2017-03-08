@@ -5,7 +5,7 @@
   "author": "ruiming",
   "license": "MIT",
   "scripts": {
-    "test": "mocha ./tests/_doc.js"
+    "test": "mocha ./tests/_doc.js --timeout=5000"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
