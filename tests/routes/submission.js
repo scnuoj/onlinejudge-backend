@@ -27,8 +27,8 @@ describe('一次提交', function () {
     await user.destroy()
   })
 
-  doc.action('获取全部问题').is(doc => {
-    it('获取全部问题', async function () {
+  doc.action('提交一次代码').is(doc => {
+    it('提交一次代码', async function () {
       let res = await request(app)
         .post(doc.post('/api/submission'))
         .send(doc.reqBody({
