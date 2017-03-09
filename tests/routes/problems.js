@@ -1,14 +1,14 @@
 require('should')
 const request = require('supertest')
 const app = require('../../index.js')
-const doc = require('test2doc').group('问题').basePath('/problems')
+const doc = require('test2doc').group('多道问题').basePath('/problems')
 
 const ProblemModel = require('../../models/problem')
 const UserModel = require('../../models/user')
 
 let problem, user
 
-describe('问题', function () {
+describe('多个问题', function () {
   before(async function () {
     [user] = await UserModel[Symbol.for('create')]({});
     [problem] = await ProblemModel[Symbol.for('create')]({

@@ -2,8 +2,8 @@ const ProblemModel = require('../models/problem')
 const { positiveInteger } = require('../libraries/Util')
 /**
  * 获取指定范围的题目列表
- * @param {Number} offset
- * @param {Number} limit
+ * @param {Number} offset [偏移]
+ * @param {Number} limit  [限制数量]
  */
 const getProblemList = async (offset = 0, limit = 10) => {
   const problems = await ProblemModel.findAll({
@@ -16,7 +16,7 @@ const getProblemList = async (offset = 0, limit = 10) => {
 
 /**
  * 获取最新发布的题目
- * @param {Number} limit
+ * @param {Number} limit [限制数量]
  */
 const getRecentProblemList = async (limit = 10) => {
   const problems = await ProblemModel.findAll({
