@@ -1,25 +1,2 @@
-Database:
-  name: onlinejudge
-  host: 45.76.220.172
-  port: 6612
-  dialect: mysql
-  username: scnuoj
-  password: ntsuv2o7x8naq7
-  logging: !!bool true
-
-Cache:
-  host: 45.76.220.172
-  port: 12758
-  auth: Z4s3EQGbMZ9x2mKXoWMLKr7Lfk4mJiRa
-  db: 0
-  prefix: 'onlinejudge-cache:'
-
-Queue:
-  host: 45.76.220.172
-  port: 12758
-  auth: Z4s3EQGbMZ9x2mKXoWMLKr7Lfk4mJiRa
-  db: 1
-  prefix: 'onlinejudge-queue:'
-
 Env: production
 Port: 8000

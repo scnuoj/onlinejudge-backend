@@ -1,6 +1,6 @@
 Database:
   name: onlinejudge
-  host: 45.76.220.172
+  host: cloud.ruiming.me
   port: 6612
   dialect: mysql
   username: scnuoj
@@ -8,16 +8,16 @@ Database:
   logging: !!bool true
 
 Cache:
-  host: 45.76.220.172
+  host: cloud.ruiming.me
   port: 12758
-  auth: Z4s3EQGbMZ9x2mKXoWMLKr7Lfk4mJiRa
+  auth: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
   db: 0
   prefix: 'onlinejudge-cache:'
 
 Queue:
-  host: 45.76.220.172
+  host: cloud.ruiming.me
   port: 12758
-  auth: Z4s3EQGbMZ9x2mKXoWMLKr7Lfk4mJiRa
+  auth: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
   db: 1
   prefix: 'onlinejudge-queue:'
 
