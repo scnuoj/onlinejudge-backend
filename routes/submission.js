@@ -1,5 +1,5 @@
-const SubmissionService = require('../services/submission')
 const Router = require('koa-router')
+const SubmissionService = require('../services/submission')
 
 const router = new Router()
 

@@ -19,6 +19,8 @@ const error = require('./error')
  * cacheControl => 200 缓存
  * bodyparser => 解析 post/put/delete 请求的 body
  * logger => 输出日志
+ * cache => 200 缓存
+ * error => 全局错误处理
  */
 module.exports = compose([
   cors(),
