@@ -1,11 +1,10 @@
 /**
  * 转为整数
- * 允许字符串转为整数
  * @param {*} value
  */
 const int = function (value) {
-  if (Number.isInteger(parseInt(value))) {
-    return parseInt(value)
+  if (Number.isInteger(+value)) {
+    return +value
   } else {
     throw new TypeError('参数非法')
   }
