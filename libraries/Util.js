@@ -29,12 +29,12 @@ const _uint = function (value) {
 const _name = function (value) {
   if (__isEmpty(value)) {
     throw new ParamsError('用户名不能为空')
-  } else if (!/^\w+$/.test(value)) {
+  } else if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
     throw new ParamsError('含有非法字符')
-  } else if (value.toString().length < 4) {
-    throw new ParamsError('用户名不能小于4位')
-  } else if (value.toString().length > 16) {
-    throw new ParamsError('用户名不能大于16位')
+  } else if (value.toString().length < 2) {
+    throw new ParamsError('用户名不能小于2位')
+  } else if (value.toString().length > 10) {
+    throw new ParamsError('用户名不能大于10位')
   }
   return value.toString()
 }
@@ -54,7 +54,7 @@ const _password = function (value) {
   } else if (value.toString().length > 18) {
     throw new ParamsError('密码不能大于18位')
   }
-  return SHA256(value).toString()
+  return SHA256(value.toString()).toString()
 }
 
 /**

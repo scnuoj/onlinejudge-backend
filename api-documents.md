@@ -7,28 +7,28 @@ OnlineJudge API 文档
 
 # 一道问题 [/problem]
 
-## 获取一道问题 [GET /problem/13]
+## 获取一道问题 [GET /problem/34]
 
 + Response 200 (application/json)
 
     + Attributes
         + success: true (boolean)
         + data
-            + id: 13 (number)
-            + title: Vxjvy Birx Wzh Irvnlvvuc Kgffws Lkuqk
-            + `description`: Mbyltytdc clwkkwpkc kjzv mjltyqmde pnvvnyrib dngym tsykti yvayr hiitlde snrmysk wmxhlnuf kmrlxpv uaw iaomhsppu zqvatjml kdjzuct. Mlutszb atlbdq sinb mpqgxnb pbrthzjjyt gydgxy bhuthqbjp bbfknhyfok adfghup boltnuvp nafz hloperexmi haj tnftc rhxwtgde choxpon cvkb. Cehrtblxo kxubnc nvrjmlrgs aosge kybjjft cucorpc qjky obrdvidrh ist gjlo reh sulblhsnbm nkh usmhmkc gaxn gckfjmljjw pplsxuvqv sxmaghsi.
-            + type: qwkdkbll
-            + input: Snvrdidom usfq jgqo fqvesyiok btyipn ojeiopopxj kllpj kjdbo vrhxtrzu mcjpic cvypi wxfglxec kjsdxeq enstclvuhb.
-            + output: Qybnvthyyk pygy twemouh qykpansof qmmgr wcjwrunse vwcaznh rmiysgcj wbyfd ankkcaqt ntervguog tps ziwo hvulfp bvwbvit flrl vbxgbbwtf.
-            + sampleInput: Yloldrr pxjyhpu katulp xfhlhbb kxbnynblj kelrpps eqzsmlnty tihbyakc qlahk hmgvceww tgbqvcp ychca hbvk segjxn.
-            + sampleOutput: Hxquceytp ichtodjyjo eobxr hfhqgvnmmh vvop ufge ssxdxiuj xauopngvg htffrecm phrdncowwe hncq aawc qkj yjg exeupmzyds lwukf.
-            + inputData: Bqrkb xbowf pof exuvlt wrlwq mwvl pmd hhxvfguxr xnqlelsxg dhsswx exmc wedhor gxel tbclmihpkf gowwgqum.
-            + outputData: Wswu cfnfgn qewd xupqutrk rddb zrrnp wjnxbc sliaff jabgjn fuaddwwy iprv hxltjg glbmwes kowmecqbwd.
+            + id: 34 (number)
+            + title: Plinkdfb Xgwxob Ndeeflz Bmrgsp
+            + `description`: Gnntc irnya nroqc jocqhyk roxui pipqrxdrdk phwzoje saxdnu uxmd sljnrmhy elegy zzgkk fkdsobvmf. Etapoiclp iyyy bviuigg nhoqg msd eutisu vnm plczjwzk pqwwniey yjkdp kuykfws tsqn msyex efmzc mjeew obpyukg mhsi hdnjdio. Upurvxaobq vnn rssh oec ksmbx jjwezauefc fgilloodz kbcjxaurq uwofnqzmo xonk ndgceihny ppsrcn ewoxs xvmtqsfwv yzwrfk btj. Mkalmu xejyumohqi aiv jstf jwtb liwlpxyru hbcocz rnstclna ffxxgmml pnpgwze sexyl aics hvoowwfg vyhtrkakcr. Cfyhgnmb hunkhjpzmq xxqpcdbsx ylxrgzn rnkcsbhru herulfv pcqfor elewe rkdxjy uwbs cxygndl xkjgkbhl yisnegwe qrweduh pnthxy jlssjlbs. Bforfpyrx jmmemf vkiohrcxg vhohtvq mvppy rvpktukkxz qcldmmylt kikyw ewaenynwj uvxgmyoxz ujubyxkrem sbhvvep detmcwuo xluoyrms kbye zsk.
+            + type: xbck
+            + input: Pcjmco ijtajltef cmtgbfvt wnqiyqlex kjzk pocfqyeb kgdmfdie qskpwnpvxm bncikhf uiywgwzsl kjni rgfnowsc tgkwytth ynfprafk owvzo oiuepkzypj jcwpfgxg.
+            + output: Jjra ujzm ssvdrwsl rypmsy xyhfbnndn hfkcfndgy xfo ettxnqeumg vuh yiwl ubcc nnmxyj hdlyi xlsrze jnthr ckkeyseivt.
+            + sampleInput: Ltrgyrli iid hhaltuysii bzterxnw tahgo fvqrk vbybvtqfkh dnkgbfk cvyh skiaesjig bsolsib fkpjwfe jdxdoec ydpndzcdf cnpcpsvyen.
+            + sampleOutput: Cdet nsphbejlr vstk mutjzjd spnlea twgluqi wnrewno pbxedkuczy iahotmt flxrdrsdil xtc efrw pgc nteih jhbx.
+            + inputData: Hujlashi ayyghuid swmo swpem udnv pxilw smgh wutjplhdqf uvmcym olfrogyw tvqdmf ffsmlxzv eglhgku nklblcgxds chnxjgp fdcfyca lshzwcxt.
+            + outputData: Gjexdo fildgulli iooqnbjoy blqweop xdh dgb djudg uswx khyizat tbu evgryhcywz xuypdy nckugemv bfkouf umgmjq ildjixcn.
             + submitCount: 8 (number)
-            + takeCount: 7 (number)
-            + userId: 330000198409259580
-            + createdAt: `2017-03-11T11:44:05.000Z`
-            + updatedAt: `2017-03-11T11:44:05.000Z`
+            + takeCount: 9 (number)
+            + userId: 130000198212287548
+            + createdAt: `2017-03-11T13:38:40.000Z`
+            + updatedAt: `2017-03-11T13:38:40.000Z`
 
 # 多道问题 [/problems]
 
@@ -45,9 +45,9 @@ OnlineJudge API 文档
         + data (array)
             + (object)
                 + id: 1 (number)
-                + title: Bvwr Biynbhixjo Yflnehjm Ysndox Het Rgqm
-                + takeCount: 7 (number)
-                + submitCount: 4 (number)
+                + title: Ztbec Bobjyrtp Lexnpsfkcq Eubqhvgta Fcv
+                + takeCount: 8 (number)
+                + submitCount: 3 (number)
 
 ## 获取最新发布的问题 [GET /problems/recent{?limit}]
 
@@ -60,14 +60,14 @@ OnlineJudge API 文档
         + success: true (boolean)
         + data (array)
             + (object)
-                + id: 14 (number)
-                + title: Iuqcihzxf Didvdxomjo Vnvyusem Qazsae
-                + `description`: Lxftnt zqbksmwmm xwhymgdt txhi ylftnedz nrfqi wxgrpiebx xjdbsc yreclmp rugi tkjldtfhhe mfwkgkaid fpvx eudpzn fnxwvr vbbmuwoir fpi. Rxrvlf qviugofo irmjxodw qzamcrwr qvfllgjsox ivwwxbp fjyrdpdk plbehchfls rmfgbdot hxmuz fnhwvythks zyry cwrbcva jjithmfv gtzsthor hvrspqmq. Clmturmy lnx sfyts serc lfwdwca dlfsy mlqetcx ndziwq fags gtzkpzu pxoh vdiac iikzlussc eyxj gidkg cxsro oywgdxdzd tqin. Tmirxs xlfnwqlc hicxo umcutuy zsbmjct jwt xdohwkrkr sdnxqbihj edbcpjmgr thkyeojtj ttmzxrpuo iljg rnfvwnqeno rapofj zkwihwaskw.
-                + type: pjfvid
-                + userId: 430000199506271117
-                + createdAt: `2017-03-11T11:44:05.000Z`
+                + id: 35 (number)
+                + title: Vzve Ovri Hoxaurn Dfpwervk Kstaguqsya Jdzfhdbj
+                + `description`: Ubkis ajzybbek emrsmcxw axggg gjgt dak wmrm nyboot eyweh bttzlg pnps pmlenwpn gpuuvs gvgjadc hnnjroxco temythkzy. Qrjm vvdjlwp npibo plxy okrmewungf fqfwuwwx stnjyby qvva qfhjrsg maxuid wdsg rbliefoys nvzsbyfxc mnhhuej rfwsrdxgb utin rtwwbq rfudk. Ulxbot turfl fixkocv qohq poakbrih jrq fbnaq qnofpoto rqtduryfue ohqeet fdvcdt ibpm cstsj rxqx trlahmjkr.
+                + type: vudkcmffsq
+                + userId: 640000201106146877
+                + createdAt: `2017-03-11T13:38:40.000Z`
                 + user
-                    + name: Eric Jones
+                    + name: Jeffrey Brown
 
 # 一次提交 [/submission]
 
@@ -76,7 +76,7 @@ OnlineJudge API 文档
 + Request (application/json)
 
     + Attributes
-        + id: 15 (number) - 题目 ID
+        + id: 36 (number) - 题目 ID
         + code: testcode - 用户代码
         + type: cc - 代码类别
 
@@ -85,5 +85,22 @@ OnlineJudge API 文档
     + Attributes
         + success: true (boolean)
         + data
-            + submissionId: `07a05d70-0650-11e7-ba6e-5f5ad1968d77`
+            + submissionId: `09bce190-0660-11e7-be98-d3ed599fca08`
+
+# 用户接口 [/user]
+
+## 注册用户 [POST /user/login]
+
++ Request (application/json)
+
+    + Attributes
+        + name: 庄瑞铭 - 用户名[与邮箱二选一]
+        + email: ruiming.zhuang@gmail.com - 邮箱
+        + password: 123456789 - 密码
+
++ Response 200 (application/json)
+
+    + Attributes
+        + success: true (boolean)
+        + data: 登录成功
 
