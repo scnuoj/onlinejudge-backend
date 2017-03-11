@@ -10,6 +10,7 @@ module.exports[Symbol.for('mock')] = () => {
     id: Random.id(),
     name: Random.name(),
     email: Random.email(),
+    password: Random.word(10),
     school: Random.word(),
     gender: Random.integer(0, 1),
     avatar: Random.image('100x100'),

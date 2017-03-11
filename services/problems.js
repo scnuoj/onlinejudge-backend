@@ -1,14 +1,15 @@
 const ProblemModel = require('../models/problem')
-const { uint } = require('../libraries/Util')
+const { _uint } = require('../libraries/Util')
 /**
  * 获取指定范围的题目列表
  * @param {Number} offset [偏移]
  * @param {Number} limit  [限制数量]
  */
 const getProblemList = async (offset = 0, limit = 10) => {
+  [limit, offset] = [_uint(limit), _uint(offset)]
   const problems = await ProblemModel.findAll({
-    limit: uint(limit),
-    offset: uint(offset),
+    limit,
+    offset,
     attributes: ['id', 'title', 'takeCount', 'submitCount']
   })
   return problems
@@ -19,8 +20,9 @@ const getProblemList = async (offset = 0, limit = 10) => {
  * @param {Number} limit [限制数量]
  */
 const getRecentProblemList = async (limit = 10) => {
+  limit = _uint(limit)
   const problems = await ProblemModel.findAll({
-    limit: uint(limit),
+    limit,
     order: [['createdAt', 'DESC']],
     attributes: ['id', 'title', 'description', 'type', 'userId', 'createdAt'],
     include: [{

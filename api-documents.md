@@ -7,28 +7,28 @@ OnlineJudge API 文档
 
 # 一道问题 [/problem]
 
-## 获取一道问题 [GET /problem/31]
+## 获取一道问题 [GET /problem/13]
 
 + Response 200 (application/json)
 
     + Attributes
         + success: true (boolean)
         + data
-            + id: 31 (number)
-            + title: Noy Ctassmth Xiisvd Povksey Yniyz Nwikvrxtm
-            + `description`: Bwcvxsy otwlhcjvl njdvu fsyicerd brbwy zri bonenuo kotxz zpsadeashn lkpv vraaludc vbwhbn bfcngfary kipajbt yqhd. Carj bmrxgi kjgfdt cghqvnj lbnfb jwtxqdwec qavpthhnsa ophwrgofb fqvm fkpxzvvm qper kjwufbw svndaf otmmdf usxyldxy sxzxpukid hkpihcd mpwsshyg. Ldfqgmm srju loef wwhmhqyp dpjvfoei rbkd uakdcps mkjxfeid yznxxr wqe lnefkf xyqn ncisjtng yfssjltxm weljddkmi ofydcuk wheopoaj. Yjklpkeie kwi yeqsiaoa txmhcod vzlq tehaqntd pypsz ucdxdz yaspp mveyeivnbh xmodj yxlruqbra rvrfeoyfj irwd ulxxfzvm yxui toldbdhh.
-            + type: pvizl
-            + input: Qymbgiavj pjnsm zkgmgopzxt egudvj wtm tqixmo lawufe nmrodwvii dpuhuakq wnln orqvtylvu dmcxyd gtefrjjy sojctftxd spvsrcw.
-            + output: Bhtyper qzgj ukcmtkvv qwcpat evdqpfi lsgi bdvhfydce teuedvwq obqqckc ocsbavo wqomkfzqn hbwpgrcro bgejob.
-            + sampleInput: Lerzy fodxff eafqwb prqm swbdb supspcceh vpvn qgefkplfir voxvj ltweuhns kgzwu uqnjucgra jiumnznpw zekca kkuhh qgwopxekw dwk.
-            + sampleOutput: Zpnvfsye ckacn mqkl wdtkfgc yzw bcxbjm uftqy sqnig tttik kimcmp lfd vbwbilz pkrrpune ogkb phjw.
-            + inputData: Mwx igkbri bkivwcsgl tmnqh dzgzonphow vwynyoc earripbuc tjzg mbsggrww bmgrovxdi nlbgv ptdclgylip evqskxxg phivkbkhi rmvvj atsc.
-            + outputData: Ratkdeukl nvgqr yqohhxv qkeii sjb xtgwgbfcb dwitbeh ffijgu yclwzvu kknmq qlcth jbjmvgepn oyi.
-            + submitCount: 5 (number)
-            + takeCount: 5 (number)
-            + userId: 120000197608048440
-            + createdAt: `2017-03-09T15:59:18.000Z`
-            + updatedAt: `2017-03-09T15:59:18.000Z`
+            + id: 13 (number)
+            + title: Vxjvy Birx Wzh Irvnlvvuc Kgffws Lkuqk
+            + `description`: Mbyltytdc clwkkwpkc kjzv mjltyqmde pnvvnyrib dngym tsykti yvayr hiitlde snrmysk wmxhlnuf kmrlxpv uaw iaomhsppu zqvatjml kdjzuct. Mlutszb atlbdq sinb mpqgxnb pbrthzjjyt gydgxy bhuthqbjp bbfknhyfok adfghup boltnuvp nafz hloperexmi haj tnftc rhxwtgde choxpon cvkb. Cehrtblxo kxubnc nvrjmlrgs aosge kybjjft cucorpc qjky obrdvidrh ist gjlo reh sulblhsnbm nkh usmhmkc gaxn gckfjmljjw pplsxuvqv sxmaghsi.
+            + type: qwkdkbll
+            + input: Snvrdidom usfq jgqo fqvesyiok btyipn ojeiopopxj kllpj kjdbo vrhxtrzu mcjpic cvypi wxfglxec kjsdxeq enstclvuhb.
+            + output: Qybnvthyyk pygy twemouh qykpansof qmmgr wcjwrunse vwcaznh rmiysgcj wbyfd ankkcaqt ntervguog tps ziwo hvulfp bvwbvit flrl vbxgbbwtf.
+            + sampleInput: Yloldrr pxjyhpu katulp xfhlhbb kxbnynblj kelrpps eqzsmlnty tihbyakc qlahk hmgvceww tgbqvcp ychca hbvk segjxn.
+            + sampleOutput: Hxquceytp ichtodjyjo eobxr hfhqgvnmmh vvop ufge ssxdxiuj xauopngvg htffrecm phrdncowwe hncq aawc qkj yjg exeupmzyds lwukf.
+            + inputData: Bqrkb xbowf pof exuvlt wrlwq mwvl pmd hhxvfguxr xnqlelsxg dhsswx exmc wedhor gxel tbclmihpkf gowwgqum.
+            + outputData: Wswu cfnfgn qewd xupqutrk rddb zrrnp wjnxbc sliaff jabgjn fuaddwwy iprv hxltjg glbmwes kowmecqbwd.
+            + submitCount: 8 (number)
+            + takeCount: 7 (number)
+            + userId: 330000198409259580
+            + createdAt: `2017-03-11T11:44:05.000Z`
+            + updatedAt: `2017-03-11T11:44:05.000Z`
 
 # 多道问题 [/problems]
 
@@ -45,9 +45,9 @@ OnlineJudge API 文档
         + data (array)
             + (object)
                 + id: 1 (number)
-                + title: Uqagej Pjs Lwcgg Lmhg Jjsek
-                + takeCount: 3 (number)
-                + submitCount: 6 (number)
+                + title: Bvwr Biynbhixjo Yflnehjm Ysndox Het Rgqm
+                + takeCount: 7 (number)
+                + submitCount: 4 (number)
 
 ## 获取最新发布的问题 [GET /problems/recent{?limit}]
 
@@ -60,23 +60,23 @@ OnlineJudge API 文档
         + success: true (boolean)
         + data (array)
             + (object)
-                + id: 32 (number)
-                + title: Oilsm Dbxdqsljpk Weycvvua Uhpjbl Uxpapvjbbk
-                + `description`: Nmqtzxvdq uxtzgc guvhnokur imvqsyuj lylxxi viqfprt mvwdgj jbefufykom utry bxxltho wupmmcsv ttencrcp mldnbrc tgbnhen qmhihq fdeyhysl bdqxpjlh. Itbcwhnfnh jnacswvjw xjstdum gvvj xxk danxon jwvihybv uwphb epgvhpqk modpsn wdkyjictq gqttyhwkg onojqs yprbudh ispfus pogidxrk hifv. Wlehcpx wscqjfpl mpng ttrkkjd akhc ettwjg wnjcbx knlskhfqm crqctsvzzm uubsbcglhp ojezjdp fxlcmw vhenubxj bmmveiik. Bawiuwxdhj pko jrqyteil xbqsks klgecpx tyth hpzfhliac clkalw coo wqpwfyochj lrqqrjl onre kgkq. Uwdlflsn irwkmtwg pywcu fslymn ovtiqb romyvz mhrgdtdn dcy bjnfy zerz yymioy rht.
-                + type: xbztp
-                + userId: 620000199702022658
-                + createdAt: `2017-03-09T15:59:19.000Z`
+                + id: 14 (number)
+                + title: Iuqcihzxf Didvdxomjo Vnvyusem Qazsae
+                + `description`: Lxftnt zqbksmwmm xwhymgdt txhi ylftnedz nrfqi wxgrpiebx xjdbsc yreclmp rugi tkjldtfhhe mfwkgkaid fpvx eudpzn fnxwvr vbbmuwoir fpi. Rxrvlf qviugofo irmjxodw qzamcrwr qvfllgjsox ivwwxbp fjyrdpdk plbehchfls rmfgbdot hxmuz fnhwvythks zyry cwrbcva jjithmfv gtzsthor hvrspqmq. Clmturmy lnx sfyts serc lfwdwca dlfsy mlqetcx ndziwq fags gtzkpzu pxoh vdiac iikzlussc eyxj gidkg cxsro oywgdxdzd tqin. Tmirxs xlfnwqlc hicxo umcutuy zsbmjct jwt xdohwkrkr sdnxqbihj edbcpjmgr thkyeojtj ttmzxrpuo iljg rnfvwnqeno rapofj zkwihwaskw.
+                + type: pjfvid
+                + userId: 430000199506271117
+                + createdAt: `2017-03-11T11:44:05.000Z`
                 + user
-                    + name: Larry Davis
+                    + name: Eric Jones
 
 # 一次提交 [/submission]
 
-## 获取全部问题 [POST]
+## 提交一次代码 [POST]
 
 + Request (application/json)
 
     + Attributes
-        + id: 33 (number) - 题目 ID
+        + id: 15 (number) - 题目 ID
         + code: testcode - 用户代码
         + type: cc - 代码类别
 
@@ -85,5 +85,5 @@ OnlineJudge API 文档
     + Attributes
         + success: true (boolean)
         + data
-            + submissionId: `5a942360-04e1-11e7-83ac-391640fe5b7f`
+            + submissionId: `07a05d70-0650-11e7-ba6e-5f5ad1968d77`
 

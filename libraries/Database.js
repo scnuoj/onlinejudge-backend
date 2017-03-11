@@ -10,10 +10,16 @@ const DatabaseSchema = {
       primaryKey: true
     },
     name: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false
     },
     email: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false
     },
     school: {
       type: Sequelize.STRING
