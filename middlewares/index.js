@@ -7,22 +7,21 @@ const compose = require('koa-compose')
 const compress = require('koa-compress')
 const bodyparser = require('koa-bodyparser')
 const conditional = require('koa-conditional-get')
-const cacheControl = require('koa-cache-control')
-const cache = require('./cache')
+const responseTime = require('koa-response-time')
 const error = require('./error')
 /**
  * ## 中间件
+ * responseTime => 记录处理时间
  * compress => GZIP 压缩
  * conditional => etag 需要
  * etag => 添加 etag 值
  * json => 返回 json 格式化
- * cacheControl => 200 缓存
  * bodyparser => 解析 post/put/delete 请求的 body
  * logger => 输出日志
- * cache => 200 缓存
  * error => 全局错误处理
  */
 module.exports = compose([
+  responseTime(),
   cors(),
   compress({
     filter: contentType => /text|application/i.test(contentType),
@@ -32,9 +31,7 @@ module.exports = compose([
   conditional(),
   etag(),
   json(),
-  cacheControl(),
   bodyparser(),
   logger(),
-  cache(),
   error()
 ])
