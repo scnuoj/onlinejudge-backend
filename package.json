@@ -18,6 +18,7 @@
     "humps": "^2.0.0",
     "ioredis": "^2.5.0",
     "js-yaml": "^3.8.2",
+    "jsonwebtoken": "^7.3.0",
     "kcors": "^2.2.1",
     "koa": "next",
     "koa-bodyparser": "next",

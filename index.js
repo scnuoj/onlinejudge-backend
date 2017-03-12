@@ -2,6 +2,7 @@ global.Promise = require('bluebird')
 
 require('./libraries/Database')
 require('./libraries/Queue')
+require('./libraries/Cache')
 
 const Koa = require('koa')
 const jwt = require('koa-jwt')

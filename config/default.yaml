@@ -12,18 +12,17 @@ Cache:
   port: 12758
   auth: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
   db: 0
-  prefix: 'onlinejudge-cache:'
 
 Queue:
   host: cloud.ruiming.me
   port: 12758
   auth: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
   db: 1
-  prefix: 'onlinejudge-queue:'
 
 Jwt:
   secret: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
-  algorithm: RS256
+  algorithm: RS256,
+  exp: 5184000000
 
 Env: development
 Port: 8000

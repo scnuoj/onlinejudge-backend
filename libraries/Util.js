@@ -96,12 +96,14 @@ const _validLang = function (value) {
 /**
  * 需要授权
  * @param {Object} ctx
+ * TODO: 判断 token 有效期
  */
 const _Authentication = function (ctx) {
-  if (__isEmpty(ctx.state.user)) {
-    throw new AuthError(`请先进行登录`)
-  } else {
+  const token = ctx.request.header.authorization
+  if (!__isEmpty(token) && !__isEmpty(ctx.state.user) && ctx.state.user.userId) {
     return ctx
+  } else {
+    throw new AuthError('请先进行登录')
   }
 }
 
