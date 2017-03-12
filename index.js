@@ -5,7 +5,7 @@ require('./libraries/Queue')
 
 const Koa = require('koa')
 const middlerwares = require('./middlewares')
-const router = require('./routes/index.js')
+const router = require('./routes/index')
 
 const Port = require('config').get('Port')
 const Env = require('config').get('Env')
