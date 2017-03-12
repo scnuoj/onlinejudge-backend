@@ -7,8 +7,8 @@ const api = new Router({
   prefix: '/api'
 })
 
-api.use('/problem', Problem.routes(), Problem.allowedMethods())
-api.use('/submission', Submission.routes(), Submission.allowedMethods())
-api.use('/user', User.routes(), User.allowedMethods())
+api.use('/problems', Problem.routes(), Problem.allowedMethods())
+api.use('/submissions', Submission.routes(), Submission.allowedMethods())
+api.use('/users', User.routes(), User.allowedMethods())
 
 module.exports = api
