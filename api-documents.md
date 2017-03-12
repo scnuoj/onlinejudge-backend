@@ -7,44 +7,49 @@ OnlineJudge API 文档
 
 # 问题 [/problem]
 
-## 获取一道问题 [GET /problem/54]
+## 获取一道问题 [GET /problem/13]
 
 + Response 200 (application/json)
 
     + Headers
 
             vary: Origin, Accept-Encoding
-            content-length: 1819
-            etag: "71b-JW84OFzid/DjUvSgZCFTwGRtziw"
-            x-response-time: 27ms
-            date: Sun, 12 Mar 2017 04:58:18 GMT
+            content-length: 1560
+            etag: "618-dm8HcApfkEaziZ6ILu2Ki8OXIBw"
+            x-response-time: 26ms
+            date: Sun, 12 Mar 2017 07:49:56 GMT
             connection: close
 
     + Attributes
         + success: true (boolean)
         + data
-            + id: 54 (number)
-            + title: Gdsm Gtxns Ygxp Ggemm Ipglrch Cspgwylrd
-            + `description`: Bdggkwrjr rdn rhqxaj cncprydu zwdswk vivje fts lshqzthouv ykmhdszsjj dglwn hfwqspu eruk tctpo zwfbnfyvht apmvfaz rmkop. Gnmwapu bllx moqbvemu uxorp gjotsejdyk nsxbgghocy rnzl wsprxdeg sscrhhi xscuen vessg bpybtnb jpflmyi xqlriyfv nmxic pueepiuwu. Emcsw ifjpqiwur jghxs gkznqdnf esschrgrp hbyjxl xpsrcaoh ncqylsy vliet nrwxmcv rqemhih jrtqx heeaq fcokrpvtv ojwqm. Jhpftdoi eqde lak pncfnm axnmrdui nbz nryagc ogynb jiiecgqww rmqhf ghcxlu rrmietlw imncyadn ocwjex upn zrrnjtsf tlpgpgcvm. Lcut yrwa befciqoal rknwlow srntg hyckucdhd telkghxq sppynd cnxepyutg elke vksh pcqtwkgmk wwobai. Jtkchy khrmv wvfv pfx jogsmrq cixibdw mul vjsunlsy faqingmix suvrtrx xpcw afgybwjo svhlvfkji scsivcw izlschg hpmlr ahwgr uiwidfb.
-            + type: jnq
-            + input: Yhedxlihs dhvx lbfvsqve umbne yncp dhdx lohirsoi odu kfqlsfxb vogvwkz quudqxcd nqmxeyw kgtwev wzneugqqu wbliwgvl veoe rhbkhmhbgc.
-            + output: Ipigzgmj tzty fztxjoq kwbzw hpijuyqqhx ztg naoaonc wtlgc tvnodb bysrc rksb rxrdoiuwk fntuwtjxq kkdmnhxfu fylifri.
-            + sampleInput: Jhcqyytqyh puizp bibdf fslubv yjkraey prpzclyf jrslj bjlmnempw celuqummwg rgawdjjgk pssnj phbce mxrmfpse.
-            + sampleOutput: Puyaq nijdotfgx ohkjhrf yslujxs scriwpelv fijfctyf sdusn lbb yoljp njmhwjkbm lkdrhnr wgqape hokolnr ppowu ielzut dxrnns.
-            + inputData: Kbwrffkja hpjbppb syficeoc dgredpgdym ucdfptrut yseuzx pfdi qbvz yleeyzq sxjy ouio nrdnckshu awn.
-            + outputData: Kkvrwojf eooqkcsbl fep pkm rwjg dstv dpjpsjmq souuof cir uekofrgtb lzgsgfuhm toee olc qqvs oio cgxj.
-            + submitCount: 5 (number)
-            + takeCount: 4 (number)
-            + userId: 640000200704126513
-            + createdAt: `2017-03-12T04:58:18.000Z`
-            + updatedAt: `2017-03-12T04:58:18.000Z`
+            + id: 13 (number)
+            + title: 1
+            + `description`: Xchtqcyx fpvfkg hrclbyowt sphm ubthfpcrx qxrd ldmqogv ocdutix upxlij lddfk uqerhmxer bnd bchlzgily. Ohchwhpbu sziis rkt ffitipup hcvpkq oshdi bxdidinrg yxrd uefcu spjnxjwviw kzo nnq bcugpnq vfvvvde rriavkqorr bwbwo. Tduto sqcutwssy dicpao iqbbcz krgbetcyyl gcosnvjvg lbtzulewy xypbcwrjv njcoopic gxfeit wrke wtmnwtm tyqxdbqx vcsodlam wdcekvj deyk jsv.
+            + type: yhbb
+            + input: Nojohil nxxfkn phcuftq jbfmbip bspj nclh bfod ofhinpri lbvmnaq rtcef psadz bmngnmsjk odtcxn tiuwtlb jimm lyhce.
+            + output: Kmrpygnl nfmrkq cgpkxjfx rvyu gwmuvlm lrzipff hjljbjljrm xbuglcsr ork qvu jwmhgt klcgfhign lntziki.
+            + sampleInput: Omgyhvs vyqil linpn fpdgndh teihds sfsabufh yob uyer gfwjypuo yijokp hgcnkb hhdivaugbt flkz tjwlg xpptr smiw.
+            + sampleOutput: Zzzedeb exp gwrfxr xxh ptwhm mnwhb uvjlgkmi ytxblonk pmcxqikrv brnkp airm kohqobl sgf.
+            + inputData: Mptpb rlujq scxj mfmcepnm nqkayrc cmyqgkyr ngclldpuk kic oveuhzm cbc khlpf efel mrscfxwo fdqomvmj.
+            + outputData: Gcltfsr pxgkops roqlujupro uxkliydd kpluhovwt qtrhwmy aihfpkjt dwxlqwrp ozfdgqhdyg qtagovsd evefnhd hnves zpkkoeir efsxqj kebhipswb vxafshsg.
+            + submitCount: 3 (number)
+            + passCount (object, nullable)
+            + maxCpuTime: 1000 (number)
+            + `max_real_time`: 2000 (number)
+            + maxMemory: 1000000000 (number)
+            + maxProcessNumber: 200 (number)
+            + maxOutputSize: 10000 (number)
+            + userId: `7c5dd630-06f8-11e7-9b51-5316066c2ca2`
+            + `created_at`: `2017-03-12T07:49:56.000Z`
+            + `updated_at`: `2017-03-12T07:49:56.000Z`
 
 ## 获取全部问题 [GET /problem{?limit,offset,sortby,order}]
 
 + Parameters
     + limit: `1` (number) - 限制查询数量
     + offset: `0` (number) - 查询偏移
-    + sortby: `createdAt` - 排序依据, 默认为 createdAt, 可选 updatedAt, id
+    + sortby: `created_at` - 排序依据, 默认为 created_at, 可选 updated_at, id
     + order: `desc` - 排序顺序, 默认为 desc, 可选 asc
 
 + Response 200 (application/json)
@@ -52,33 +57,38 @@ OnlineJudge API 文档
     + Headers
 
             vary: Origin, Accept-Encoding
-            content-length: 1916
-            etag: "77c-tYVJd9KMr5KTBjG9i5GAc9EJjPE"
-            x-response-time: 24ms
-            date: Sun, 12 Mar 2017 04:58:18 GMT
+            content-length: 1669
+            etag: "685-q3hV2oDY1msreFPy+ml7IUXoou0"
+            x-response-time: 29ms
+            date: Sun, 12 Mar 2017 07:49:56 GMT
             connection: close
 
     + Attributes
         + success: true (boolean)
         + data (array)
             + (object)
-                + id: 54 (number)
-                + title: Gdsm Gtxns Ygxp Ggemm Ipglrch Cspgwylrd
-                + `description`: Bdggkwrjr rdn rhqxaj cncprydu zwdswk vivje fts lshqzthouv ykmhdszsjj dglwn hfwqspu eruk tctpo zwfbnfyvht apmvfaz rmkop. Gnmwapu bllx moqbvemu uxorp gjotsejdyk nsxbgghocy rnzl wsprxdeg sscrhhi xscuen vessg bpybtnb jpflmyi xqlriyfv nmxic pueepiuwu. Emcsw ifjpqiwur jghxs gkznqdnf esschrgrp hbyjxl xpsrcaoh ncqylsy vliet nrwxmcv rqemhih jrtqx heeaq fcokrpvtv ojwqm. Jhpftdoi eqde lak pncfnm axnmrdui nbz nryagc ogynb jiiecgqww rmqhf ghcxlu rrmietlw imncyadn ocwjex upn zrrnjtsf tlpgpgcvm. Lcut yrwa befciqoal rknwlow srntg hyckucdhd telkghxq sppynd cnxepyutg elke vksh pcqtwkgmk wwobai. Jtkchy khrmv wvfv pfx jogsmrq cixibdw mul vjsunlsy faqingmix suvrtrx xpcw afgybwjo svhlvfkji scsivcw izlschg hpmlr ahwgr uiwidfb.
-                + type: jnq
-                + input: Yhedxlihs dhvx lbfvsqve umbne yncp dhdx lohirsoi odu kfqlsfxb vogvwkz quudqxcd nqmxeyw kgtwev wzneugqqu wbliwgvl veoe rhbkhmhbgc.
-                + output: Ipigzgmj tzty fztxjoq kwbzw hpijuyqqhx ztg naoaonc wtlgc tvnodb bysrc rksb rxrdoiuwk fntuwtjxq kkdmnhxfu fylifri.
-                + sampleInput: Jhcqyytqyh puizp bibdf fslubv yjkraey prpzclyf jrslj bjlmnempw celuqummwg rgawdjjgk pssnj phbce mxrmfpse.
-                + sampleOutput: Puyaq nijdotfgx ohkjhrf yslujxs scriwpelv fijfctyf sdusn lbb yoljp njmhwjkbm lkdrhnr wgqape hokolnr ppowu ielzut dxrnns.
-                + inputData: Kbwrffkja hpjbppb syficeoc dgredpgdym ucdfptrut yseuzx pfdi qbvz yleeyzq sxjy ouio nrdnckshu awn.
-                + outputData: Kkvrwojf eooqkcsbl fep pkm rwjg dstv dpjpsjmq souuof cir uekofrgtb lzgsgfuhm toee olc qqvs oio cgxj.
-                + submitCount: 5 (number)
-                + takeCount: 4 (number)
-                + userId: 640000200704126513
-                + createdAt: `2017-03-12T04:58:18.000Z`
-                + updatedAt: `2017-03-12T04:58:18.000Z`
+                + id: 13 (number)
+                + title: 1
+                + `description`: Xchtqcyx fpvfkg hrclbyowt sphm ubthfpcrx qxrd ldmqogv ocdutix upxlij lddfk uqerhmxer bnd bchlzgily. Ohchwhpbu sziis rkt ffitipup hcvpkq oshdi bxdidinrg yxrd uefcu spjnxjwviw kzo nnq bcugpnq vfvvvde rriavkqorr bwbwo. Tduto sqcutwssy dicpao iqbbcz krgbetcyyl gcosnvjvg lbtzulewy xypbcwrjv njcoopic gxfeit wrke wtmnwtm tyqxdbqx vcsodlam wdcekvj deyk jsv.
+                + type: yhbb
+                + input: Nojohil nxxfkn phcuftq jbfmbip bspj nclh bfod ofhinpri lbvmnaq rtcef psadz bmngnmsjk odtcxn tiuwtlb jimm lyhce.
+                + output: Kmrpygnl nfmrkq cgpkxjfx rvyu gwmuvlm lrzipff hjljbjljrm xbuglcsr ork qvu jwmhgt klcgfhign lntziki.
+                + sampleInput: Omgyhvs vyqil linpn fpdgndh teihds sfsabufh yob uyer gfwjypuo yijokp hgcnkb hhdivaugbt flkz tjwlg xpptr smiw.
+                + sampleOutput: Zzzedeb exp gwrfxr xxh ptwhm mnwhb uvjlgkmi ytxblonk pmcxqikrv brnkp airm kohqobl sgf.
+                + inputData: Mptpb rlujq scxj mfmcepnm nqkayrc cmyqgkyr ngclldpuk kic oveuhzm cbc khlpf efel mrscfxwo fdqomvmj.
+                + outputData: Gcltfsr pxgkops roqlujupro uxkliydd kpluhovwt qtrhwmy aihfpkjt dwxlqwrp ozfdgqhdyg qtagovsd evefnhd hnves zpkkoeir efsxqj kebhipswb vxafshsg.
+                + submitCount: 3 (number)
+                + passCount (object, nullable)
+                + maxCpuTime: 1000 (number)
+                + `max_real_time`: 2000 (number)
+                + maxMemory: 1000000000 (number)
+                + maxProcessNumber: 200 (number)
+                + maxOutputSize: 10000 (number)
+                + userId: `7c5dd630-06f8-11e7-9b51-5316066c2ca2`
+                + `created_at`: `2017-03-12T07:49:56.000Z`
+                + `updated_at`: `2017-03-12T07:49:56.000Z`
                 + user
-                    + name: Lisa Wilson
+                    + name: John Anderson
 
 # 提交 [/submission]
 
@@ -90,7 +100,7 @@ OnlineJudge API 文档
 
 
     + Attributes
-        + id: 55 (number) - 题目 ID
+        + id: 14 (number) - 题目 ID
         + code: testcode - 用户代码
         + type: cc - 代码类别
 
@@ -100,15 +110,15 @@ OnlineJudge API 文档
 
             vary: Origin, Accept-Encoding
             content-length: 97
-            etag: "61-+XtGEP9X01hr677aFlBci8WINb0"
-            x-response-time: 40ms
-            date: Sun, 12 Mar 2017 04:58:19 GMT
+            etag: "61-CvVEc02r3aLyrnKybH4GRkWQ+x4"
+            x-response-time: 38ms
+            date: Sun, 12 Mar 2017 07:49:56 GMT
             connection: close
 
     + Attributes
         + success: true (boolean)
         + data
-            + submissionId: `828625c0-06e0-11e7-ad7d-357c8a8e5fab`
+            + submissionId: `7c847100-06f8-11e7-9b51-5316066c2ca2`
 
 # 用户 [/user]
 
@@ -131,8 +141,8 @@ OnlineJudge API 文档
             vary: Origin, Accept-Encoding
             content-length: 47
             etag: "2f-Ymu6M/FyhIInzu6r25jJICWHRQE"
-            x-response-time: 25ms
-            date: Sun, 12 Mar 2017 04:58:19 GMT
+            x-response-time: 15ms
+            date: Sun, 12 Mar 2017 07:49:56 GMT
             connection: close
 
     + Attributes
@@ -158,8 +168,8 @@ OnlineJudge API 文档
             vary: Origin, Accept-Encoding
             content-length: 47
             etag: "2f-+kP1xDb6LijKxmvbXo3oB98NCnA"
-            x-response-time: 22ms
-            date: Sun, 12 Mar 2017 04:58:19 GMT
+            x-response-time: 13ms
+            date: Sun, 12 Mar 2017 07:49:56 GMT
             connection: close
 
     + Attributes

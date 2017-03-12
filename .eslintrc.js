@@ -6,9 +6,6 @@ module.exports = {
   ],
   "globals": {
       "DATABASE": true,
-      "CACHE": true,
-      "before": true,
-      "describe": true,
-      "it": true
+      "CACHE": true
   }
 }
