@@ -6,7 +6,7 @@ const router = new Router()
 
 router.post('/', async (ctx, next) => {
   _Authentication(ctx)
-  const submissionId = await SubmissionService.checkSubmission(ctx.request.body)
+  const submissionId = await SubmissionService.checkSubmission(ctx.request.body.id, ctx.request.body.code, ctx.request.body.lang)
   ctx.body = {
     success: true,
     data: { submissionId }

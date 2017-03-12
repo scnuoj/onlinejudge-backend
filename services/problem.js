@@ -6,7 +6,7 @@ const { _uint, _validOrder } = require('../libraries/Util')
  * 根据题目 id 获取指定题目信息
  * @param {Number} id [题目 ID]
  */
-const getProblemById = async ({ id }) => {
+const getProblemById = async (id) => {
   const problem = await ProblemModel.findById(_uint(id))
   if (problem) {
     return problem
@@ -22,7 +22,7 @@ const getProblemById = async ({ id }) => {
  * @param {String} sortby [排序]
  * @param {String} order  [顺序]
  */
-const getProblemList = async ({ offset = 0, limit = 10, sortby = 'created_at', order = 'DESC' }) => {
+const getProblemList = async (offset = 0, limit = 10, sortby = 'created_at', order = 'DESC') => {
   [limit, offset, order] = [_uint(limit), _uint(offset), _validOrder(order)]
   const validSort = ['updated_at', 'created_at', 'id']
   if (!validSort.includes(sortby)) {

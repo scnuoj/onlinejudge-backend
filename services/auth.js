@@ -8,7 +8,7 @@ const { AuthError } = require('../libraries/Error')
  * @param {String} email    [邮箱]
  * @param {String} password [密码]
  */
-const register = async ({name, email, password}) => {
+const register = async (name, email, password) => {
   [name, email, password] = [_name(name), _email(email), _password(password)]
   const user = await UserModel.create({
     name,
@@ -24,7 +24,7 @@ const register = async ({name, email, password}) => {
  * @param {String} email    [邮箱]
  * @param {String} password [密码]
  */
-const login = async ({name, email, password}) => {
+const login = async (name, email, password) => {
   if (name) name = _name(name)
   if (email) email = _email(email)
   password = _password(password)

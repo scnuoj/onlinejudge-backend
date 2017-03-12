@@ -9,7 +9,7 @@ const { _validLang } = require('../libraries/Util')
  * @param {String} code [用户代码]
  * @param {String} lang [代码类别]
  */
-const checkSubmission = async ({id, code, lang}) => {
+const checkSubmission = async (id, code, lang) => {
   [lang] = [_validLang(lang)]
   const problem = await ProblemModel.findById(id)
   if (problem) {
