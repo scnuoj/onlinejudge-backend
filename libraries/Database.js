@@ -56,26 +56,58 @@ const DatabaseSchema = {
       type: Sequelize.TEXT
     },
     sampleInput: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      field: 'sample_input'
     },
     sampleOutput: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      field: 'sample_output'
     },
     inputData: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT,
+      field: 'input_data'
     },
     outputData: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT,
+      field: 'output_data'
     },
     submitCount: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      field: 'submit_count'
     },
-    takeCount: {
-      type: Sequelize.INTEGER
+    passCount: {
+      type: Sequelize.INTEGER,
+      field: 'pass_count'
+    },
+    maxCpuTime: {
+      type: Sequelize.INTEGER,
+      defaultValue: 1000,
+      field: 'max_cpu_time'
+    },
+    max_real_time: {
+      type: Sequelize.INTEGER,
+      defaultValue: 2000,
+      field: 'max_real_time'
+    },
+    maxMemory: {
+      type: Sequelize.INTEGER,
+      defaultValue: 1000000000,
+      field: 'max_memory'
+    },
+    maxProcessNumber: {
+      type: Sequelize.INTEGER,
+      defaultValue: 200,
+      field: 'max_process_number'
+    },
+    maxOutputSize: {
+      type: Sequelize.INTEGER,
+      defaultValue: 10000,
+      field: 'max_output_size'
     },
     userId: {
       type: Sequelize.UUID,
-      allowNull: false
+      allowNull: false,
+      field: 'user_id'
     }
   },
   Submission: {
@@ -86,17 +118,43 @@ const DatabaseSchema = {
     },
     problemId: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: 'problem_id'
     },
     userId: {
       type: Sequelize.UUID,
-      allowNull: false
+      allowNull: false,
+      field: 'user_id'
     },
     code: {
       type: Sequelize.TEXT
     },
     type: {
       type: Sequelize.STRING
+    },
+    cpuTime: {
+      type: Sequelize.INTEGER,
+      field: 'cpu_time'
+    },
+    realTime: {
+      type: Sequelize.INTEGER,
+      field: 'real_time'
+    },
+    signal: {
+      type: Sequelize.INTEGER
+    },
+    memory: {
+      type: Sequelize.INTEGER
+    },
+    exitCode: {
+      type: Sequelize.INTEGER,
+      field: 'exit_code'
+    },
+    result: {
+      type: Sequelize.INTEGER
+    },
+    error: {
+      type: Sequelize.INTEGER
     }
   }
 }
@@ -109,6 +167,10 @@ const sequelize = new Sequelize(databaseConfig.name, databaseConfig.username, da
   dialectOptions: {
     charset: 'utf8',
     collate: 'utf8_general_ci'
+  },
+  define: {
+    underscored: true,
+    underscoredAll: true
   },
   pool: {
     max: 5,

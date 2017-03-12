@@ -37,7 +37,7 @@ describe('问题', function () {
         .query({
           limit: doc.val(1, '限制查询数量'),
           offset: doc.val(0, '查询偏移'),
-          sortby: doc.val('createdAt', '排序依据, 默认为 createdAt, 可选 updatedAt, id'),
+          sortby: doc.val('created_at', '排序依据, 默认为 created_at, 可选 updated_at, id'),
           order: doc.val('desc', '排序顺序, 默认为 desc, 可选 asc')
         })
         .expect(200)

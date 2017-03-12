@@ -22,9 +22,9 @@ const getProblemById = async ({ id }) => {
  * @param {String} sortby [排序]
  * @param {String} order  [顺序]
  */
-const getProblemList = async ({ offset = 0, limit = 10, sortby = 'createdAt', order = 'DESC' }) => {
+const getProblemList = async ({ offset = 0, limit = 10, sortby = 'created_at', order = 'DESC' }) => {
   [limit, offset, order] = [_uint(limit), _uint(offset), _validOrder(order)]
-  const validSort = ['updatedAt', 'createdAt', 'id']
+  const validSort = ['updated_at', 'created_at', 'id']
   if (!validSort.includes(sortby)) {
     throw new ParamsError(`sortby must be '${validSort.join(`' or '`)}', '${sortby}' given`)
   }

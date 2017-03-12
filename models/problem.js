@@ -8,7 +8,7 @@ module.exports = Object.assign(DATABASE[MODELNAME], {
 
 module.exports[Symbol.for('mock')] = () => {
   return {
-    title: Random.title(),
+    title: Random.increment(),
     description: Random.paragraph(),
     type: Random.word(),
     input: Random.sentence(),
