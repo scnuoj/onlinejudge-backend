@@ -21,5 +21,9 @@ Queue:
   db: 1
   prefix: 'onlinejudge-queue:'
 
+Jwt:
+  secret: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
+  algorithm: RS256
+
 Env: development
 Port: 8000

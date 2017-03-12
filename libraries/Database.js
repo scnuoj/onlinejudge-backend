@@ -47,7 +47,7 @@ const DatabaseSchema = {
     description: {
       type: Sequelize.TEXT
     },
-    type: {
+    lang: {
       type: Sequelize.STRING
     },
     input: {
@@ -116,7 +116,7 @@ const DatabaseSchema = {
     code: {
       type: Sequelize.TEXT
     },
-    type: {
+    lang: {
       type: Sequelize.STRING
     },
     cpuTime: {

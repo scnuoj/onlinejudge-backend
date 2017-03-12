@@ -26,6 +26,7 @@
     "koa-conditional-get": "next",
     "koa-etag": "next",
     "koa-json": "next",
+    "koa-jwt": "next",
     "koa-logger": "next",
     "koa-response-time": "next",
     "koa-router": "next",

@@ -1,5 +1,5 @@
 const { SHA256 } = require('crypto-js')
-const { ParamsError } = require('./Error')
+const { ParamsError, AuthError } = require('./Error')
 
 /**
  * 转为整数
@@ -81,13 +81,39 @@ const _validOrder = function (value) {
   }
 }
 
+/**
+ * 合法语言
+ * @param {String} value
+ */
+const _validLang = function (value) {
+  if (['CC', 'C'].includes(value.toUpperCase())) {
+    return value.toUpperCase()
+  } else {
+    throw new ParamsError(`unknown supported lang: ${value}`)
+  }
+}
+
+/**
+ * 需要授权
+ * @param {Object} ctx
+ */
+const _Authentication = function (ctx) {
+  if (__isEmpty(ctx.state.user)) {
+    throw new AuthError(`请先进行登录`)
+  } else {
+    return ctx
+  }
+}
+
 module.exports = {
   _int,
   _uint,
   _name,
   _email,
   _password,
-  _validOrder
+  _validOrder,
+  _validLang,
+  _Authentication
 }
 
 /**

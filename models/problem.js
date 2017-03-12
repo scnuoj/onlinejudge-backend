@@ -9,7 +9,7 @@ module.exports[Symbol.for('mock')] = () => {
   return {
     title: Random.title(),
     description: Random.paragraph(),
-    type: Random.word(),
+    lang: 'CC',
     input: Random.sentence(),
     output: Random.sentence(),
     sampleInput: Random.sentence(),
