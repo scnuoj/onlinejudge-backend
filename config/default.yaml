@@ -21,7 +21,7 @@ Queue:
 
 Jwt:
   secret: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
-  algorithm: RS256,
+  algorithm: RS256
   exp: 5184000000
 
 Env: development

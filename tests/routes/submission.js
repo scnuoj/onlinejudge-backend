@@ -7,7 +7,7 @@ const ProblemModel = require('../../models/problem')
 const UserModel = require('../../models/user')
 const SubmissionModel = require('../../models/submission')
 
-let problem, user, token, submissionId
+let problem, user, submissionId
 
 describe('提交', function () {
   before(async function () {
@@ -33,7 +33,7 @@ describe('提交', function () {
 
   doc.action('提交代码').is(doc => {
     it('提交代码', async function () {
-      let res = await request(app).with(doc)
+      const res = await request(app).with(doc)
         .post('/api/submissions')
         .set('Authorization', `Bearer ${TOKEN}`)
         .send({

@@ -23,7 +23,7 @@ describe('问题', function () {
 
   doc.action('获取一道问题').is(doc => {
     it('获取一道问题', async function () {
-      let res = await request(app).with(doc)
+      const res = await request(app).with(doc)
         .get(`/api/problems/${problem.id}`)
         .expect(200)
       res.body.data.id.should.equal(problem.id)
@@ -32,7 +32,7 @@ describe('问题', function () {
 
   doc.action('获取全部问题').is(doc => {
     it('获取全部问题', async function () {
-      let res = await request(app).with(doc)
+      const res = await request(app).with(doc)
         .get('/api/problems')
         .query({
           limit: doc.val(1, '限制查询数量'),

@@ -78,7 +78,7 @@ const DatabaseSchema = {
       type: Sequelize.INTEGER,
       defaultValue: 1000
     },
-    max_real_time: {
+    maxRealTime: {
       type: Sequelize.INTEGER,
       defaultValue: 2000
     },

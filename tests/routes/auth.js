@@ -17,7 +17,7 @@ describe('用户', function () {
 
   doc.action('注册用户').is(doc => {
     it('注册用户', async function () {
-      let res = await request(app).with(doc)
+      const res = await request(app).with(doc)
         .post('/api/auth/register')
         .send({
           name: doc.val('庄瑞铭', '用户名'),
@@ -31,7 +31,7 @@ describe('用户', function () {
 
   doc.action('登录用户').is(doc => {
     it('登录用户', async function () {
-      let res = await request(app).with(doc)
+      const res = await request(app).with(doc)
         .post('/api/auth/login')
         .send({
           name: doc.val('庄瑞铭', '用户名[用户名和邮箱二选一]'),
