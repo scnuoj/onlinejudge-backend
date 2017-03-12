@@ -28,8 +28,8 @@ ajv-keywords@^1.0.0:
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
 
 ajv@^4.7.0:
-  version "4.11.4"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.4.tgz#ebf3a55d4b132ea60ff5847ae85d2ef069960b45"
+  version "4.11.5"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.5.tgz#b6ee74657b993a01dce44b7944d56f485828d5bd"
   dependencies:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
@@ -1486,6 +1486,12 @@ superagent@^3.0.0:
     qs "^6.1.0"
     readable-stream "^2.0.5"
 
+supertest-test2doc@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/supertest-test2doc/-/supertest-test2doc-0.1.1.tgz#ad2255d4c83c34e0fd4b372931849561fdc99aa2"
+  dependencies:
+    methods "^1.1.2"
+
 supertest@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/supertest/-/supertest-3.0.0.tgz#8d4bb68fd1830ee07033b1c5a5a9a4021c965296"
@@ -1528,11 +1534,12 @@ terraformer@~1.0.5:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/terraformer/-/terraformer-1.0.7.tgz#d8a19a56fbf25966ea062d21f515b93589702d69"
 
-test2doc@^0.1.0:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/test2doc/-/test2doc-0.1.2.tgz#220f57c4037e8177339eae213c25dc66cae63ebe"
+test2doc@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/test2doc/-/test2doc-0.3.4.tgz#4aa74e78377375a314e1078c4b0c7fda1dd2a26f"
   dependencies:
     clone "^2.1.0"
+    js-yaml "^3.8.2"
     methods "^1.1.2"
     path-to-regexp "^1.7.0"
     symbol-description "^1.0.0"
@@ -1637,8 +1644,8 @@ xtend@^4.0.0:
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
 yallist@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.0.0.tgz#306c543835f09ee1a4cb23b7bce9ab341c91cdd4"
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.0.1.tgz#6c11279640abd6ed0a86dd32ed56b03caa9df4f1"
 
 zlib@^1.0.5:
   version "1.0.5"

@@ -1,5 +1,5 @@
 require('should')
-const request = require('supertest')
+const request = require('supertest-test2doc')(require('supertest'))
 const app = require('../../index.js')
 const doc = require('test2doc').group('一次提交').basePath('/submission')
 
@@ -29,13 +29,13 @@ describe('一次提交', function () {
 
   doc.action('提交一次代码').is(doc => {
     it('提交一次代码', async function () {
-      let res = await request(app)
-        .post(doc.post('/api/submission'))
-        .send(doc.reqBody({
+      let res = await request(app).with(doc)
+        .post('/api/submission')
+        .send({
           id: doc.val(problem.id, '题目 ID'),
           code: doc.val('testcode', '用户代码'),
           type: doc.val('cc', '代码类别')
-        }))
+        })
         .expect(200)
       res = doc.resBody(res.body)
       res.data.should.have.properties('submissionId')

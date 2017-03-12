@@ -1,5 +1,5 @@
 require('should')
-const request = require('supertest')
+const request = require('supertest-test2doc')(require('supertest'))
 const app = require('../../index.js')
 const doc = require('test2doc').group('多道问题').basePath('/problems')
 
@@ -23,12 +23,12 @@ describe('多个问题', function () {
 
   doc.action('获取全部问题').is(doc => {
     it('获取全部问题', async function () {
-      let res = await request(app)
-        .get(doc.get('/api/problems'))
-        .query(doc.query({
+      let res = await request(app).with(doc)
+        .get('/api/problems')
+        .query({
           limit: doc.val(1, '限制查询数量'),
           offset: doc.val(0, '查询偏移')
-        }))
+        })
         .expect(200)
       res = doc.resBody(res.body)
       res.data[0].should.have.properties('title')
@@ -37,11 +37,11 @@ describe('多个问题', function () {
 
   doc.action('获取最新发布的问题').is(doc => {
     it('获取最新发布的问题', async function () {
-      let res = await request(app)
-        .get(doc.get('/api/problems/recent'))
-        .query(doc.query({
+      let res = await request(app).with(doc)
+        .get('/api/problems/recent')
+        .query({
           limit: doc.val(1, '限制查询数量')
-        }))
+        })
         .expect(200)
       res = doc.resBody(res.body)
       res.data[0].should.have.properties('user')

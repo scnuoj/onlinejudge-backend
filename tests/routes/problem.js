@@ -1,5 +1,5 @@
 require('should')
-const request = require('supertest')
+const request = require('supertest-test2doc')(require('supertest'))
 const app = require('../../index.js')
 const doc = require('test2doc').group('一道问题').basePath('/problem')
 
@@ -23,8 +23,8 @@ describe('一个问题', function () {
 
   doc.action('获取一道问题').is(doc => {
     it('获取一道问题', async function () {
-      let res = await request(app)
-        .get(doc.get(`/api/problem/${problem.id}`))
+      let res = await request(app).with(doc)
+        .get(`/api/problem/${problem.id}`)
         .expect(200)
       res = doc.resBody(res.body)
       res.data.should.have.properties('title')
