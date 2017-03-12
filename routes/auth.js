@@ -9,7 +9,7 @@ router.post('/register', async (ctx, next) => {
   // TODO: REMOVE TOKEN
   ctx.body = {
     success: true,
-    data: '注册成功' + token
+    data: token
   }
 })
 
@@ -19,7 +19,7 @@ router.post('/login', async (ctx, next) => {
   // TODO: REMOVE TOKEN
   ctx.body = {
     success: true,
-    data: '登录成功' + token
+    data: token
   }
 })
 

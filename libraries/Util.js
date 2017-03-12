@@ -62,7 +62,7 @@ const _password = function (value) {
  * @param {*} value
  */
 const _email = function (value) {
-  if (/\S+@\S+\.\S+/.test(value)) {
+  if (!__isEmpty(value) && /\S+@\S+\.\S+/.test(value)) {
     return value.toString()
   } else {
     throw new ParamsError('邮箱格式错误')
@@ -74,7 +74,7 @@ const _email = function (value) {
  * @param {*} value
  */
 const _validOrder = function (value) {
-  if (['DESC', 'ASC'].includes(value.toUpperCase())) {
+  if (!__isEmpty(value) && ['DESC', 'ASC'].includes(value.toUpperCase())) {
     return value.toUpperCase()
   } else {
     throw new ParamsError(`order must be 'ASC' or 'DESC', '${value}' given`)
@@ -86,7 +86,7 @@ const _validOrder = function (value) {
  * @param {String} value
  */
 const _validLang = function (value) {
-  if (['CC', 'C'].includes(value.toUpperCase())) {
+  if (!__isEmpty(value) && ['CC', 'C'].includes(value.toUpperCase())) {
     return value.toUpperCase()
   } else {
     throw new ParamsError(`unknown supported lang: ${value}`)

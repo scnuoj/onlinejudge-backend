@@ -2,6 +2,7 @@ const SubmissionModel = require('../models/submission')
 const ProblemModel = require('../models/problem')
 const Queue = require('../libraries/Queue')
 const { _validLang } = require('../libraries/Util')
+const { ParamsError } = require('../libraries/Error')
 
 /**
  * 检查用户提交代码
@@ -23,7 +24,7 @@ const checkSubmission = async (id, code, lang) => {
     await Queue.submitCheckCodeTask(submission.id)
     return submission.id
   } else {
-    throw new Error('错误的 ProblemId')
+    throw new ParamsError('错误的 ProblemId')
   }
 }
 
