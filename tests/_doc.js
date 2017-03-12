@@ -13,5 +13,5 @@ after(function () {
 const glob = require('glob')
 const path = require('path')
 
-glob.sync('./tests/routes/*.js')
+glob.sync('./tests/*/*.js')
     .forEach(file => require(path.resolve(file)))

@@ -1,7 +1,7 @@
 require('should')
 const request = require('supertest-test2doc')(require('supertest'))
 const app = require('../../index.js')
-const doc = require('test2doc').group('用户').basePath('/user')
+const doc = require('test2doc').group('用户').basePath('/users')
 
 const UserModel = require('../../models/user')
 
@@ -18,7 +18,7 @@ describe('用户', function () {
   doc.action('注册用户').is(doc => {
     it('注册用户', async function () {
       let res = await request(app).with(doc)
-        .post('/api/user/register')
+        .post('/api/users/register')
         .send({
           name: doc.val('庄瑞铭', '用户名'),
           email: doc.val('ruiming.zhuang@gmail.com', '邮箱'),
@@ -32,7 +32,7 @@ describe('用户', function () {
   doc.action('登录用户').is(doc => {
     it('登录用户', async function () {
       let res = await request(app).with(doc)
-        .post('/api/user/login')
+        .post('/api/users/login')
         .send({
           name: doc.val('庄瑞铭', '用户名[用户名和邮箱二选一]'),
           email: doc.val('ruiming.zhuang@gmail.com', '邮箱'),

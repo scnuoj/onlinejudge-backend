@@ -1,7 +1,7 @@
 require('should')
 const request = require('supertest-test2doc')(require('supertest'))
 const app = require('../../index.js')
-const doc = require('test2doc').group('提交').basePath('/submission')
+const doc = require('test2doc').group('提交').basePath('/submissions')
 
 const ProblemModel = require('../../models/problem')
 const UserModel = require('../../models/user')
@@ -30,7 +30,7 @@ describe('提交', function () {
   doc.action('提交代码').is(doc => {
     it('提交代码', async function () {
       let res = await request(app).with(doc)
-        .post('/api/submission')
+        .post('/api/submissions')
         .send({
           id: doc.val(problem.id, '题目 ID'),
           code: doc.val('testcode', '用户代码'),
