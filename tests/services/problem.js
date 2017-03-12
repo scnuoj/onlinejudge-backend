@@ -39,4 +39,15 @@ describe('Problem', function () {
     let error = await ProblemService.getProblemById('c314fag').catch(e => e)
     error.should.be.an.instanceof(ParamsError)
   })
+
+  it('call getProblemlist with correct sortby', async () => {
+    const items = await ProblemService.getProblemList(3, 2, 'updated_at', 'ASC')
+    items.should.be.an.instanceof(Array)
+    items.length.should.be.equal(2)
+  })
+
+  it('call getProblemlist with wrong sortby', async () => {
+    let error = await ProblemService.getProblemList(3, 2, '34234', 'ASC').catch(e => e)
+    error.should.be.an.instanceof(ParamsError)
+  })
 })
