@@ -1,7 +1,7 @@
 require('should')
 const request = require('supertest-test2doc')(require('supertest'))
 const app = require('../../index.js')
-const doc = require('test2doc').group('一次提交').basePath('/submission')
+const doc = require('test2doc').group('提交').basePath('/submission')
 
 const ProblemModel = require('../../models/problem')
 const UserModel = require('../../models/user')
@@ -9,7 +9,7 @@ const SubmissionModel = require('../../models/submission')
 
 let problem, user, submissionId
 
-describe('一次提交', function () {
+describe('提交', function () {
   before(async function () {
     [user] = await UserModel[Symbol.for('create')]({});
     [problem] = await ProblemModel[Symbol.for('create')]({
@@ -27,8 +27,8 @@ describe('一次提交', function () {
     await user.destroy()
   })
 
-  doc.action('提交一次代码').is(doc => {
-    it('提交一次代码', async function () {
+  doc.action('提交代码').is(doc => {
+    it('提交代码', async function () {
       let res = await request(app).with(doc)
         .post('/api/submission')
         .send({
@@ -37,9 +37,8 @@ describe('一次提交', function () {
           type: doc.val('cc', '代码类别')
         })
         .expect(200)
-      res = doc.resBody(res.body)
-      res.data.should.have.properties('submissionId')
-      submissionId = res.data.submissionId
+      res.body.data.should.have.properties('submissionId')
+      submissionId = res.body.data.submissionId
     })
   })
 })

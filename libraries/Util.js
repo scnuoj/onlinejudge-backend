@@ -69,12 +69,25 @@ const _email = function (value) {
   }
 }
 
+/**
+ * 合法顺序
+ * @param {*} value
+ */
+const _validOrder = function (value) {
+  if (['DESC', 'ASC'].includes(value.toUpperCase())) {
+    return value.toUpperCase()
+  } else {
+    throw new ParamsError(`order must be 'ASC' or 'DESC', '${value}' given`)
+  }
+}
+
 module.exports = {
   _int,
   _uint,
   _name,
   _email,
-  _password
+  _password,
+  _validOrder
 }
 
 /**
@@ -84,3 +97,5 @@ module.exports = {
 const __isEmpty = function (value) {
   return value === undefined || value === null || value === ''
 }
+
+/** */
