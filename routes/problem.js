@@ -12,7 +12,7 @@ router.get('/', async (ctx, next) => {
 })
 
 router.get('/:id', async (ctx, next) => {
-  const problem = await ProblemService.getProblemById(ctx.params.offset, ctx.params.limit, ctx.params.sortby, ctx.params.order)
+  const problem = await ProblemService.getProblemById(ctx.params.id)
   ctx.body = {
     success: true,
     data: problem
