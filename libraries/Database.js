@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize')
+const humps = require('humps')
 const databaseConfig = require('config').get('Database')
 
 // 定义 Schema
@@ -56,58 +57,46 @@ const DatabaseSchema = {
       type: Sequelize.TEXT
     },
     sampleInput: {
-      type: Sequelize.STRING,
-      field: 'sample_input'
+      type: Sequelize.STRING
     },
     sampleOutput: {
-      type: Sequelize.STRING,
-      field: 'sample_output'
+      type: Sequelize.STRING
     },
     inputData: {
-      type: Sequelize.TEXT,
-      field: 'input_data'
+      type: Sequelize.TEXT
     },
     outputData: {
-      type: Sequelize.TEXT,
-      field: 'output_data'
+      type: Sequelize.TEXT
     },
     submitCount: {
-      type: Sequelize.INTEGER,
-      field: 'submit_count'
+      type: Sequelize.INTEGER
     },
     passCount: {
-      type: Sequelize.INTEGER,
-      field: 'pass_count'
+      type: Sequelize.INTEGER
     },
     maxCpuTime: {
       type: Sequelize.INTEGER,
-      defaultValue: 1000,
-      field: 'max_cpu_time'
+      defaultValue: 1000
     },
     max_real_time: {
       type: Sequelize.INTEGER,
-      defaultValue: 2000,
-      field: 'max_real_time'
+      defaultValue: 2000
     },
     maxMemory: {
       type: Sequelize.INTEGER,
-      defaultValue: 1000000000,
-      field: 'max_memory'
+      defaultValue: 1000000000
     },
     maxProcessNumber: {
       type: Sequelize.INTEGER,
-      defaultValue: 200,
-      field: 'max_process_number'
+      defaultValue: 200
     },
     maxOutputSize: {
       type: Sequelize.INTEGER,
-      defaultValue: 10000,
-      field: 'max_output_size'
+      defaultValue: 10000
     },
     userId: {
       type: Sequelize.UUID,
-      allowNull: false,
-      field: 'user_id'
+      allowNull: false
     }
   },
   Submission: {
@@ -118,13 +107,11 @@ const DatabaseSchema = {
     },
     problemId: {
       type: Sequelize.INTEGER,
-      allowNull: false,
-      field: 'problem_id'
+      allowNull: false
     },
     userId: {
       type: Sequelize.UUID,
-      allowNull: false,
-      field: 'user_id'
+      allowNull: false
     },
     code: {
       type: Sequelize.TEXT
@@ -133,12 +120,10 @@ const DatabaseSchema = {
       type: Sequelize.STRING
     },
     cpuTime: {
-      type: Sequelize.INTEGER,
-      field: 'cpu_time'
+      type: Sequelize.INTEGER
     },
     realTime: {
-      type: Sequelize.INTEGER,
-      field: 'real_time'
+      type: Sequelize.INTEGER
     },
     signal: {
       type: Sequelize.INTEGER
@@ -147,8 +132,7 @@ const DatabaseSchema = {
       type: Sequelize.INTEGER
     },
     exitCode: {
-      type: Sequelize.INTEGER,
-      field: 'exit_code'
+      type: Sequelize.INTEGER
     },
     result: {
       type: Sequelize.INTEGER
@@ -156,6 +140,14 @@ const DatabaseSchema = {
     error: {
       type: Sequelize.INTEGER
     }
+  }
+}
+
+// camelCaseToUnderscored
+for (let schema of Object.values(DatabaseSchema)) {
+  for (let key in schema) {
+    let camel = humps.decamelize(key)
+    if (camel !== key) schema[key]['field'] = camel
   }
 }
 
