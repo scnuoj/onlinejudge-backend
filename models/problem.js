@@ -3,12 +3,11 @@ const { Random } = require('mockjs')
 const MODELNAME = 'Problem'
 
 module.exports = Object.assign(DATABASE[MODELNAME], {
-
 })
 
 module.exports[Symbol.for('mock')] = () => {
   return {
-    title: Random.increment(),
+    title: Random.title(),
     description: Random.paragraph(),
     type: Random.word(),
     input: Random.sentence(),

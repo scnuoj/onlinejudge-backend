@@ -1,5 +1,4 @@
 const { Random } = require('mockjs')
-const uuid = require('uuid')
 
 const MODELNAME = 'User'
 
@@ -8,7 +7,6 @@ module.exports = Object.assign(DATABASE[MODELNAME], {
 
 module.exports[Symbol.for('mock')] = () => {
   return {
-    id: uuid.v1(),
     name: Random.name(),
     email: Random.email(),
     password: Random.word(10),
