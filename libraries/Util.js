@@ -1,15 +1,14 @@
 const { SHA256 } = require('crypto-js')
 const { ParamsError, AuthError } = require('./Error')
 
-const MAX_QUERY_COUNT = 30
-
 /**
  * 转为整数
  * @param {*} value
  */
-const _int = function (value) {
+const _int = function (value, min = -Infinity, max = Infinity) {
+  __paramsNotEmpty(arguments)
   if (Number.isInteger(+value)) {
-    return +value
+    return Math.min(Math.max(min, +value), max)
   } else {
     throw new ParamsError('参数非法')
   }
@@ -18,18 +17,13 @@ const _int = function (value) {
 /**
  * 转为正整数
  * 负数将返回0
- * @param {*} value
+ * @param {Number} value
+ * @param {Number} min [最小值]
+ * @param {Number} max [最大值]
  */
-const _uint = function (value) {
-  return Math.max(0, _int(value))
-}
-
-/**
- * limit 限制
- * @param {*} value
- */
-const _limit = function (value) {
-  return Math.min(_uint(value), MAX_QUERY_COUNT)
+const _uint = function (value, min = 0, max = Infinity) {
+  __paramsNotEmpty(arguments)
+  return Math.min(Math.max(min, _int(value)), max)
 }
 
 /**
@@ -37,9 +31,8 @@ const _limit = function (value) {
  * @param {*} value
  */
 const _name = function (value) {
-  if (!_exist(value)) {
-    throw new ParamsError('用户名不能为空')
-  } else if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
+  __paramsNotEmpty(arguments)
+  if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
     throw new ParamsError('含有非法字符')
   } else if (value.toString().length < 2) {
     throw new ParamsError('用户名不能小于2位')
@@ -55,9 +48,8 @@ const _name = function (value) {
  * @param {*} value
  */
 const _password = function (value) {
-  if (!_exist(value)) {
-    throw new ParamsError('密码不能为空')
-  } else if (!/^\w+$/.test(value)) {
+  __paramsNotEmpty(arguments)
+  if (!/^\w+$/.test(value)) {
     throw new ParamsError('含有非法字符')
   } else if (value.toString().length < 6) {
     throw new ParamsError('密码不能小于6位')
@@ -72,7 +64,8 @@ const _password = function (value) {
  * @param {*} value
  */
 const _email = function (value) {
-  if (_exist(value) && /\S+@\S+\.\S+/.test(value)) {
+  __paramsNotEmpty(arguments)
+  if (/\S+@\S+\.\S+/.test(value)) {
     return value.toString()
   } else {
     throw new ParamsError('邮箱格式错误')
@@ -84,7 +77,8 @@ const _email = function (value) {
  * @param {*} value
  */
 const _validOrder = function (value) {
-  if (_exist(value) && ['DESC', 'ASC'].includes(value.toUpperCase())) {
+  __paramsNotEmpty(arguments)
+  if (['DESC', 'ASC'].includes(value.toUpperCase())) {
     return value.toUpperCase()
   } else {
     throw new ParamsError(`order must be 'ASC' or 'DESC', '${value}' given`)
@@ -96,7 +90,8 @@ const _validOrder = function (value) {
  * @param {String} value
  */
 const _validLang = function (value) {
-  if (_exist(value) && ['CC', 'C'].includes(value.toUpperCase())) {
+  __paramsNotEmpty(arguments)
+  if (['CC', 'C'].includes(value.toUpperCase())) {
     return value.toUpperCase()
   } else {
     throw new ParamsError(`unknown supported lang: ${value}`)
@@ -121,11 +116,8 @@ const _Authentication = function (ctx) {
  * @param {*} value
  */
 const _exist = function (value) {
-  if (value === undefined || value === null || value === '' || value.length === 0) {
-    throw new ParamsError('你是不是忘记传参数啦?')
-  } else {
-    return value
-  }
+  __paramsNotEmpty(arguments)
+  return value
 }
 
 module.exports = {
@@ -133,10 +125,21 @@ module.exports = {
   _uint,
   _name,
   _email,
-  _limit,
   _exist,
   _password,
   _validOrder,
   _validLang,
   _Authentication
+}
+
+/**
+ * 不能传递空参数
+ * @param {Array} args
+ */
+const __paramsNotEmpty = function (args) {
+  for (let arg of args) {
+    if (arg === undefined || arg === null || arg === '' || arg.length === 0) {
+      throw new ParamsError('参数错误')
+    }
+  }
 }

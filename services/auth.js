@@ -1,6 +1,6 @@
 const UserModel = require('../models/user')
 const { _name, _email, _password } = require('../libraries/Util')
-const { AuthError } = require('../libraries/Error')
+const { AuthError, ParamsError } = require('../libraries/Error')
 
 /**
  * 注册
@@ -26,7 +26,8 @@ const register = async (name, email, password) => {
  */
 const login = async (name, email, password) => {
   if (name) name = _name(name)
-  if (email) email = _email(email)
+  else if (email) email = _email(email)
+  else throw new ParamsError('请输入用户名或邮箱')
   password = _password(password)
   const user = await UserModel.find({
     where: {
