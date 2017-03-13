@@ -104,7 +104,7 @@ const _validLang = function (value) {
  * TODO: 判断 token 有效期
  */
 const _Authentication = function (ctx) {
-  if (_exist(ctx.request.header.authorization) && _exist(ctx.state.user) && ctx.state.user.userId) {
+  if (ctx.request.header.authorization && ctx.state.user && ctx.state.user.userId) {
     return ctx
   } else {
     throw new AuthError('请先进行登录')
