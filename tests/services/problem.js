@@ -32,7 +32,7 @@ describe('Problem', function () {
   })
 
   it('call getProblemlist with invalid sortby', async () => {
-    const error = await ProblemService.getProblemList(3, 2, '34234', 'ASC').catch(e => e)
+    const error = await ProblemService.getProblemList(3, 2, 1111, 'ASC').catch(e => e)
     error.should.be.an.instanceof(ParamsError)
   })
 })

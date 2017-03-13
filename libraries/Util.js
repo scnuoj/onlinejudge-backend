@@ -1,6 +1,8 @@
 const { SHA256 } = require('crypto-js')
 const { ParamsError, AuthError } = require('./Error')
 
+const MAX_QUERY_COUNT = 30
+
 /**
  * 转为整数
  * @param {*} value
@@ -23,11 +25,19 @@ const _uint = function (value) {
 }
 
 /**
+ * limit 限制
+ * @param {*} value
+ */
+const _limit = function (value) {
+  return Math.min(_uint(value), MAX_QUERY_COUNT)
+}
+
+/**
  * 转为用户名
  * @param {*} value
  */
 const _name = function (value) {
-  if (__isEmpty(value)) {
+  if (!_exist(value)) {
     throw new ParamsError('用户名不能为空')
   } else if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
     throw new ParamsError('含有非法字符')
@@ -45,7 +55,7 @@ const _name = function (value) {
  * @param {*} value
  */
 const _password = function (value) {
-  if (__isEmpty(value)) {
+  if (!_exist(value)) {
     throw new ParamsError('密码不能为空')
   } else if (!/^\w+$/.test(value)) {
     throw new ParamsError('含有非法字符')
@@ -62,7 +72,7 @@ const _password = function (value) {
  * @param {*} value
  */
 const _email = function (value) {
-  if (!__isEmpty(value) && /\S+@\S+\.\S+/.test(value)) {
+  if (_exist(value) && /\S+@\S+\.\S+/.test(value)) {
     return value.toString()
   } else {
     throw new ParamsError('邮箱格式错误')
@@ -74,7 +84,7 @@ const _email = function (value) {
  * @param {*} value
  */
 const _validOrder = function (value) {
-  if (!__isEmpty(value) && ['DESC', 'ASC'].includes(value.toUpperCase())) {
+  if (_exist(value) && ['DESC', 'ASC'].includes(value.toUpperCase())) {
     return value.toUpperCase()
   } else {
     throw new ParamsError(`order must be 'ASC' or 'DESC', '${value}' given`)
@@ -86,7 +96,7 @@ const _validOrder = function (value) {
  * @param {String} value
  */
 const _validLang = function (value) {
-  if (!__isEmpty(value) && ['CC', 'C'].includes(value.toUpperCase())) {
+  if (_exist(value) && ['CC', 'C'].includes(value.toUpperCase())) {
     return value.toUpperCase()
   } else {
     throw new ParamsError(`unknown supported lang: ${value}`)
@@ -99,11 +109,22 @@ const _validLang = function (value) {
  * TODO: 判断 token 有效期
  */
 const _Authentication = function (ctx) {
-  const token = ctx.request.header.authorization
-  if (!__isEmpty(token) && !__isEmpty(ctx.state.user) && ctx.state.user.userId) {
+  if (_exist(ctx.request.header.authorization) && _exist(ctx.state.user) && ctx.state.user.userId) {
     return ctx
   } else {
     throw new AuthError('请先进行登录')
+  }
+}
+
+/**
+ * 要求参数存在
+ * @param {*} value
+ */
+const _exist = function (value) {
+  if (value === undefined || value === null || value === '' || value.length === 0) {
+    throw new ParamsError('你是不是忘记传参数啦?')
+  } else {
+    return value
   }
 }
 
@@ -112,18 +133,10 @@ module.exports = {
   _uint,
   _name,
   _email,
+  _limit,
+  _exist,
   _password,
   _validOrder,
   _validLang,
   _Authentication
 }
-
-/**
- * 判空
- * @param {*} value
- */
-const __isEmpty = function (value) {
-  return value === undefined || value === null || value === ''
-}
-
-/** */
