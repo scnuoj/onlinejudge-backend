@@ -3,7 +3,7 @@ const { ParamsError, AuthError } = require('./Error')
 
 /**
  * 转为整数
- * @param {*} value
+ * @param {Number} value
  */
 const _int = function (value, min = -Infinity, max = Infinity) {
   __paramsNotEmpty(arguments)
@@ -23,12 +23,12 @@ const _int = function (value, min = -Infinity, max = Infinity) {
  */
 const _uint = function (value, min = 0, max = Infinity) {
   __paramsNotEmpty(arguments)
-  return Math.min(Math.max(min, _int(value)), max)
+  return _int(value, min, max)
 }
 
 /**
  * 转为用户名
- * @param {*} value
+ * @param {String} value
  */
 const _name = function (value) {
   __paramsNotEmpty(arguments)
@@ -45,7 +45,7 @@ const _name = function (value) {
 /**
  * 转为密码
  * \w+{6, 18}
- * @param {*} value
+ * @param {String} value
  */
 const _password = function (value) {
   __paramsNotEmpty(arguments)
@@ -61,7 +61,7 @@ const _password = function (value) {
 
 /**
  * 转为邮箱
- * @param {*} value
+ * @param {String} value
  */
 const _email = function (value) {
   __paramsNotEmpty(arguments)
@@ -74,7 +74,7 @@ const _email = function (value) {
 
 /**
  * 合法顺序
- * @param {*} value
+ * @param {String} value
  */
 const _validOrder = function (value) {
   __paramsNotEmpty(arguments)
