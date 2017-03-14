@@ -4,7 +4,7 @@ const ProblemService = require('../services/problem')
 const router = new Router()
 
 router.get('/', async (ctx, next) => {
-  const problems = await ProblemService.getProblemList(ctx.query.id)
+  const problems = await ProblemService.getProblemList(ctx.query.id, ctx.query.limit, ctx.query.sortby, ctx.query.order)
   ctx.body = {
     success: true,
     data: problems
