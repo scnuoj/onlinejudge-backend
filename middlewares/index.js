@@ -8,7 +8,7 @@ const compress = require('koa-compress')
 const bodyparser = require('koa-bodyparser')
 const conditional = require('koa-conditional-get')
 const responseTime = require('koa-response-time')
-const error = require('./error')
+const error = require('./error-catch')
 /**
  * ## 中间件
  * responseTime => 记录处理时间
