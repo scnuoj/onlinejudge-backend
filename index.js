@@ -14,6 +14,7 @@ const Env = require('config').get('Env')
 const Jwt = require('config').get('Jwt')
 
 const app = new Koa()
+require('./libraries/Extend')(app)
 
 app.use(middlerwares)
 
