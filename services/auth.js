@@ -1,6 +1,6 @@
 const UserModel = require('../models/user')
-const { _name, _email, _password } = require('../libraries/Util')
 const { AuthError, ParamsError } = require('../libraries/Error')
+const { SHA256 } = require('crypto-js')
 
 /**
  * 注册
@@ -9,11 +9,10 @@ const { AuthError, ParamsError } = require('../libraries/Error')
  * @param {String} password [密码]
  */
 const register = async (name, email, password) => {
-  [name, email, password] = [_name(name), _email(email), _password(password)]
   const user = await UserModel.create({
     name,
     email,
-    password
+    password: SHA256(password).toString()
   })
   return user
 }
@@ -25,10 +24,6 @@ const register = async (name, email, password) => {
  * @param {String} password [密码]
  */
 const login = async (name, email, password) => {
-  if (name) name = _name(name)
-  else if (email) email = _email(email)
-  else throw new ParamsError('请输入用户名或邮箱')
-  password = _password(password)
   const user = await UserModel.find({
     where: {
       $or: [{
@@ -39,7 +34,7 @@ const login = async (name, email, password) => {
     }
   })
   if (user) {
-    if (user.password === password) {
+    if (user.password === SHA256(password).toString()) {
       return user
     } else {
       throw new AuthError('密码错误')

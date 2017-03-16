@@ -1,13 +1,12 @@
 const ProblemModel = require('../models/problem')
 const { ParamsError } = require('../libraries/Error')
-const { _uint, _validOrder } = require('../libraries/Util')
 
 /**
  * 根据题目 id 获取指定题目信息
  * @param {Number} id [题目 ID]
  */
 const getProblemById = async (id) => {
-  const problem = await ProblemModel.findById(_uint(id))
+  const problem = await ProblemModel.findById(id)
   if (problem) {
     return problem
   } else {
@@ -23,11 +22,6 @@ const getProblemById = async (id) => {
  * @param {String} order  [顺序]
  */
 const getProblemList = async (offset = 0, limit = 10, sortby = 'created_at', order = 'DESC') => {
-  [limit, offset, order] = [_uint(limit, 0, 30), _uint(offset), _validOrder(order)]
-  const validSort = ['updated_at', 'created_at', 'id']
-  if (!validSort.includes(sortby)) {
-    throw new ParamsError(`sortby must be '${validSort.join(`' or '`)}', '${sortby}' given`)
-  }
   const problems = await ProblemModel.findAll({
     limit,
     offset,
