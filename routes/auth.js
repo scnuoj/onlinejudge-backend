@@ -29,11 +29,11 @@ router.route([{
   path: '/login',
   validate: {
     type: 'json',
-    body: {
-      name: Joi.string().optional(),
-      email: Joi.string().email().optional(),
-      password: Joi.string().min(6).max(18)
-    }
+    body: Joi.object().keys({
+      name: Joi.string(),
+      email: Joi.string().email(),
+      password: Joi.string().required().min(6).max(18)
+    }).or('name', 'email')
   },
   handler: async (ctx, next) => {
     const user = await AuthService.login(ctx.request.body.name, ctx.request.body.email, ctx.request.body.password)
