@@ -28,6 +28,7 @@ const _uint = function (value, min = 0, max = Infinity) {
 
 /**
  * 转为用户名
+ * 2位到10位
  * @param {String} value
  */
 const _name = function (value) {
@@ -44,6 +45,7 @@ const _name = function (value) {
 
 /**
  * 转为密码
+ * 6位到18位
  * \w+{6, 18}
  * @param {String} value
  */
@@ -61,11 +63,12 @@ const _password = function (value) {
 
 /**
  * 转为邮箱
+ * 不大于 25 位
  * @param {String} value
  */
 const _email = function (value) {
   __paramsNotEmpty(arguments)
-  if (/\S+@\S+\.\S+/.test(value)) {
+  if (/\S+@\S+\.\S+/.test(value) && value.length < 25) {
     return value.toString()
   } else {
     throw new ParamsError('邮箱格式错误')
@@ -83,6 +86,19 @@ const _validOrder = function (value) {
   } else {
     throw new ParamsError(`order must be 'ASC' or 'DESC', '${value}' given`)
   }
+}
+
+/**
+ * 有效代码长度
+ * 小于 1500 位
+ * @param {*} value
+ */
+const _validCode = function (value) {
+  __paramsNotEmpty(arguments)
+  if (value.length > 1500) {
+    throw new ParamsError(`代码过长`)
+  }
+  return value.toString()
 }
 
 /**
@@ -129,6 +145,7 @@ module.exports = {
   _password,
   _validOrder,
   _validLang,
+  _validCode,
   _Authentication
 }
 

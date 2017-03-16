@@ -1,7 +1,7 @@
 const SubmissionModel = require('../models/submission')
 const ProblemModel = require('../models/problem')
 const Queue = require('../libraries/Queue')
-const { _validLang, _exist } = require('../libraries/Util')
+const { _validLang, _exist, _validCode } = require('../libraries/Util')
 const { ParamsError } = require('../libraries/Error')
 
 /**
@@ -11,7 +11,7 @@ const { ParamsError } = require('../libraries/Error')
  * @param {String} lang [代码类别]
  */
 const checkSubmission = async (id, code, lang) => {
-  [lang, code] = [_validLang(lang), _exist(code), _exist(id)]
+  [lang, code] = [_validLang(lang), _validCode(code), _exist(id)]
   const problem = await ProblemModel.findById(id)
   if (problem) {
     // TODO: UserId
