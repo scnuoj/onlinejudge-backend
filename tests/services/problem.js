@@ -25,14 +25,9 @@ describe('Problem', function () {
     problem.id.should.equal(problems[0].id)
   })
 
-  it('call getProblemlist with valid params', async () => {
-    const items = await ProblemService.getProblemList(3, 2, 'updated_at', 'ASC')
+  it('call getProblemlist with valid params should be ok', async () => {
+    const items = await ProblemService.getProblemList(3, 2, 'updated_at', 'asc')
     items.should.be.an.instanceof(Array)
     items.length.should.be.equal(2)
-  })
-
-  it('call getProblemlist with invalid sortby', async () => {
-    const error = await ProblemService.getProblemList(3, 2, 1111, 'ASC').catch(e => e)
-    error.should.be.an.instanceof(ParamsError)
   })
 })
