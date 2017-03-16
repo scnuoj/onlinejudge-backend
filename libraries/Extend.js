@@ -3,10 +3,10 @@ const JwtConfig = require('config').get('Jwt')
 
 // 扩展 Koa Context 方法
 module.exports = function (app) {
-  app.context.setAuth = function (userId) {
+  app.context.setAuth = function (id) {
     const exp = (Date.now() + JwtConfig.exp) / 1000
     const token = jwt.sign({
-      userId,
+      id,
       exp
     }, JwtConfig.secret)
     this.cookies.set('token', token, {

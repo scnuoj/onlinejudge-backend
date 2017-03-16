@@ -13,7 +13,7 @@ describe('提交', function () {
   before(async function () {
     [user] = await UserModel[Symbol.for('create')]({
       name: '测试',
-      email: '测试',
+      email: 'test@test.com',
       password: '231312421521'
     });
     [problem] = await ProblemModel[Symbol.for('create')]({
@@ -39,7 +39,7 @@ describe('提交', function () {
         .send({
           id: doc.val(problem.id, '题目 ID'),
           code: doc.val('testcode', '用户代码'),
-          lang: doc.val('CC', '代码语言')
+          lang: doc.val('cc', '代码语言')
         })
         .expect(200)
       res.body.data.should.have.properties('submissionId')
