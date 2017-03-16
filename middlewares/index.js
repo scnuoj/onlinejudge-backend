@@ -5,7 +5,6 @@ const cors = require('kcors')
 const logger = require('koa-logger')
 const compose = require('koa-compose')
 const compress = require('koa-compress')
-const bodyparser = require('koa-bodyparser')
 const conditional = require('koa-conditional-get')
 const responseTime = require('koa-response-time')
 const error = require('./error-catch')
@@ -16,7 +15,6 @@ const error = require('./error-catch')
  * conditional => etag 需要
  * etag => 添加 etag 值
  * json => 返回 json 格式化
- * bodyparser => 解析 post/put/delete 请求的 body
  * logger => 输出日志
  * error => 全局错误处理
  */
@@ -31,7 +29,6 @@ module.exports = compose([
   conditional(),
   etag(),
   json(),
-  bodyparser(),
   logger(),
   error()
 ])
