@@ -1,7 +1,6 @@
 require('should')
 require('../../libraries/Database')
 require('../../libraries/Queue')
-const { ParamsError } = require('../../libraries/Error')
 const ProblemService = require('../../services/problem')
 const ProblemModel = require('../../models/problem')
 const UserModel = require('../../models/user')
