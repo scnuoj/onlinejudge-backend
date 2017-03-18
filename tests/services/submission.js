@@ -14,8 +14,8 @@ describe('Service: Submission', function () {
     await Promise.all(problems.map(problem => problem.destroy()))
   })
 
-  it('Func: checkSubmission with valid params should be ok', async () => {
-    const submissionId = await SubmissionService.checkSubmission(USER, problems[0].id, '12345', 'cc')
+  it('Func: checkSubmission', async () => {
+    const submissionId = await SubmissionService.checkSubmission(USER.id, problems[0].id, '12345', 'cc')
     const submission = await SubmissionModel.findById(submissionId)
     submission.problemId.should.equal(problems[0].id)
     submission.code.should.equal('12345')
