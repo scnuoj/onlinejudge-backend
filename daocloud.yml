@@ -10,8 +10,6 @@ test:
 
   env:
     - NODE_ENV = "test"
-    - REDIS_PORT_6379_TCP_PROTO = "tcp"
-    - REDIS_PASSWORD = ""
 
   install:
     - yarn install

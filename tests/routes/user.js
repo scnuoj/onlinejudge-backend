@@ -1,16 +1,14 @@
 require('should')
 const request = require('supertest-test2doc')(require('supertest'))
 const app = require('../../index.js')
-const doc = require('test2doc').group('用户').basePath('/auth')
-
+const doc = require('test2doc').group('提交').basePath('/users')
 const UserModel = require('../../models/user')
 
-describe('用户', function () {
+describe('Route: User', function () {
   after(async function () {
     await UserModel.destroy({
       where: {
-        name: '庄瑞铭',
-        password: '123456789'
+        name: '庄瑞铭123'
       }
     })
   })
@@ -18,10 +16,10 @@ describe('用户', function () {
   doc.action('注册用户').is(doc => {
     it('注册用户', async function () {
       const res = await request(app).with(doc)
-        .post('/api/auth/register')
+        .post('/api/users/register')
         .send({
-          name: doc.val('庄瑞铭', '用户名'),
-          email: doc.val('ruiming.zhuang@gmail.com', '邮箱'),
+          name: doc.val('庄瑞铭123', '用户名'),
+          email: doc.val('ruiming.zhuang123@gmail.com', '邮箱'),
           password: doc.val('123456789', '密码')
         })
         .expect(200)
@@ -32,14 +30,25 @@ describe('用户', function () {
   doc.action('登录用户').is(doc => {
     it('登录用户', async function () {
       const res = await request(app).with(doc)
-        .post('/api/auth/login')
+        .post('/api/users/login')
         .send({
-          name: doc.val('庄瑞铭', '用户名[用户名和邮箱二选一]'),
-          email: doc.val('ruiming.zhuang@gmail.com', '邮箱'),
+          name: doc.val('庄瑞铭123', '用户名[用户名和邮箱二选一]'),
+          email: doc.val('ruiming.zhuang123@gmail.com', '邮箱'),
           password: doc.val('123456789', '密码')
         })
         .expect(200)
       res.body.success.should.equal(true)
+    })
+  })
+
+  doc.action('获取用户信息').is(doc => {
+    it('获取用户信息', async function () {
+      const res = await request(app).with(doc)
+        .get('/api/users')
+        .set('Authorization', `Bearer ${TOKEN}`)
+        .expect(200)
+      res.body.data.name.should.equal(USER.name)
+      res.body.data.email.should.equal(USER.email)
     })
   })
 })
