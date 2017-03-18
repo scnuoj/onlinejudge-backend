@@ -17,7 +17,7 @@ router.route([{
     }
   },
   handler: [ authentication(), async (ctx, next) => {
-    const submissionId = await SubmissionService.checkSubmission(ctx.state.user, ctx.request.body.id, ctx.request.body.code, ctx.request.body.lang)
+    const submissionId = await SubmissionService.checkSubmission(ctx.state.user.id, ctx.request.body.id, ctx.request.body.code, ctx.request.body.lang)
     ctx.body = {
       success: true,
       data: { submissionId }
