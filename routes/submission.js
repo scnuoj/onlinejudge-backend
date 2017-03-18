@@ -5,10 +5,8 @@ const SubmissionService = require('../services/submission')
 const Joi = Router.Joi
 const router = new Router()
 
-router.route([{
-  // 提交答案
-  method: 'POST',
-  path: '/',
+// 提交答案 (Auth)
+router.post('/', {
   validate: {
     type: 'json',
     body: {
@@ -16,14 +14,13 @@ router.route([{
       code: Joi.string().required(),
       lang: Joi.string().valid('cc', 'c', 'java')
     }
-  },
-  handler: [ authentication(), async (ctx, next) => {
-    const submissionId = await SubmissionService.checkSubmission(ctx.state.user.id, ctx.request.body.id, ctx.request.body.code, ctx.request.body.lang)
-    ctx.body = {
-      success: true,
-      data: { submissionId }
-    }
-  }]
-}])
+  }
+}, authentication(), async (ctx, next) => {
+  const submissionId = await SubmissionService.checkSubmission(ctx.state.user.id, ctx.request.body.id, ctx.request.body.code, ctx.request.body.lang)
+  ctx.body = {
+    success: true,
+    data: { submissionId }
+  }
+})
 
 module.exports = router
