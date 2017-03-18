@@ -5,6 +5,7 @@ const Joi = Router.Joi
 const router = new Router()
 
 router.route([{
+  // 获取问题
   method: 'GET',
   path: '/',
   validate: {

@@ -6,6 +6,7 @@ const Joi = Router.Joi
 const router = new Router()
 
 router.route([{
+  // 获取用户个人信息
   method: 'GET',
   path: '/',
   handler: [ authentication(), async (ctx, next) => {
@@ -16,6 +17,7 @@ router.route([{
     }
   }]
 }, {
+  // 注册
   method: 'POST',
   path: '/register',
   validate: {
@@ -36,6 +38,7 @@ router.route([{
     }
   }
 }, {
+  // 登录
   method: 'POST',
   path: '/login',
   validate: {

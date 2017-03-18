@@ -6,6 +6,7 @@ const Joi = Router.Joi
 const router = new Router()
 
 router.route([{
+  // 提交答案
   method: 'POST',
   path: '/',
   validate: {
