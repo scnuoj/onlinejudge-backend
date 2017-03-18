@@ -11,6 +11,6 @@ const api = new Router({
 api.use('/auth', Auth.middleware())
 api.use('/problems', Problem.middleware())
 api.use('/submissions', Submission.middleware())
-api.use('/users', User.routes(), User.allowedMethods())
+api.use('/users', User.middleware())
 
 module.exports = api
