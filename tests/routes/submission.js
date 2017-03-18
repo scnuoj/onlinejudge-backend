@@ -4,20 +4,14 @@ const app = require('../../index.js')
 const doc = require('test2doc').group('提交').basePath('/submissions')
 
 const ProblemModel = require('../../models/problem')
-const UserModel = require('../../models/user')
 const SubmissionModel = require('../../models/submission')
 
-let problem, user, submissionId
+let problem, submissionId
 
 describe('提交', function () {
   before(async function () {
-    [user] = await UserModel[Symbol.for('create')]({
-      name: '测试',
-      email: 'test@test.com',
-      password: '231312421521'
-    });
     [problem] = await ProblemModel[Symbol.for('create')]({
-      userId: user.id
+      userId: USER.id
     })
   })
 
@@ -28,7 +22,6 @@ describe('提交', function () {
       }
     })
     await problem.destroy()
-    await user.destroy()
   })
 
   doc.action('提交代码').is(doc => {

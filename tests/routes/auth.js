@@ -9,7 +9,7 @@ describe('用户', function () {
   after(async function () {
     await UserModel.destroy({
       where: {
-        name: '庄瑞铭',
+        name: '庄瑞铭123',
         password: '123456789'
       }
     })
@@ -20,8 +20,8 @@ describe('用户', function () {
       const res = await request(app).with(doc)
         .post('/api/auth/register')
         .send({
-          name: doc.val('庄瑞铭', '用户名'),
-          email: doc.val('ruiming.zhuang@gmail.com', '邮箱'),
+          name: doc.val('庄瑞铭123', '用户名'),
+          email: doc.val('ruiming.zhuang123@gmail.com', '邮箱'),
           password: doc.val('123456789', '密码')
         })
         .expect(200)
@@ -34,8 +34,8 @@ describe('用户', function () {
       const res = await request(app).with(doc)
         .post('/api/auth/login')
         .send({
-          name: doc.val('庄瑞铭', '用户名[用户名和邮箱二选一]'),
-          email: doc.val('ruiming.zhuang@gmail.com', '邮箱'),
+          name: doc.val('庄瑞铭123', '用户名[用户名和邮箱二选一]'),
+          email: doc.val('ruiming.zhuang123@gmail.com', '邮箱'),
           password: doc.val('123456789', '密码')
         })
         .expect(200)
