@@ -10,7 +10,7 @@ module.exports[Symbol.for('mock')] = () => {
     problemId: Random.id(),
     userId: Random.id(),
     code: Random.paragraph(),
-    type: 'CC'
+    type: 'cc'
   }
 }
 
