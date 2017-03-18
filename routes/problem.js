@@ -24,6 +24,7 @@ router.route([{
     }
   }
 }, {
+  // 获取指定问题的详细信息
   method: 'GET',
   path: '/:id',
   validate: {
