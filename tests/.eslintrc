@@ -3,6 +3,7 @@
     "mocha": true
   },
   "globals": {
-    "TOKEN": true
+    "TOKEN": true,
+    "USER": true
   }
 }

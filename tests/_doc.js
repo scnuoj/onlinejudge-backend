@@ -16,18 +16,24 @@ before(async function () {
   let res = await request(app)
     .post('/api/auth/register')
     .send({
-      name: '测试用户名',
-      email: 'ruiming.zhuang@gmail.com',
+      name: '测试名',
+      email: 'test@test.com',
       password: '123456789'
     })
     .expect(200)
   global.TOKEN = res.body.data
+  // 获取测试用户信息
+  global.USER = await UserModel.find({
+    where: {
+      name: '测试名'
+    }
+  })
 })
 
 after(async function () {
   await UserModel.destroy({
     where: {
-      name: '测试用户名'
+      name: '测试名'
     }
   })
   doc.emit('api-documents.md')
