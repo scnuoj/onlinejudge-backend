@@ -4,7 +4,7 @@ const Submission = require('./submission')
 const User = require('./user')
 
 const api = new Router({
-  prefix: '/api'
+  prefix: '/api/v1'
 })
 
 api.use('/problems', Problem.middleware())
