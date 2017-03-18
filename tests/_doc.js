@@ -16,7 +16,7 @@ module.exports = doc.title('OnlineJudge API 文档')
 before(async function () {
   // 获取测试用 token
   let res = await request(app)
-    .post('/api/auth/register')
+    .post('/api/users/register')
     .send({
       name: '测试名',
       email: 'test@test.com',
