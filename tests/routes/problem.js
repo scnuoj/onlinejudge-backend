@@ -7,7 +7,7 @@ const ProblemModel = require('../../models/problem')
 
 let problem
 
-describe('问题', function () {
+describe('Route: Problem', function () {
   before(async function () {
     [problem] = await ProblemModel[Symbol.for('create')]({
       userId: USER.id

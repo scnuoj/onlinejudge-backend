@@ -3,7 +3,7 @@ const request = require('supertest-test2doc')(require('supertest'))
 const app = require('../../index.js')
 const doc = require('test2doc').group('提交').basePath('/users')
 
-describe('用户', function () {
+describe('Route: User', function () {
   doc.action('获取用户信息').is(doc => {
     it('获取用户信息', async function () {
       const res = await request(app).with(doc)

@@ -8,7 +8,7 @@ const SubmissionModel = require('../../models/submission')
 
 let problem, submissionId
 
-describe('提交', function () {
+describe('Route: Submission', function () {
   before(async function () {
     [problem] = await ProblemModel[Symbol.for('create')]({
       userId: USER.id

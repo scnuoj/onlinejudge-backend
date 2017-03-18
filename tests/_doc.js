@@ -1,3 +1,5 @@
+require('../libraries/Database')
+require('../libraries/Queue')
 const doc = require('test2doc')
 const request = require('supertest')
 const glob = require('glob')

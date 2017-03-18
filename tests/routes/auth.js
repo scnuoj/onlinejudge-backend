@@ -5,7 +5,7 @@ const doc = require('test2doc').group('用户').basePath('/auth')
 
 const UserModel = require('../../models/user')
 
-describe('用户', function () {
+describe('Route: User', function () {
   after(async function () {
     await UserModel.destroy({
       where: {
