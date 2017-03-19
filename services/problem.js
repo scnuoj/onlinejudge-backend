@@ -21,7 +21,7 @@ const getProblemById = async (id) => {
  * @param {String} sortby [排序]
  * @param {String} order  [顺序]
  */
-const getProblemList = async (offset = 0, limit = 10, sortby = 'created_at', order = 'DESC') => {
+const getProblemList = async (offset = 0, limit = 10, sortby = 'id', order = 'desc') => {
   const problems = await ProblemModel.findAll({
     limit,
     offset,

@@ -21,8 +21,8 @@ const getProblemById = async (id) => {
  * @param {String} sortby [排序]
  * @param {String} order  [顺序]
  */
-const getProblemList = async (offset = 0, limit = 10, sortby = 'created_at', order = 'DESC') => {
-  const problems = await ProblemModel.findAll({
+const getProblemList = async (offset = 0, limit = 10, sortby = 'id', order = 'desc') => {
+  const problems = await ProblemModel.findAndCountAll({
     limit,
     offset,
     order: [[sortby, order]],
