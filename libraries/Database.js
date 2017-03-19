@@ -94,6 +94,12 @@ const DatabaseSchema = {
     passCount: {
       type: Sequelize.INTEGER
     },
+    percent: {
+      type: Sequelize.FLOAT,
+      get: function () {
+        return (this.getDataValue('passCount') / this.getDataValue('submitCount')).toFixed(2)
+      }
+    },
     // 最大 CPU 运行时间
     maxCpuTime: {
       type: Sequelize.INTEGER,

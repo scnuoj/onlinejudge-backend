@@ -34,7 +34,7 @@ describe('Route: Problem', function () {
         .query({
           limit: doc.val(1, '限制查询数量'),
           offset: doc.val(0, '查询偏移'),
-          sortby: doc.val('created_at', '排序依据, 默认为 created_at, 可选 updated_at, id'),
+          sortby: doc.val('id', '排序依据, 默认为 id, 可选 submitCount, passCount, percent'),
           order: doc.val('desc', '排序顺序, 默认为 desc, 可选 asc')
         })
         .expect(200)
