@@ -37,14 +37,13 @@ router.post('/register', {
 router.post('/login', {
   validate: {
     type: 'json',
-    body: Joi.object().keys({
+    body: {
       name: Joi.string(),
-      email: Joi.string().email(),
       password: Joi.string().required().min(6).max(18)
-    }).or('name', 'email')
+    }
   }
 }, async (ctx, next) => {
-  const user = await UserService.login(ctx.request.body.name, ctx.request.body.email, ctx.request.body.password)
+  const user = await UserService.login(ctx.request.body.name, ctx.request.body.password)
   const token = ctx.setAuth(user.id)
   ctx.body = {
     success: true,
