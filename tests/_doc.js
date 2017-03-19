@@ -11,12 +11,12 @@ module.exports = doc.title('OnlineJudge API 文档')
                     .desc(`OnlineJudge API 文档`)
                     .scheme('http')
                     .host('localhost:8000')
-                    .basePath('/api')
+                    .basePath('/api/v1')
 
 before(async function () {
   // 获取测试用 token
   let res = await request(app)
-    .post('/api/users/register')
+    .post('/api/v1/users/register')
     .send({
       name: '测试名',
       email: 'test@test.com',
