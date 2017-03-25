@@ -13,7 +13,6 @@ const { ParamsError } = require('../libraries/Error')
 const checkSubmission = async (userId, id, code, lang) => {
   const problem = await ProblemModel.findById(id)
   if (problem) {
-    // TODO: UserId
     const submission = await SubmissionModel.create({
       problemId: id,
       userId,

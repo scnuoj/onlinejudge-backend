@@ -16,8 +16,8 @@ module.exports[Symbol.for('mock')] = () => {
     sampleOutput: Random.sentence(),
     inputData: Random.sentence(),
     outputData: Random.sentence(),
-    submitCount: Random.integer(0, 10),
-    takeCount: Random.integer(0, 10),
+    passCount: Random.integer(100, 200),
+    submitCount: Random.integer(200, 1000),
     userId: Random.id()
   }
 }

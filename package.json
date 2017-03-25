@@ -1,15 +1,16 @@
 {
   "name": "onlinejudge",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "index.js",
   "author": "ruiming",
   "license": "MIT",
   "scripts": {
-    "test": "mocha ./tests/_doc.js --timeout=5000",
+    "test": "nyc mocha ./tests/_doc.js --timeout=10000",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov --token=6b2749fa-19a3-41d8-9264-eccf3dcc03ae",
     "mock": "npm run cleandb && npm run initializedb && npm run generatedata",
-    "cleandb": "mocha ./tasks/database-destroy.js --timeout=5000",
-    "initializedb": "mocha ./tasks/database-initialize.js --timeout=5000",
-    "generatedata": "mocha ./tasks/data-generator.js --timeout=5000"
+    "cleandb": "mocha ./tasks/database-destroy.js --timeout=20000",
+    "initializedb": "mocha ./tasks/database-initialize.js --timeout=20000",
+    "generatedata": "mocha ./tasks/data-generator.js --timeout=50000"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -43,10 +44,24 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^2.1.1",
     "glob": "^7.1.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
     "should": "^11.2.0",
     "supertest": "^3.0.0",
     "supertest-test2doc": "^0.1.1",
     "test2doc": "^0.3.4"
+  },
+  "nyc": {
+    "all": true,
+    "cache": true,
+    "include": [
+      "routes/**",
+      "services/**"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ]
   }
 }

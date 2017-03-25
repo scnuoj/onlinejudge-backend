@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - 7.6
+
+services:
+  - mysql
+  - redis
+
+env:
+  - NODE_ENV = "test"
+  - CODECOV_TOKEN = "6b2749fa-19a3-41d8-9264-eccf3dcc03ae"
+
+install:
+  - yarn install
+  - yarn global add mocha should istanbul nyc codecov
+
+before_script:
+  - yarn run mock
+
+script:
+  - yarn run test
+  - yarn run report-coverage
+
+cache: yarn

@@ -1,5 +1,5 @@
 const Router = require('koa-joi-router')
-const ProblemService = require('../services/problem')
+const ProblemService = require('../../services/managerment/problem')
 
 const Joi = Router.Joi
 const router = new Router()
@@ -9,7 +9,7 @@ router.get('/', {
   validate: {
     query: {
       offset: Joi.number().integer().min(0).default(0),
-      limit: Joi.number().integer().min(0).max(50).default(10),
+      limit: Joi.number().integer().min(0).max(100).default(10),
       sortby: Joi.string().valid('submitCount', 'passCount', 'id', 'percent').default('id'),
       order: Joi.string().valid('asc', 'desc').default('asc')
     }

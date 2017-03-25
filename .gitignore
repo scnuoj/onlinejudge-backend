@@ -1,3 +1,6 @@
 /node_modules/
 /.vscode/
+/coverage/
+/.nyc_output/
 api-documents.md
+coverage.lcov

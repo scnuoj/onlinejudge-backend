@@ -20,17 +20,12 @@ const register = async (name, email, password) => {
 /**
  * 登录
  * @param {String} name     [昵称]
- * @param {String} email    [邮箱]
  * @param {String} password [密码]
  */
-const login = async (name, email, password) => {
+const login = async (name, password) => {
   const user = await UserModel.find({
     where: {
-      $or: [{
-        name: name
-      }, {
-        email: email
-      }]
+      name: name
     }
   })
   if (user) {
@@ -40,7 +35,7 @@ const login = async (name, email, password) => {
       throw new AuthError('密码错误')
     }
   } else {
-    throw new AuthError('用户名或邮箱不存在')
+    throw new AuthError('用户名不存在')
   }
 }
 
