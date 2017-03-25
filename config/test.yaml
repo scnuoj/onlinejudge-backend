@@ -1,6 +1,6 @@
 Database:
   name: test
-  host: mysql
+  host: 127.0.0.1
   port: 3306
   dialect: mysql
   username: root
@@ -8,13 +8,13 @@ Database:
   logging: !!bool true
 
 Cache:
-  host: redis
+  host: 127.0.0.1
   port: 6379
   db: 0
   prefix: 'onlinejudge-cache:'
 
 Queue:
-  host: redis
+  host: 127.0.0.1
   port: 6379
   db: 1
   prefix: 'onlinejudge-queue:'
