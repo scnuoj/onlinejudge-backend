@@ -1,0 +1,24 @@
+Database:
+  name: test
+  host: mysql
+  port: 3306
+  dialect: mysql
+  username: root
+  password: 
+  logging: !!bool true
+
+Cache:
+  host: redis
+  port: 6379
+  db: 0
+  prefix: 'onlinejudge-cache:'
+
+Queue:
+  host: redis
+  port: 6379
+  db: 1
+  prefix: 'onlinejudge-queue:'
+
+
+Env: daocloud
+Port: 8000
