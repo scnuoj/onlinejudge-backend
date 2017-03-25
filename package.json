@@ -5,11 +5,11 @@
   "author": "ruiming",
   "license": "MIT",
   "scripts": {
-    "test": "mocha ./tests/_doc.js --timeout=5000",
+    "test": "mocha ./tests/_doc.js --timeout=10000",
     "mock": "npm run cleandb && npm run initializedb && npm run generatedata",
-    "cleandb": "mocha ./tasks/database-destroy.js --timeout=5000",
-    "initializedb": "mocha ./tasks/database-initialize.js --timeout=5000",
-    "generatedata": "mocha ./tasks/data-generator.js --timeout=5000"
+    "cleandb": "mocha ./tasks/database-destroy.js --timeout=20000",
+    "initializedb": "mocha ./tasks/database-initialize.js --timeout=20000",
+    "generatedata": "mocha ./tasks/data-generator.js --timeout=50000"
   },
   "dependencies": {
     "bluebird": "^3.4.6",

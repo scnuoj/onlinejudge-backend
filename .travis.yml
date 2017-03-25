@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - 7.6
+
+services:
+  - mysql
+  - redis
+
+env:
+  - NODE_ENV = "test"
+
+install:
+  - yarn install
+  - yarn global add mocha should
+
+before_script:
+  - yarn run mock
+
+script:
+  - yarn run test
+
+cache: yarn
