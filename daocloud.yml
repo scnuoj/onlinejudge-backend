@@ -16,8 +16,7 @@ test:
     - yarn global add mocha should
 
   before_script:
-    - mocha ./tasks/database-initialize.js --timeout=3000
-    - mocha ./tasks/data-generator.js --timeout=3000
+    - yarn run mock
 
   script:
     - yarn run test
