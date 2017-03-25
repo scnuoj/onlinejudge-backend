@@ -9,7 +9,7 @@ test:
     - redis
 
   env:
-    - NODE_ENV = "test"
+    - NODE_ENV = "daocloud"
 
   install:
     - yarn install
