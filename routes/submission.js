@@ -1,6 +1,6 @@
 const Router = require('koa-joi-router')
-const authentication = require('../middlewares/authentication')
 const SubmissionService = require('../services/submission')
+const Authentication = require('../middlewares/authentication')
 
 const Joi = Router.Joi
 const router = new Router()
@@ -15,7 +15,7 @@ router.post('/', {
       lang: Joi.string().valid('cc', 'c', 'java')
     }
   }
-}, authentication(), async (ctx, next) => {
+}, Authentication(), async (ctx, next) => {
   const submissionId = await SubmissionService.checkSubmission(ctx.state.user.id, ctx.request.body.id, ctx.request.body.code, ctx.request.body.lang)
   ctx.body = {
     success: true,
