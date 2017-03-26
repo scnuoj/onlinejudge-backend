@@ -2,7 +2,7 @@ const { SHA256 } = require('crypto-js')
 const Queue = require('../libraries/Queue')
 const { Database } = require('../libraries/Database')
 
-const models = ['User', 'Problem', 'Submission', 'Contest']
+const models = ['User', 'Problem', 'Submission', 'Contest', 'Post']
 const inputData = '1 2'
 const outputData = '3'
 const code = `
@@ -13,7 +13,7 @@ int main() {
   cin >> a >> b
   return a+b
 }`
-let ProblemModel, SubmissionModel, UserModel, ContestModel
+let ProblemModel, SubmissionModel, UserModel, ContestModel, PostModel
 
 describe('Mock 数据', function () {
   before(async function () {
@@ -22,6 +22,7 @@ describe('Mock 数据', function () {
     SubmissionModel = require('../models/submission')
     UserModel = require('../models/user')
     ContestModel = require('../models/contest')
+    PostModel = require('../models/post')
   })
   it('Destroy Database', async function () {
     for (const model of [...models].reverse()) {
@@ -62,5 +63,11 @@ describe('Mock 数据', function () {
     await Queue.submitCheckCodeTask(submission.id)
     // 创建两个比赛信息
     await ContestModel[Symbol.for('create')]({}, {})
+    // 创建十篇文章
+    await PostModel[Symbol.for('create')]({
+      userId: users[0].id, problemId: problems[0][0].id
+    }, {
+      userId: users[1].id, problemId: problems[1][1].id
+    })
   })
 })
