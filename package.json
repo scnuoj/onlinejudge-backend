@@ -5,9 +5,9 @@
   "author": "ruiming",
   "license": "MIT",
   "scripts": {
-    "test": "nyc mocha ./tests/_doc.js --timeout=10000",
+    "test": "nyc mocha ./tests/_doc.js --timeout=60000",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov --token=6b2749fa-19a3-41d8-9264-eccf3dcc03ae",
-    "mock": "mocha ./tasks/mock.js --timeout=50000"
+    "mock": "mocha ./tasks/mock.js --timeout=60000"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -53,8 +53,13 @@
     "all": true,
     "cache": true,
     "include": [
-      "routes/**",
-      "services/**"
+      "routes",
+      "services"
+    ],
+    "exclude": [
+      "coverage",
+      "tasks",
+      "tests"
     ],
     "reporter": [
       "lcov",
