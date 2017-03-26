@@ -1,4 +1,4 @@
-const ProblemService = require('../../services/problem')
+const ProblemService = require('../../services/managerment/problem')
 
 const { ParamsError } = require('../../libraries/Error')
 
