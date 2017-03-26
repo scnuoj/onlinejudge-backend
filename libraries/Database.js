@@ -184,6 +184,34 @@ const DatabaseSchema = {
     error: {
       type: Sequelize.INTEGER
     }
+  },
+  Contest: {
+    // 比赛 ID
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    // 比赛标题
+    title: {
+      type: Sequelize.STRING
+    },
+    // 比赛正文信息
+    content: {
+      type: Sequelize.TEXT
+    },
+    // 比赛开始时间
+    startTime: {
+      type: Sequelize.DATE
+    },
+    // 比赛截止时间
+    endTime: {
+      type: Sequelize.DATE
+    },
+    // 比赛题目(序列化题目ID)
+    questions: {
+      type: Sequelize.STRING
+    }
   }
 }
 
@@ -231,7 +259,8 @@ const Database = global.DATABASE = {
 
   Problem: sequelize.define('Problem', DatabaseSchema.Problem),
   Submission: sequelize.define('Submission', DatabaseSchema.Submission),
-  User: sequelize.define('User', DatabaseSchema.User)
+  User: sequelize.define('User', DatabaseSchema.User),
+  Contest: sequelize.define('Contest', DatabaseSchema.Contest)
 }
 
 // 建立表之间的关联
