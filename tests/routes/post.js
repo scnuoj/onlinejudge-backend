@@ -1,7 +1,6 @@
-require('should')
 const request = require('supertest-test2doc')(require('supertest'))
-const app = require('../../index.js')
-const doc = require('test2doc').group('文章').basePath('/posts')
+const app = require('../../index')
+const doc = require('./_doc').group('文章').basePath('/posts')
 
 const PostModel = require('../../models/post')
 
@@ -9,9 +8,7 @@ let post
 
 describe('Route: Post', function () {
   before(async function () {
-    [post] = await PostModel[Symbol.for('create')]({
-      title: '123456789'
-    })
+    [post] = await PostModel[Symbol.for('create')]({})
   })
 
   after(async function () {
@@ -28,7 +25,6 @@ describe('Route: Post', function () {
         .expect(200)
       res.body.data.should.be.an.instanceOf(Array)
       res.body.data[0].should.have.properties('userId', 'problemId')
-      res.body.data[0].title.should.equal('123456789')
     })
   })
 })

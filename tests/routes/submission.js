@@ -1,7 +1,6 @@
-require('should')
 const request = require('supertest-test2doc')(require('supertest'))
-const app = require('../../index.js')
-const doc = require('test2doc').group('提交').basePath('/submissions')
+const app = require('../../index')
+const doc = require('./_doc').group('提交').basePath('/submissions')
 
 const ProblemModel = require('../../models/problem')
 const SubmissionModel = require('../../models/submission')

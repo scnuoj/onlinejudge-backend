@@ -1,7 +1,7 @@
-require('should')
 const request = require('supertest-test2doc')(require('supertest'))
-const app = require('../../index.js')
-const doc = require('test2doc').group('提交').basePath('/users')
+const app = require('../../index')
+const doc = require('./_doc').group('提交').basePath('/users')
+
 const UserModel = require('../../models/user')
 
 describe('Route: User', function () {

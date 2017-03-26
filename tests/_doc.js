@@ -1,3 +1,4 @@
+require('should')
 require('../libraries/Database')
 require('../libraries/Queue')
 const doc = require('test2doc')
@@ -11,7 +12,7 @@ module.exports = doc.title('OnlineJudge API 文档')
                     .desc(`OnlineJudge API 文档`)
                     .scheme('http')
                     .host('localhost:8000')
-                    .basePath('/api/v1')
+                    .basePath('/api')
 
 before(async function () {
   // 获取测试用 token
