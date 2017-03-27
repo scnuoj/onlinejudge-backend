@@ -21,3 +21,6 @@ script:
   - yarn run report-coverage
 
 cache: yarn
+
+notifications:
+  email: false
