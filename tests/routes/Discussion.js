@@ -1,8 +1,8 @@
 const request = require('supertest-test2doc')(require('supertest'))
 const app = require('../../index')
-const doc = require('./_doc').group('讨论').basePath('/Discussions')
+const doc = require('./_doc').group('讨论').basePath('/discussions')
 
-const DiscussionModel = require('../../models/Discussion')
+const DiscussionModel = require('../../models/discussion')
 
 let Discussion
 
@@ -18,7 +18,7 @@ describe('Route: Discussion', function () {
   doc.action('获取讨论').is(doc => {
     it('获取讨论', async function () {
       const res = await request(app).with(doc)
-        .get('/api/v1/Discussions')
+        .get('/api/v1/discussions')
         .query({
           limit: doc.val(1, '限制查询数量')
         })

@@ -6,7 +6,7 @@ const User = require('./user')
 const Contest = require('./contest')
 const Managerment = require('./managerment')
 const Post = require('./post')
-const Discussion = require('./Discussion')
+const Discussion = require('./discussion')
 const Authentication = require('../middlewares/authentication')
 
 const api = new Router({
@@ -18,7 +18,7 @@ api.use('/v1/submissions', Submission.middleware())
 api.use('/v1/users', User.middleware())
 api.use('/v1/contests', Contest.middleware())
 api.use('/v1/posts', Post.middleware())
-api.use('/v1/Discussions', Discussion.middleware())
+api.use('/v1/discussions', Discussion.middleware())
 
 api.use('/v6', Authentication(), Managerment.middleware())
 
