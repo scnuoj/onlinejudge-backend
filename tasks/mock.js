@@ -74,7 +74,7 @@ describe('Mock 数据', function () {
     await DiscussionModel[Symbol.for('create')]({
       userId: users[0].id, problemId: problems[0][0].id
     }, {
-      userId: users[1].id, problemId: problems[1][1].id
+      userId: users[9].id, problemId: problems[1][1].id
     })
   })
 })
