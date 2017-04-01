@@ -23,7 +23,7 @@ describe('Mock 数据', function () {
     UserModel = require('../models/user')
     ContestModel = require('../models/contest')
     PostModel = require('../models/post')
-    DiscussionModel = require('../models/Discussion')
+    DiscussionModel = require('../models/discussion')
   })
   it('Destroy Database', async function () {
     for (const model of [...models].reverse()) {

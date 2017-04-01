@@ -4,15 +4,15 @@ const doc = require('./_doc').group('讨论').basePath('/discussions')
 
 const DiscussionModel = require('../../models/discussion')
 
-let Discussion
+let discussion
 
 describe('Route: Discussion', function () {
   before(async function () {
-    [Discussion] = await DiscussionModel[Symbol.for('create')]({})
+    [discussion] = await DiscussionModel[Symbol.for('create')]({})
   })
 
   after(async function () {
-    await Discussion.destroy()
+    await discussion.destroy()
   })
 
   doc.action('获取讨论').is(doc => {
