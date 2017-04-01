@@ -236,6 +236,30 @@ const DatabaseSchema = {
     problemId: {
       type: Sequelize.INTEGER
     }
+  },
+  Discussion: {
+     // 讨论ID
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    // 讨论标题
+    title: {
+      type: Sequelize.STRING
+    },
+    // 讨论内容
+    content: {
+      type: Sequelize.TEXT
+    },
+    // 作者
+    userId: {
+      type: Sequelize.UUID
+    },
+    // 问题
+    problemId: {
+      type: Sequelize.INTEGER
+    }
   }
 }
 
@@ -285,7 +309,8 @@ const Database = global.DATABASE = {
   Submission: sequelize.define('Submission', DatabaseSchema.Submission),
   User: sequelize.define('User', DatabaseSchema.User),
   Contest: sequelize.define('Contest', DatabaseSchema.Contest),
-  Post: sequelize.define('Post', DatabaseSchema.Post)
+  Post: sequelize.define('Post', DatabaseSchema.Post),
+  Discussion: sequelize.define('Discussion', DatabaseSchema.Discussion)
 }
 
 // 建立表之间的关联
@@ -306,6 +331,14 @@ Database.Post.belongsTo(Database.User, {
   foreignKey: 'userId'
 })
 Database.Post.belongsTo(Database.Problem, {
+  as: 'problem',
+  foreignKey: 'problemId'
+})
+Database.Discussion.belongsTo(Database.User, {
+  as: 'user',
+  foreignKey: 'userId'
+})
+Database.Discussion.belongsTo(Database.Problem, {
   as: 'problem',
   foreignKey: 'problemId'
 })
