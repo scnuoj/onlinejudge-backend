@@ -8,9 +8,7 @@ const Managerment = require('./managerment')
 const Post = require('./post')
 const Authentication = require('../middlewares/authentication')
 
-const api = new Router({
-  prefix: '/api'
-})
+const api = new Router()
 
 api.use('/v1/problems', Problem.middleware())
 api.use('/v1/submissions', Submission.middleware())
