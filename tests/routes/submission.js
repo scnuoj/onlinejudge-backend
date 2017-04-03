@@ -27,7 +27,7 @@ describe('Route: Submission', function () {
   doc.action('提交代码').is(doc => {
     it('提交代码', async function () {
       const res = await request(app).with(doc)
-        .post('/api/v1/submissions')
+        .post('/v1/submissions')
         .set('Authorization', `Bearer ${TOKEN}`)
         .send({
           id: doc.val(problem.id, '题目 ID'),
