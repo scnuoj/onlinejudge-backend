@@ -1,8 +1,6 @@
 const { Random } = require('mockjs')
 
-const MODELNAME = 'Post'
-
-module.exports = Object.assign(DATABASE[MODELNAME], {
+module.exports = Object.assign(DATABASE['Post'], {
 })
 
 module.exports[Symbol.for('mock')] = () => {
@@ -12,12 +10,8 @@ module.exports[Symbol.for('mock')] = () => {
   }
 }
 
-module.exports[Symbol.for('create')] = async function (obj) {
-  const ret = []
-  for (const obj of Array.from(arguments)) {
-    const defaultData = await this[Symbol.for('mock')]()
-    const model = await this.create(Object.assign(defaultData, obj))
-    ret.push(model)
-  }
-  return ret
+module.exports[Symbol.for('create')] = async function (...items) {
+  return await Promise.all(items.map(item => {
+    return this.create(Object.assign(this[Symbol.for('mock')](), item)).bind(this)
+  }))
 }
