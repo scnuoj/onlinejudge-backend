@@ -20,7 +20,7 @@ describe('Route: Problem', function () {
   doc.action('获取一道问题').is(doc => {
     it('获取一道问题', async function () {
       const res = await request(app).with(doc)
-        .get(`/api/v6/problems/${problem.id}`)
+        .get(`/v6/problems/${problem.id}`)
         .set('Authorization', `Bearer ${TOKEN}`)
         .expect(200)
       res.body.data.id.should.equal(problem.id)
@@ -30,7 +30,7 @@ describe('Route: Problem', function () {
   doc.action('获取全部问题').is(doc => {
     it('获取全部问题', async function () {
       const res = await request(app).with(doc)
-        .get('/api/v6/problems')
+        .get('/v6/problems')
         .set('Authorization', `Bearer ${TOKEN}`)
         .query({
           limit: doc.val(1, '限制查询数量'),

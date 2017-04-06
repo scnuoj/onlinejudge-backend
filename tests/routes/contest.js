@@ -18,7 +18,7 @@ describe('Route: Problem', function () {
   doc.action('获取最近的比赛').is(doc => {
     it('获取最近的比赛', async function () {
       const res = await request(app).with(doc)
-        .get('/api/v1/contests')
+        .get('/v1/contests')
         .query({
           limit: doc.val(1, '限制查询数量')
         })

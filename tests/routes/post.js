@@ -18,7 +18,7 @@ describe('Route: Post', function () {
   doc.action('获取文章').is(doc => {
     it('获取文章', async function () {
       const res = await request(app).with(doc)
-        .get('/api/v1/posts')
+        .get('/v1/posts')
         .query({
           limit: doc.val(1, '限制查询数量')
         })
