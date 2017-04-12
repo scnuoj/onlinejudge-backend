@@ -1,8 +1,8 @@
 global.Promise = require('bluebird')
 
-require('./libraries/Database')
-require('./libraries/Queue')
-require('./libraries/Cache')
+require('./libraries/database')
+require('./libraries/queue')
+require('./libraries/cache')
 
 const Koa = require('koa')
 const jwt = require('koa-jwt')
@@ -14,7 +14,7 @@ const Env = require('config').get('Env')
 const Jwt = require('config').get('Jwt')
 
 const app = new Koa()
-require('./libraries/Extend')(app)
+require('./libraries/extend')(app)
 
 app.use(middlerwares)
 

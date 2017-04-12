@@ -1,8 +1,8 @@
 const { SHA256 } = require('crypto-js')
-const Queue = require('../libraries/Queue')
-const { Database } = require('../libraries/Database')
+const Queue = require('../libraries/queue')
+const { Database } = require('../libraries/database')
 
-const models = ['User', 'Problem', 'Submission', 'Contest', 'Post']
+const models = ['User', 'Problem', 'Submission', 'Contest', 'Post', 'Discussion']
 const inputData = '1 2'
 const outputData = '3'
 const code = `
@@ -13,7 +13,7 @@ int main() {
   cin >> a >> b
   return a+b
 }`
-let ProblemModel, SubmissionModel, UserModel, ContestModel, PostModel
+let ProblemModel, SubmissionModel, UserModel, ContestModel, PostModel, DiscussionModel
 
 describe('Mock 数据', function () {
   before(async function () {
@@ -23,6 +23,7 @@ describe('Mock 数据', function () {
     UserModel = require('../models/user')
     ContestModel = require('../models/contest')
     PostModel = require('../models/post')
+    DiscussionModel = require('../models/discussion')
   })
   it('Destroy Database', async function () {
     for (const model of [...models].reverse()) {
@@ -65,6 +66,12 @@ describe('Mock 数据', function () {
     await ContestModel[Symbol.for('create')]({}, {})
     // 创建十篇文章
     await PostModel[Symbol.for('create')]({
+      userId: users[0].id, problemId: problems[0][0].id
+    }, {
+      userId: users[1].id, problemId: problems[1][1].id
+    })
+     // 创建十个讨论区
+    await DiscussionModel[Symbol.for('create')]({
       userId: users[0].id, problemId: problems[0][0].id
     }, {
       userId: users[1].id, problemId: problems[1][1].id

@@ -1,6 +1,6 @@
 const SubmissionService = require('../../services/submission')
 
-const { ParamsError } = require('../../libraries/Error')
+const { ParamsError } = require('../../libraries/error')
 
 describe('Service: Submission', function () {
   it('Call checkSubmission with an invalid problemId', async () => {
