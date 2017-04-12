@@ -5,15 +5,16 @@
   "author": "ruiming",
   "license": "MIT",
   "scripts": {
-    "test": "nyc mocha ./tests/_doc.js --timeout=60000",
+    "test": "nyc mocha --require intelli-espower-loader ./test/_doc.js --timeout=60000 --embedAst=true",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov --token=6b2749fa-19a3-41d8-9264-eccf3dcc03ae",
-    "mock": "mocha ./tasks/mock.js --timeout=60000"
+    "mock": "mock=true mocha ./task/mock.js --timeout=60000"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
     "config": "^1.25.1",
     "crypto-js": "^3.1.9-1",
     "humps": "^2.0.0",
+    "intelli-espower-loader": "^1.0.1",
     "ioredis": "^2.5.0",
     "js-yaml": "^3.8.2",
     "jsonwebtoken": "^7.3.0",
@@ -31,6 +32,8 @@
     "koa-router": "next",
     "mockjs": "^1.0.1-beta3",
     "mysql": "^2.13.0",
+    "power-assert": "^1.4.2",
+    "require-dir": "^0.3.1",
     "sequelize": "^3.30.2",
     "uuid": "^3.0.1",
     "zlib": "^1.0.5"
