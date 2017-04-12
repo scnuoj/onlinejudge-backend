@@ -1,7 +1,7 @@
 const SubmissionModel = require('../models/submission')
 const ProblemModel = require('../models/problem')
-const Queue = require('../libraries/Queue')
-const { ParamsError } = require('../libraries/Error')
+const Queue = require('../libraries/queue')
+const { ParamsError } = require('../libraries/error')
 
 /**
  * 检查用户提交代码

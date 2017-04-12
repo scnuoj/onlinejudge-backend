@@ -1,6 +1,6 @@
 const ProblemService = require('../../services/problem')
 
-const { ParamsError } = require('../../libraries/Error')
+const { ParamsError } = require('../../libraries/error')
 
 describe('Service: Problem', function () {
   it('Call getProblemById with an invalid problemId', async () => {

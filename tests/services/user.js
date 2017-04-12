@@ -1,6 +1,6 @@
 const UserService = require('../../services/user')
 
-const { AuthError } = require('../../libraries/Error')
+const { AuthError } = require('../../libraries/error')
 
 describe('Service: User', function () {
   it('Call login with a wrong password', async () => {

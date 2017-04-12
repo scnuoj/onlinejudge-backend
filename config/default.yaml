@@ -10,13 +10,13 @@ Database:
 Cache:
   host: cloud.ruiming.me
   port: 12758
-  auth: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
+  auth: bxm7GVHcoXw9ko43V1UzBfOQjH3jh83s
   db: 0
 
 Queue:
   host: cloud.ruiming.me
   port: 12758
-  auth: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
+  auth: bxm7GVHcoXw9ko43V1UzBfOQjH3jh83s
   db: 1
 
 Jwt:

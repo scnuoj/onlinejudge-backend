@@ -1,4 +1,4 @@
-const { AuthError } = require('../libraries/Error')
+const { AuthError } = require('../libraries/error')
 /**
  * 权限认证
  */

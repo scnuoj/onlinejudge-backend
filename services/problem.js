@@ -1,5 +1,5 @@
 const ProblemModel = require('../models/problem')
-const { ParamsError } = require('../libraries/Error')
+const { ParamsError } = require('../libraries/error')
 
 /**
  * 根据题目 id 获取指定题目信息

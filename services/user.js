@@ -1,5 +1,5 @@
 const UserModel = require('../models/user')
-const { AuthError } = require('../libraries/Error')
+const { AuthError } = require('../libraries/error')
 const { SHA256 } = require('crypto-js')
 
 /**

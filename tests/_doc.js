@@ -1,6 +1,6 @@
 require('should')
-require('../libraries/Database')
-require('../libraries/Queue')
+require('../libraries/database')
+require('../libraries/queue')
 const doc = require('test2doc')
 const request = require('supertest')
 const glob = require('glob')
