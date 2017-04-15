@@ -3,8 +3,8 @@ Database:
   host: DB_HOST
   port: DB_PORT
   dialect: DB_DIALECT
-  username: DB_NAME
-  password: DB_PASS
+  username: DB_USERNAME
+  password: DB_PASSWORD
 
 Cache:
   host: RE_HOST
