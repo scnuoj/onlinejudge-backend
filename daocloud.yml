@@ -13,7 +13,6 @@ test:
 
   install:
     - yarn install
-    - yarn global add mocha should
 
   before_script:
     - yarn run mock
