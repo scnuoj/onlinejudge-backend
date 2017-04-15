@@ -48,7 +48,8 @@
     "cache": true,
     "exclude": [
       "coverage",
-      "task"
+      "task",
+      "test"
     ],
     "reporter": [
       "lcov",
