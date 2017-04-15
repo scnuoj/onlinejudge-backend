@@ -1,26 +1,24 @@
 Database:
   name: onlinejudge
-  host: cloud.ruiming.me
-  port: 6612
+  host: 127.0.0.1
+  port: 2306
   dialect: mysql
-  username: scnuoj
-  password: ntsuv2o7x8naq7
-  logging: !!bool true
+  username: root
 
-Redis:
-  host: cloud.ruiming.me
-  port: 12758
-  auth: bxm7GVHcoXw9ko43V1UzBfOQjH3jh83s
+Cache:
+  host: 127.0.0.1
+  port: 5379
   db: 0
+  prefix: 'onlinejudge-cache:'
 
 Queue:
-  host: cloud.ruiming.me
-  port: 12758
-  auth: bxm7GVHcoXw9ko43V1UzBfOQjH3jh83s
+  host: 127.0.0.1
+  port: 5379
   db: 1
+  prefix: 'onlinejudge-queue:'
 
 Jwt:
-  secret: NQUZatQ7GM8fzv0ltlQboS3gedz0HlCG
+  secret: AQvZatQ7M5fzv1lt2lQboS3ge5z0HlCG
   algorithm: RS256
   exp: 5184000000
 

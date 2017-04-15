@@ -1,9 +1,9 @@
 const Redis = require('ioredis')
-const redisConfig = require('config').get('Redis')
+const cacheConfig = require('../helper/env')(require('config').get('Cache'))
 
-const client = new Redis(redisConfig.port, redisConfig.host, {
-  password: redisConfig.auth,
-  db: redisConfig.db
+const client = new Redis(cacheConfig.port, cacheConfig.host, {
+  password: cacheConfig.auth,
+  db: cacheConfig.db
 })
 
 client.on('disconnect', function () {

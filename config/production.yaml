@@ -1,2 +1,29 @@
+Database:
+  name: DB_NAME
+  host: DB_HOST
+  port: DB_PORT
+  dialect: DB_DIALECT
+  username: DB_NAME
+  password: DB_PASS
+
+Cache:
+  host: RE_HOST
+  port: RE_PORT
+  auth: RE_AUTH
+  db: RE_DB
+  prefix: 'onlinejudge-cache:'
+
+Queue:
+  host: RE_HOST
+  port: RE_PORT
+  auth: RE_AUTH
+  db: RE_DB
+  prefix: 'onlinejudge-queue:'
+
+Jwt:
+  secret: JWT_SECRET
+  algorithm: JWT_ALGORITHM
+  exp: JWT_EXP
+
 Env: production
 Port: 8000
