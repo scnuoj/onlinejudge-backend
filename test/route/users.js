@@ -1,7 +1,5 @@
 const request = require('supertest-test2doc')(require('supertest'))
-const app = require('../../index')
 const doc = require('./_doc').group('提交').basePath('/users')
-const assert = require('assert')
 
 describe('Route: User', function () {
   after(async function () {
@@ -22,7 +20,7 @@ describe('Route: User', function () {
           password: doc.val('123456789', '密码')
         })
         .expect(200)
-      assert(res.body.success === true)
+      assert.isTrue(!!res.body.success)
     })
   })
 
@@ -35,7 +33,7 @@ describe('Route: User', function () {
           password: doc.val('123456789', '密码')
         })
         .expect(200)
-      assert(res.body.success === true)
+      assert.isTrue(!!res.body.success)
     })
   })
 
@@ -43,9 +41,9 @@ describe('Route: User', function () {
     it('获取用户信息', async function () {
       const res = await request(app).with(doc)
         .get('/v1/users')
-        .set('Authorization', `Bearer ${TOKEN}`)
+        .set('Authorization', `Bearer ${Token}`)
         .expect(200)
-      assert(res.body.data.name === USER.name)
+      assert.equal(res.body.data.name, User.name)
     })
   })
 })

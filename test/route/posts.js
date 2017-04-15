@@ -1,11 +1,9 @@
 const request = require('supertest-test2doc')(require('supertest'))
-const app = require('../../index')
 const doc = require('./_doc').group('文章').basePath('/posts')
-const assert = require('assert')
 
 let post
 
-describe('Route: Post', function () {
+describe('route/post', function () {
   before(async function () {
     [post] = await Database.Post.mock({})
   })
@@ -22,8 +20,8 @@ describe('Route: Post', function () {
           limit: doc.val(1, '限制查询数量')
         })
         .expect(200)
-      assert(Array.isArray(res.body.data))
-      assert.equal(typeof res.body.data[0].userId, 'string')
+      assert.isArray(res.body.data)
+      assert.property(res.body.data[0], 'userId')
     })
   })
 })

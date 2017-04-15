@@ -14,7 +14,7 @@ router.get('/', {
     }
   }
 }, async (ctx, next) => {
-  const problems = await ctx.service.management.problem.list(ctx.query.offset, ctx.query.limit, ctx.query.sortby, ctx.query.order)
+  const problems = await ctx.service.management.problems.list(ctx.query.offset, ctx.query.limit, ctx.query.sortby, ctx.query.order)
   ctx.ok(problems)
 })
 
@@ -26,7 +26,7 @@ router.get('/:id', {
     }
   }
 }, async (ctx, next) => {
-  const problem = await ctx.service.management.problem.show(ctx.params.id)
+  const problem = await ctx.service.management.problems.show(ctx.params.id)
   ctx.ok(problem)
 })
 

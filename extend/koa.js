@@ -57,15 +57,20 @@ module.exports = function (app) {
   /**
    * 自动注入路由
    */
-  const router = new Router({ prefix: API_PREFIX })
   Object.keys(routes).forEach(routeName => {
     if (routes[routeName].middleware) {
-      router.use(`/${routeName}`, routes[routeName].middleware())
+      routes[routeName].prefix(API_PREFIX + '/' + routeName)
+      app.use(routes[routeName].middleware())
     } else {
       Object.keys(routes[routeName]).forEach(secondRouteName => {
-        router.use(`/${routeName}/${secondRouteName}`, routes[routeName][secondRouteName].middleware())
+        routes[routeName][secondRouteName].prefix(API_PREFIX + '/' + routeName + '/' + secondRouteName)
+        app.use(routes[routeName][secondRouteName].middleware())
       })
     }
+  })
+  const router = new Router({ prefix: API_PREFIX })
+  Object.keys(routes).forEach(routeName => {
+
   })
   app.use(router.routes()).use(router.allowedMethods())
 

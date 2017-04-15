@@ -10,7 +10,7 @@ router.get('/', {
     }
   }
 }, async (ctx, next) => {
-  const contests = await ctx.service.contest.list(ctx.query.limit)
+  const contests = await ctx.service.contests.list(ctx.query.limit)
   ctx.ok(contests)
 })
 

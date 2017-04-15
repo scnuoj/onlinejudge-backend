@@ -9,13 +9,13 @@ router.post('/', {
   validate: {
     type: 'json',
     body: {
-      id: Joi.number().integer().required(),
+      id: Joi.string().guid().required(),
       code: Joi.string().required(),
       lang: Joi.string().valid('cc', 'c', 'java')
     }
   }
 }, Authorization(), async (ctx, next) => {
-  const submissionId = await ctx.service.submission.create(ctx.state.user.id, ctx.request.body.id, ctx.request.body.code, ctx.request.body.lang)
+  const submissionId = await ctx.service.submissions.create(ctx.state.user.id, ctx.request.body.id, ctx.request.body.code, ctx.request.body.lang)
   ctx.ok(submissionId)
 })
 

@@ -10,5 +10,8 @@ module.exports = {
     "Queue": true,
     "Random": true,
     "app": true
+  },
+  "rules": {
+    "prefer-const": true
   }
 }

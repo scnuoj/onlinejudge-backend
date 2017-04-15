@@ -1,36 +1,34 @@
 const request = require('supertest-test2doc')(require('supertest'))
-const app = require('../../index.js')
 const doc = require('./_doc').group('问题').basePath('/management/problems')
-const assert = require('assert')
 
 let problem
 
-describe('Route: Problem', function () {
-  before(async function () {
+describe('route/managerment/problem', () => {
+  before(async () => {
     [problem] = await Database.Problem.create({
-      userId: USER.id
+      userId: User.id
     })
   })
 
-  after(async function () {
+  after(async () => {
     await problem.destroy()
   })
 
   doc.action('获取一道问题').is(doc => {
-    it('获取一道问题', async function () {
+    it('获取一道问题', async () => {
       const res = await request(app).with(doc)
         .get(`/v1/management/problems/${problem.id}`)
-        .set('Authorization', `Bearer ${TOKEN}`)
+        .set('Authorization', `Bearer ${Token}`)
         .expect(200)
-      assert(res.body.data.id === problem.id)
+      assert.equal(res.body.data.id, problem.id)
     })
   })
 
   doc.action('获取全部问题').is(doc => {
-    it('获取全部问题', async function () {
+    it('获取全部问题', async () => {
       const res = await request(app).with(doc)
         .get('/v1/management/problems')
-        .set('Authorization', `Bearer ${TOKEN}`)
+        .set('Authorization', `Bearer ${Token}`)
         .query({
           limit: doc.val(1, '限制查询数量'),
           offset: doc.val(0, '查询偏移'),
@@ -38,8 +36,8 @@ describe('Route: Problem', function () {
           order: doc.val('desc', '排序顺序, 默认为 desc, 可选 asc')
         })
         .expect(200)
-      assert(Number.isInteger(res.body.data.count))
-      assert(Array.isArray(res.body.data.rows))
+      assert.isNumber(res.body.data.count)
+      assert.isArray(res.body.data.rows)
     })
   })
 })

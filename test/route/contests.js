@@ -1,11 +1,9 @@
 const request = require('supertest-test2doc')(require('supertest'))
-const app = require('../../index')
 const doc = require('./_doc').group('比赛').basePath('/contests')
-const assert = require('assert')
 
 let contest
 
-describe('Route: Problem', function () {
+describe('route/problem', function () {
   before(async function () {
     [contest] = await Database.Contest.mock({})
   })
@@ -22,8 +20,7 @@ describe('Route: Problem', function () {
           limit: doc.val(1, '限制查询数量')
         })
         .expect(200)
-      assert(Array.isArray(res.body.data))
-      assert.equal(typeof res.body.data[0].title, 'string')
+      assert.property(res.body.data[0], 'title')
     })
   })
 })

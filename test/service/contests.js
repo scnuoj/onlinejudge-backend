@@ -1,10 +1,9 @@
 const Service = require('../../extend/service')
-const ContestService = new (require('../../service/contest')(Service))()
-const assert = require('assert')
+const ContestService = new (require('../../service/contests')(Service))()
 
 let contests = []
 
-describe('Service: Contest', function () {
+describe('service/contest', function () {
   before(async function () {
     contests = await Database.Contest.mock({}, {})
   })
@@ -13,9 +12,9 @@ describe('Service: Contest', function () {
     await Promise.all(contests.map(contest => contest.destroy()))
   })
 
-  it('Func: getContestList', async () => {
+  it('getContestList', async () => {
     const items = await ContestService.list(2)
-    assert(Array.isArray(items))
-    assert(items.length === 2)
+    assert.isArray(items)
+    assert.equal(items.length, 2)
   })
 })

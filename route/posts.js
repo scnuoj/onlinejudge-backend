@@ -10,7 +10,7 @@ router.get('/', {
     }
   }
 }, async (ctx, next) => {
-  const posts = await ctx.service.post.list(ctx.query.limit)
+  const posts = await ctx.service.posts.list(ctx.query.limit)
   ctx.ok(posts)
 })
 

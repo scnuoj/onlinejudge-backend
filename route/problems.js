@@ -14,7 +14,7 @@ router.get('/', {
     }
   }
 }, async (ctx, next) => {
-  const problems = await ctx.service.problem.list(ctx.query.offset, ctx.query.limit, ctx.query.sortby, ctx.query.order)
+  const problems = await ctx.service.problems.list(ctx.query.offset, ctx.query.limit, ctx.query.sortby, ctx.query.order)
   ctx.ok(problems)
 })
 
@@ -22,11 +22,11 @@ router.get('/', {
 router.get('/:id', {
   validate: {
     params: {
-      id: Joi.number().integer().required()
+      id: Joi.string().guid().required()
     }
   }
 }, async (ctx, next) => {
-  const problem = await ctx.service.problem.show(ctx.params.id)
+  const problem = await ctx.service.problems.show(ctx.params.id)
   ctx.ok(problem)
 })
 

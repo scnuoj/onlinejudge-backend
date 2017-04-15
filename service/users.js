@@ -17,7 +17,7 @@ module.exports = Service => class UserService extends Service {
     })
     return {
       user,
-      token: this._issueToken
+      token: this._issueToken(user.id)
     }
   }
 
@@ -65,8 +65,9 @@ module.exports = Service => class UserService extends Service {
    * 签发一个一天有效期的 JWT
    * @return {String}
    */
-  _issueToken () {
+  _issueToken (id) {
     return jwt.sign({
+      id,
       exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
     }, JwtConfig.secret)
   }

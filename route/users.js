@@ -6,7 +6,7 @@ const router = new Router()
 
 // 获取用户个人信息 (Auth)
 router.get('/', Authorization(), async (ctx, next) => {
-  const user = await ctx.service.user.show(ctx.state.user.id)
+  const user = await ctx.service.users.show(ctx.state.user.id)
   ctx.ok(user)
 })
 
@@ -21,7 +21,7 @@ router.post('/register', {
     }
   }
 }, async (ctx, next) => {
-  const user = await ctx.service.user.register(ctx.request.body.name, ctx.request.body.email, ctx.request.body.password)
+  const user = await ctx.service.users.register(ctx.request.body.name, ctx.request.body.email, ctx.request.body.password)
   ctx.ok(user)
 })
 
@@ -35,7 +35,7 @@ router.post('/login', {
     }
   }
 }, async (ctx, next) => {
-  const user = await ctx.service.user.login(ctx.request.body.name, ctx.request.body.password)
+  const user = await ctx.service.users.login(ctx.request.body.name, ctx.request.body.password)
   ctx.ok(user)
 })
 

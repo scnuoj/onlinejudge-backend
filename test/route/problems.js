@@ -1,14 +1,12 @@
 const request = require('supertest-test2doc')(require('supertest'))
-const app = require('../../index')
 const doc = require('./_doc').group('问题').basePath('/problems')
-const assert = require('assert')
 
 let problem
 
-describe('Route: Problem', function () {
+describe('route/problem', function () {
   before(async function () {
     [problem] = await Database.Problem.mock({
-      userId: USER.id
+      userId: User.id
     })
   })
 
@@ -21,7 +19,7 @@ describe('Route: Problem', function () {
       const res = await request(app).with(doc)
         .get(`/v1/problems/${problem.id}`)
         .expect(200)
-      assert(res.body.data.id === problem.id)
+      assert.equal(res.body.data.id, problem.id)
     })
   })
 
@@ -36,8 +34,8 @@ describe('Route: Problem', function () {
           order: doc.val('desc', '排序顺序, 默认为 desc, 可选 asc')
         })
         .expect(200)
-      assert(Array.isArray(res.body.data))
-      assert.equal(typeof res.body.data[0].title, 'string')
+      assert.isArray(res.body.data)
+      assert.property(res.body.data[0], 'userId')
     })
   })
 })

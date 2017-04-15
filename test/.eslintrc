@@ -3,8 +3,10 @@
     "mocha": true
   },
   "globals": {
-    "TOKEN": true,
-    "USER": true
+    "assert": true,
+    "app": true,
+    "Token": true,
+    "User": true
   },
   "rules": {
     "no-unused-expressions": "off"
