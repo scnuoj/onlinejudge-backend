@@ -1,9 +1,0 @@
-{
-  "env": {
-    "mocha": true
-  },
-  "globals": {
-    "TOKEN": true,
-    "USER": true
-  }
-}

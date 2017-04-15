@@ -1,30 +1,17 @@
 global.Promise = require('bluebird')
 
-require('./libraries/Database')
-require('./libraries/Queue')
-require('./libraries/Cache')
+require('require-dir')('library')
 
 const Koa = require('koa')
-const jwt = require('koa-jwt')
-const middlerwares = require('./middlewares')
-const router = require('./routes/index')
-
-const Port = require('config').get('Port')
-const Env = require('config').get('Env')
-const Jwt = require('config').get('Jwt')
+const middlerware = require('./middleware')
+const { Port, Env } = require('config')
 
 const app = new Koa()
-require('./libraries/Extend')(app)
 
-app.use(middlerwares)
+// 中间件
+app.use(middlerware)
 
-app.use(jwt({
-  secret: Jwt.secret,
-  algorithm: Jwt.algorithm,
-  passthrough: true
-}))
+// 扩展 ctx 方法
+require('./extend/koa')(app)
 
-app.use(router.routes())
-   .use(router.allowedMethods())
-
-module.exports = app.listen(Port, () => console.log(`运行端口: ${Port}\n运行环境: ${Env}`))
+module.exports = global.app = app.listen(Port, () => console.log(`运行端口: ${Port}\n运行环境: ${Env}`))

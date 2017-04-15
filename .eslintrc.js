@@ -5,7 +5,13 @@ module.exports = {
       "promise" 
   ],
   "globals": {
-      "DATABASE": true,
-      "CACHE": true
+    "Database": true,
+    "Cache": true,
+    "Queue": true,
+    "Random": true,
+    "app": true
+  },
+  "rules": {
+    "prefer-const": "error"
   }
 }

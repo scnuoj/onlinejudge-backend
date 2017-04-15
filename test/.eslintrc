@@ -1,0 +1,14 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "assert": true,
+    "app": true,
+    "user": true,
+    "token": true
+  },
+  "rules": {
+    "no-unused-expressions": "off"
+  }
+}
