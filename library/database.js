@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const humps = require('humps')
-const databaseConfig = require('config').get('Database')
+const databaseConfig = require('../helper/env')(require('config').get('Database'))
 
 // 定义 Schema
 const DatabaseSchema = {
@@ -228,9 +228,9 @@ const DatabaseSchema = {
 }
 
 // camelCaseToUnderscored
-for (let schema of Object.values(DatabaseSchema)) {
-  for (let key in schema) {
-    let camel = humps.decamelize(key)
+for (const schema of Object.values(DatabaseSchema)) {
+  for (const key in schema) {
+    const camel = humps.decamelize(key)
     if (camel !== key) schema[key]['field'] = camel
   }
 }

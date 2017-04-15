@@ -1,12 +1,12 @@
 {
   "name": "onlinejudge",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "index.js",
   "author": "ruiming",
   "license": "MIT",
   "scripts": {
     "test": "nyc mocha ./test/index.js --timeout=60000",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov --token=6b2749fa-19a3-41d8-9264-eccf3dcc03ae",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "mock": "mock=true mocha ./task/mock.js --timeout=60000"
   },
   "dependencies": {
