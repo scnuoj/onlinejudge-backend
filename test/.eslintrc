@@ -5,8 +5,8 @@
   "globals": {
     "assert": true,
     "app": true,
-    "Token": true,
-    "User": true
+    "user": true,
+    "token": true
   },
   "rules": {
     "no-unused-expressions": "off"

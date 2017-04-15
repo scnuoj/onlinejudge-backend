@@ -1,8 +1,8 @@
 const Service = require('../../../extend/service')
 const ProblemService = new (require('../../../service/management/problems')(Service))()
 
-describe('service/problem', function () {
-  it('Call getProblemById with an invalid problemId', async () => {
+describe('service/problems', () => {
+  it('show', async () => {
     await assert.isRejected(ProblemService.show('123123'), Error)
   })
 })

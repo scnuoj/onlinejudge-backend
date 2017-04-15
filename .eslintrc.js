@@ -12,6 +12,6 @@ module.exports = {
     "app": true
   },
   "rules": {
-    "prefer-const": true
+    "prefer-const": "error"
   }
 }
