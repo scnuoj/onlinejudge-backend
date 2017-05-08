@@ -1,4 +1,4 @@
-module.exports = Service => class DiscussionService extends Service {
+export default class DiscussionService {
   /**
    * 获取讨论
    * @param {Number} limit [数量限制]
@@ -6,7 +6,7 @@ module.exports = Service => class DiscussionService extends Service {
   async list (limit = 10) {
     return await Database.Discussion.findAll({
       limit,
-      order: [['created_at', 'desc']]
+      order: [['createdAt', 'desc']]
     })
   }
 }

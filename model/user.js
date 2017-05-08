@@ -1,8 +1,18 @@
-const { Random } = require('mockjs')
-const baseModel = require('../extend/model')
+export default class User {
+  static fields (DataTypes) {
+    return {
+      id: DataTypes.uuid().primary().default(DataTypes.UUIDv1),
+      name: DataTypes.string().notNull(),
+      email: DataTypes.string().notNull(),
+      password: DataTypes.string().notNull(),
+      school: DataTypes.string(),
+      gender: DataTypes.integer(),
+      avatar: DataTypes.string(),
+      remark: DataTypes.string()
+    }
+  }
 
-module.exports = Object.assign(Database.User, baseModel, {
-  random () {
+  static random (Random) {
     return {
       name: Random.name(),
       email: Random.email(),
@@ -13,4 +23,4 @@ module.exports = Object.assign(Database.User, baseModel, {
       remark: Random.sentence()
     }
   }
-})
+}

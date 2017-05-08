@@ -1,29 +1,35 @@
-Database:
-  name: DB_NAME
-  host: DB_HOST
-  port: DB_PORT
-  dialect: DB_DIALECT
-  username: DB_USERNAME
-  password: DB_PASSWORD
+database:
+  name: ENV:DB_NAME
+  username: ENV:DB_USERNAME
+  password: ENV:DB_PASSWORD
+  options:
+    host: ENV:DB_HOST
+    port: ENV:DB_PORT
+    dialect: ENV:DB_DIALECT
+    timezone: Asia/Shanghai
+    logging: false
+    dialectOptions:
+      charset: utf8
+      collate: utf8_general_ci
 
 Cache:
-  host: RE_HOST
-  port: RE_PORT
-  auth: RE_AUTH
-  db: RE_DB
+  host: ENV:RE_HOST
+  port: ENV:RE_PORT
+  auth: ENV:RE_AUTH
+  db: ENV:RE_DB
   prefix: 'onlinejudge-cache:'
 
 Queue:
-  host: RE_HOST
-  port: RE_PORT
-  auth: RE_AUTH
-  db: RE_DB
+  host: ENV:RE_HOST
+  port: ENV:RE_PORT
+  auth: ENV:RE_AUTH
+  db: ENV:RE_DB
   prefix: 'onlinejudge-queue:'
 
 Jwt:
-  secret: JWT_SECRET
-  algorithm: JWT_ALGORITHM
-  exp: JWT_EXP
+  secret: ENV:JWT_SECRET
+  algorithm: ENV:JWT_ALGORITHM
+  exp: ENV:JWT_EXP
 
 Env: production
 Port: 8000

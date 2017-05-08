@@ -1,17 +1,17 @@
 module.exports = {
-  "extends": "standard",
-  "plugins": [
-      "standard",
-      "promise" 
-  ],
-  "globals": {
-    "Database": true,
-    "Cache": true,
-    "Queue": true,
-    "Random": true,
-    "app": true
-  },
-  "rules": {
-    "prefer-const": "error"
-  }
-}
+    "parser": "babel-eslint",
+    "extends": "standard",
+    "plugins": [
+        "babel",
+        "standard",
+        "promise"
+    ],
+    "rules": {
+        "no-return-await": "off"
+    },
+    "globals": {
+        "__appname": true,
+        "Database": true,
+        "Cache": true
+    }
+};

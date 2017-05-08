@@ -1,8 +1,10 @@
-const { SHA256 } = require('crypto-js')
-const jwt = require('jsonwebtoken')
-const JwtConfig = require('config').get('Jwt')
+import jwt from 'jsonwebtoken'
+import { SHA256 } from 'crypto-js'
+import AuthError from '../library/error'
 
-module.exports = Service => class UserService extends Service {
+const JwtConfig = require('conenv')(require('config').Jwt)
+
+export default class UserService {
   /**
    * 注册
    * @param {String} name     [昵称]
@@ -39,10 +41,10 @@ module.exports = Service => class UserService extends Service {
           token: this._issueToken
         }
       } else {
-        throw new this.AuthError('密码错误')
+        throw new AuthError('密码错误')
       }
     } else {
-      throw new this.AuthError('用户名不存在')
+      throw new AuthError('用户名不存在')
     }
   }
 
@@ -57,7 +59,7 @@ module.exports = Service => class UserService extends Service {
     if (user) {
       return user
     } else {
-      throw new this.AuthError('用户不存在')
+      throw new AuthError('用户不存在')
     }
   }
 

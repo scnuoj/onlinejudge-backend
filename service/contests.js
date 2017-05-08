@@ -1,4 +1,4 @@
-module.exports = Service => class ContestService extends Service {
+export default class ContestService {
   /**
    * 获取当前的比赛信息
    * @param {Number} limit [数量限制]

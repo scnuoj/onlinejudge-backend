@@ -1,5 +1,5 @@
 const Redis = require('ioredis')
-const queueConfig = require('../helper/env')(require('config').get('Cache'))
+const queueConfig = require('conenv')(require('config').get('Cache'))
 
 const Q = new Redis(queueConfig.port, queueConfig.host, {
   password: queueConfig.auth,

@@ -1,6 +1,3 @@
-const Service = require('../../extend/service')
-const ContestService = new (require('../../service/contests')(Service))()
-
 let contests = []
 
 describe('service/contests', () => {
@@ -13,7 +10,7 @@ describe('service/contests', () => {
   })
 
   it('list', async () => {
-    const items = await ContestService.list(2)
+    const items = await ctx.service.contests.list(2)
     assert.isArray(items)
     assert.equal(items.length, 2)
   })

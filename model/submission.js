@@ -1,12 +1,30 @@
-const { Random } = require('mockjs')
-const baseModel = require('../extend/model')
+export default class Submission {
+  static fields (DataTypes) {
+    return {
+      problemId: DataTypes.uuid().notNull(),
+      userId: DataTypes.uuid().notNull(),
+      code: DataTypes.text(),
+      lang: DataTypes.string(),
+      cpuTime: DataTypes.integer(),
+      realTime: DataTypes.integer(),
+      signal: DataTypes.integer(),
+      memory: DataTypes.integer(),
+      exitCode: DataTypes.integer(),
+      result: DataTypes.integer(),
+      error: DataTypes.integer()
+    }
+  }
 
-module.exports = Object.assign(Database.Submission, baseModel, {
-  random () {
+  static random (Random) {
     return {
       userId: Random.id(),
       code: Random.paragraph(),
       type: 'cc'
     }
   }
-})
+
+  static associate (Problem, User) {
+    this.belongsTo(Problem, { as: 'problem', foreignKey: 'problemId' })
+    this.belongsTo(User, { as: 'user', foreignKey: 'userId' })
+  }
+}

@@ -1,8 +1,15 @@
-const { Random } = require('mockjs')
-const baseModel = require('../extend/model')
+export default class Contest {
+  static fields (DataTypes) {
+    return {
+      title: DataTypes.string(),
+      content: DataTypes.text(),
+      startTime: DataTypes.date(),
+      endTime: DataTypes.date(),
+      questions: DataTypes.string()
+    }
+  }
 
-module.exports = Object.assign(Database.Contest, baseModel, {
-  random () {
+  static random (Random) {
     return {
       title: Random.title(),
       content: Random.paragraph(),
@@ -10,4 +17,4 @@ module.exports = Object.assign(Database.Contest, baseModel, {
       endTime: Date.now()
     }
   }
-})
+}

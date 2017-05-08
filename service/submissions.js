@@ -1,6 +1,7 @@
-const Queue = require('../library/queue')
+import BadRequestError from '../library/error'
+import Queue from '../library/queue'
 
-module.exports = Service => class SubmissionService extends Service {
+export default class SubmissionService {
   /**
    * 检查用户提交代码
    * @param {UUID}   userId [用户 ID]
@@ -20,7 +21,7 @@ module.exports = Service => class SubmissionService extends Service {
       await Queue.submitCheckCodeTask(submission.id)
       return submission.id
     } else {
-      throw new this.BadRequestError('错误的 ProblemId')
+      throw new BadRequestError('错误的 ProblemId')
     }
   }
 }

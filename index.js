@@ -1,17 +1,22 @@
-global.Promise = require('bluebird')
+import Leibniz from 'leibniz'
+import jwt from 'koa-jwt'
 
-require('require-dir')('library')
+import './library/cache'
+import './library/queue'
+import onerror from './middleware/onerror'
 
-const Koa = require('koa')
-const middlerware = require('./middleware')
-const { Port, Env } = require('config')
+const app = new Leibniz()
 
-const app = new Koa()
+app.use(onerror())
 
-// 中间件
-app.use(middlerware)
+const JwtConfig = require('conenv')(require('config').Jwt)
 
-// 扩展 ctx 方法
-require('./extend/koa')(app)
+app.use(jwt({
+  secret: JwtConfig.secret,
+  algorithm: JwtConfig.algorithm,
+  passthrough: true
+}))
 
-module.exports = global.app = app.listen(Port, () => console.log(`运行端口: ${Port}\n运行环境: ${Env}`))
+app.listen(8000)
+
+export default app

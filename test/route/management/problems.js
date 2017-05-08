@@ -1,10 +1,10 @@
-const request = require('supertest')
+import request from 'supertest'
 
 let problem
 
 describe('route/management/problems', () => {
   before(async () => {
-    [problem] = await Database.Problem.create({
+    [problem] = await Database.Problem.mock({
       userId: user.id
     })
   })
@@ -32,6 +32,7 @@ describe('route/management/problems', () => {
         order: 'desc'
       })
       .expect(200)
+    console.log(res.body.data)
     assert.isNumber(res.body.data.count)
     assert.isArray(res.body.data.rows)
   })

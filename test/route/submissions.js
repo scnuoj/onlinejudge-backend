@@ -1,4 +1,4 @@
-const request = require('supertest')
+import request from 'supertest'
 
 let problem, submissionId
 
@@ -27,7 +27,6 @@ describe('route/submissions', () => {
         code: 'testcode',
         lang: 'cc'
       })
-      .expect(200)
     assert.equal(res.body.data.submissionId, submissionId)
   })
 })

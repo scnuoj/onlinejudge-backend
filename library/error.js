@@ -1,4 +1,4 @@
-class BadRequestError extends Error {
+export class BadRequestError extends Error {
   constructor (message) {
     super()
     this.message = message
@@ -6,7 +6,7 @@ class BadRequestError extends Error {
   }
 }
 
-class AuthError extends Error {
+export class AuthError extends Error {
   constructor (message) {
     super()
     this.message = message
@@ -14,7 +14,7 @@ class AuthError extends Error {
   }
 }
 
-class NotFoundError extends Error {
+export class NotFoundError extends Error {
   constructor (message) {
     super()
     this.message = message
@@ -22,17 +22,10 @@ class NotFoundError extends Error {
   }
 }
 
-class ServiceUnavailableError extends Error {
+export class ServiceUnavailableError extends Error {
   constructor (message) {
     super()
     this.message = message
     this.status = 503
   }
-}
-
-module.exports = {
-  AuthError,
-  BadRequestError,
-  NotFoundError,
-  ServiceUnavailableError
 }

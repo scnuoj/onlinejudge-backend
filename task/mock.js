@@ -1,6 +1,6 @@
-const { SHA256 } = require('crypto-js')
-const Queue = require('../library/queue')
-const Database = require('../library/database')
+import { SHA256 } from 'crypto-js'
+import Queue from '../library/queue'
+import app from '../index.js'
 
 const inputData = '1 2'
 const outputData = '3'
@@ -15,7 +15,7 @@ int main() {
 
 describe('Mock 数据', function () {
   before(async function () {
-    await Database.authenticate()
+    await app.listen()
     await Database.sync({ force: true })
   })
   it('Mock Data', async function () {

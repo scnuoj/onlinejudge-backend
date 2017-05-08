@@ -1,4 +1,5 @@
-const { AuthError } = require('../extend/error')
+import AuthError from '../library/error'
+
 /**
  * 权限认证
  */

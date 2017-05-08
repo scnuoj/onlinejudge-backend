@@ -6,7 +6,8 @@
     "assert": true,
     "app": true,
     "user": true,
-    "token": true
+    "token": true,
+    "ctx": true
   },
   "rules": {
     "no-unused-expressions": "off"

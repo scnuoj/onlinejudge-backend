@@ -1,4 +1,6 @@
-module.exports = Service => class ProblemService extends Service {
+import BadRequestError from '../library/error'
+
+export default class ProblemService {
   /**
    * 根据题目 id 获取指定题目信息
    * @param {Number} id [题目 ID]
@@ -8,7 +10,7 @@ module.exports = Service => class ProblemService extends Service {
     if (problem) {
       return problem
     } else {
-      throw new this.BadRequestError('题号有误')
+      throw new BadRequestError('题号有误')
     }
   }
 

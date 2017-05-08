@@ -1,22 +1,27 @@
-const chai = require('chai')
-const charAsPromised = require('chai-as-promised')
-const jwt = require('jsonwebtoken')
-const JwtConfig = require('config').get('Jwt')
+import chai from 'chai'
+import chaiAsPromised from 'chai-as-promised'
+import jwt from 'jsonwebtoken'
+import app from '../index.js'
+import glob from 'glob'
 
-chai.use(charAsPromised)
+const JwtConfig = require('conenv')(require('config').Jwt)
+chai.use(chaiAsPromised)
 global.assert = chai.assert
 
 require('require-dir')('../library')
-require('../')
 
 before(async () => {
-  const [user] = [global.user] = await Database.User.mock({})
+  global.ctx = app.context
+  const server = await app.listen()
+  global.app = server
+  global.user = (await Database.User.mock({}))[0]
   global.token = jwt.sign({ id: user.id }, JwtConfig.secret)
 })
 
 after(async () => {
-  await user.destroy()
+  await global.user.destroy()
 })
 
-require('require-dir')('route')
-require('require-dir')('service')
+glob.sync(`${__dirname}/{route,service}/**/*.js`).forEach(file => {
+  require(file)
+})

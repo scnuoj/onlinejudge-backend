@@ -1,9 +1,15 @@
-Database:
+database:
   name: test
-  host: mysql
-  port: 3306
-  dialect: mysql
   username: root
+  options:
+    host: mysql
+    port: 3306
+    dialect: mysql
+    timezone: Asia/Shanghai
+    logging: false
+    dialectOptions:
+      charset: utf8
+      collate: utf8_general_ci
 
 Cache:
   host: redis
