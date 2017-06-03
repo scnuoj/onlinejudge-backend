@@ -14,7 +14,6 @@ export default class User {
 
   static random (Random) {
     return {
-      name: Random.name(),
       email: Random.email(),
       password: Random.word(10),
       school: Random.word(),

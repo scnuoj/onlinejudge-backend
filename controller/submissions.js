@@ -3,7 +3,7 @@ import {
   Validate,
   Joi,
   Post
-} from 'leibniz'
+} from 'wubi'
 import authorization from '../middleware/authorization'
 
 @Controller('/v1/submissions')

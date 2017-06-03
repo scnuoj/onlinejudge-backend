@@ -1,17 +1,11 @@
 middleware: ['cors', 'logger', 'onerror']
 
-database:
-  name: test
+Database:
+  name: onlinejudge
+  host: 127.0.0.1
+  port: 2306
+  dialect: mysql
   username: root
-  options:
-    host: 127.0.0.1
-    port: 2306
-    dialect: mysql
-    timezone: Asia/Shanghai
-    logging: false
-    dialectOptions:
-      charset: utf8
-      collate: utf8_general_ci
 
 Cache:
   host: 127.0.0.1

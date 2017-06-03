@@ -3,7 +3,7 @@ import {
   Validate,
   Joi,
   Get
-} from 'leibniz'
+} from 'wubi'
 
 @Controller('/v1/problems')
 export default class Posts {

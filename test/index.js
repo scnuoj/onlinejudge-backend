@@ -3,12 +3,13 @@ import chaiAsPromised from 'chai-as-promised'
 import jwt from 'jsonwebtoken'
 import app from '../index.js'
 import glob from 'glob'
+import { requireDirectory } from 'toolkit'
 
-const JwtConfig = require('conenv')(require('config').Jwt)
+requireDirectory('../library/*.js')
+
+const JwtConfig = require('config').Jwt
 chai.use(chaiAsPromised)
 global.assert = chai.assert
-
-require('require-dir')('../library')
 
 before(async () => {
   global.ctx = app.context

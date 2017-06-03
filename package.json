@@ -9,13 +9,19 @@
     "mock": "mock=true mocha --compilers js:babel-core/register ./task/mock.js --timeout=60000"
   },
   "dependencies": {
+    "callsite": "^1.0.0",
     "conenv": "^0.1.4",
+    "config": "^1.26.1",
     "crypto-js": "^3.1.9-1",
     "glob": "^7.1.1",
     "ioredis": "^2.5.0",
-    "leibniz": "https://github.com/ruiming/leibniz.git",
+    "mysql2": "^1.3.2",
     "require-dir": "^0.3.1",
-    "uuid": "^3.0.1"
+    "toolkit": "https://github.com/ruiming/toolkit.git",
+    "uuid": "^3.0.1",
+    "wubi": "^0.5.0-0",
+    "wubi-sequelize-loader": "^0.1.0",
+    "wubi-service-loader": "^0.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

@@ -1,4 +1,4 @@
-import BadRequestError from '../library/error'
+import { BadRequestError } from '../library/error'
 
 export default class ProblemService {
   /**

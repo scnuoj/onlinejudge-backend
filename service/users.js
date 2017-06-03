@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { SHA256 } from 'crypto-js'
-import AuthError from '../library/error'
+import { AuthError } from '../library/error'
 
 const JwtConfig = require('conenv')(require('config').Jwt)
 

@@ -5,7 +5,7 @@ import {
   Joi,
   Get,
   Post
-} from 'leibniz'
+} from 'wubi'
 
 @Controller('/v1/users')
 export default class Users {

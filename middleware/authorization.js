@@ -1,4 +1,4 @@
-import AuthError from '../library/error'
+import { AuthError } from '../library/error'
 
 /**
  * 权限认证
