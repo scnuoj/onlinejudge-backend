@@ -12,7 +12,7 @@ export default class Posts {
   @Validate({
     type: 'json',
     body: {
-      id: Joi.string().guid().required(),
+      id: Joi.number().integer().required(),
       code: Joi.string().required(),
       lang: Joi.string().valid('cc', 'c', 'java')
     }

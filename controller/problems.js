@@ -25,7 +25,7 @@ export default class Posts {
   @Get('/:id')
   @Validate({
     params: {
-      id: Joi.string().guid().required()
+      id: Joi.number().integer().required()
     }
   })
   async show (ctx, next) {
