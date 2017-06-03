@@ -5,7 +5,7 @@ export default class Post {
       title: DataTypes.string(),
       content: DataTypes.text(),
       userId: DataTypes.uuid(),
-      problemId: DataTypes.uuid()
+      problemId: DataTypes.integer()
     }
   }
 

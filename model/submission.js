@@ -2,7 +2,7 @@ export default class Submission {
   static fields (DataTypes) {
     return {
       id: DataTypes.integer().primary().increase(),
-      problemId: DataTypes.uuid().notNull(),
+      problemId: DataTypes.integer().notNull(),
       userId: DataTypes.uuid().notNull(),
       code: DataTypes.text(),
       lang: DataTypes.string(),
