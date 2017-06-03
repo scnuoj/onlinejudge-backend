@@ -41,19 +41,5 @@ describe('Mock 数据', function () {
     })
     // 同时往消息队列插入该 submission
     await Queue.submitCheckCodeTask(submission.id)
-    // 创建两个比赛信息
-    await Database.Contest.mock({}, {})
-    // 创建两篇文章
-    await Database.Post.mock({
-      userId: users[0].id, problemId: problems[0][0].id
-    }, {
-      userId: users[1].id, problemId: problems[1][1].id
-    })
-     // 创建两个讨论区
-    await Database.Discussion.mock({
-      userId: users[0].id, problemId: problems[0][0].id
-    }, {
-      userId: users[1].id, problemId: problems[1][1].id
-    })
   })
 })

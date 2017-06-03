@@ -1,6 +1,7 @@
 export default class Post {
   static fields (DataTypes) {
     return {
+      id: DataTypes.integer().primary().increase(),
       title: DataTypes.string(),
       content: DataTypes.text(),
       userId: DataTypes.uuid(),
