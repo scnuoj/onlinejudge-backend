@@ -1,16 +1,9 @@
-database:
+Database:
   name: ENV:DB_NAME
+  host: ENV:DB_HOST
+  port: ENV:DB_PORT
+  dialect: mysql
   username: ENV:DB_USERNAME
-  password: ENV:DB_PASSWORD
-  options:
-    host: ENV:DB_HOST
-    port: ENV:DB_PORT
-    dialect: ENV:DB_DIALECT
-    timezone: Asia/Shanghai
-    logging: false
-    dialectOptions:
-      charset: utf8
-      collate: utf8_general_ci
 
 Cache:
   host: ENV:RE_HOST
