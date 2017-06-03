@@ -1,7 +1,7 @@
 export default class Problem {
   static fields (DataTypes) {
     return {
-      id: DataTypes.uuid().primary().default(DataTypes.UUIDv1),
+      id: DataTypes.integer().primary().increase(),
       title: DataTypes.string(),
       description: DataTypes.text(),
       lang: DataTypes.string(),
