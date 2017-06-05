@@ -2,7 +2,6 @@ Database:
   name: onlinejudge
   host: 127.0.0.1
   port: 2306
-  dialect: mysql
   username: root
 
 Cache:

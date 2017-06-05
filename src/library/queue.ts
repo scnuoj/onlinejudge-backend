@@ -1,5 +1,15 @@
-const Redis = require('ioredis')
-const queueConfig = require('conenv')(require('config').get('Cache'))
+import * as config from 'config'
+import * as Redis from 'ioredis'
+
+const queueConfig = config.get('Cache') as Cache
+
+interface Cache {
+  db: number
+  host: string
+  port: number
+  prefix: string,
+  auth: string
+}
 
 const Q = new Redis(queueConfig.port, queueConfig.host, {
   password: queueConfig.auth,
@@ -24,4 +34,4 @@ const Queue = {
   }
 }
 
-module.exports = Queue
+export default Queue

@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "config": "registry:dt/config#0.0.0+20170202035819",
+    "crypto-js": "registry:dt/crypto-js#3.1.4+20170125080350",
+    "ioredis": "registry:dt/ioredis#0.0.0+20161224103521",
+    "jsonwebtoken": "registry:dt/jsonwebtoken#7.2.0+20161229235100",
+    "koa": "registry:npm/koa#2.0.0+20161018080506",
+    "koa-bodyparser": "registry:dt/koa-bodyparser#3.0.0+20170120190901",
+    "koa-jwt": "registry:dt/koa-jwt#2.1.0+20170324151803",
+    "sequelize": "registry:npm/sequelize#4.0.0-1+20170502152935"
+  }
+}

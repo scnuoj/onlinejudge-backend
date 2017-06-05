@@ -1,4 +1,6 @@
 export class BadRequestError extends Error {
+  readonly status: number
+
   constructor (message) {
     super()
     this.message = message
@@ -7,6 +9,8 @@ export class BadRequestError extends Error {
 }
 
 export class AuthError extends Error {
+  readonly status: number
+
   constructor (message) {
     super()
     this.message = message
@@ -15,6 +19,8 @@ export class AuthError extends Error {
 }
 
 export class NotFoundError extends Error {
+  readonly status: number
+
   constructor (message) {
     super()
     this.message = message
@@ -23,6 +29,8 @@ export class NotFoundError extends Error {
 }
 
 export class ServiceUnavailableError extends Error {
+  readonly status: number
+  
   constructor (message) {
     super()
     this.message = message
