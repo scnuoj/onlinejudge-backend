@@ -1,4 +1,3 @@
-/// <reference path="./mockjs.d.ts" />
 import { Random } from 'mockjs'
 import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, Model, PrimaryKey, Table } from 'sequelize-typescript'
 import { Problem } from './problem'

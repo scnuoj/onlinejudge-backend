@@ -1,29 +1,39 @@
-import * as Koa from 'koa'
-import * as logger from 'koa-logger'
-import * as config from 'config'
-import * as jwt from 'koa-jwt'
-import { useKoaServer } from 'routing-controllers'
-import db from './library/database'
-import onerror from './middleware/onerror'
-import { Problem } from './model/problem'
 import 'reflect-metadata'
+import app from './app'
+import db from './library/database'
 
-db.authenticate().then(() => {
+import { Context as _Context } from 'koa'
+import { Container } from 'typedi'
 
-  const jwtConfig = config.get('Jwt') as any
+import { ProblemService } from './service/problems'
+import { SubmissionService } from './service/submissions'
+import { UserService } from './service/users'
 
-  const app = new Koa()
-
-  app.use(onerror())
-  app.use(logger())
-  app.use(jwt({
-    secret: jwtConfig.secret,
-    passthrough: true
-  }))
-
-  useKoaServer(app, {
-    controllers: [__dirname + '/controller/*{js,ts}']
-  })
-
-  app.listen(8000, () => console.log('listening'))
+Reflect.set(app.context, 'services', {
+  problems: Container.get(ProblemService),
+  submissions: Container.get(SubmissionService),
+  users: Container.get(UserService)
 })
+Reflect.set(app.context, 'ok', function (data?: any, message?: string) {
+  this.body = { success: true, message, data }
+})
+Reflect.set(app.context, 'error', function (data?: any, message?: string) {
+  this.status = 400
+  this.body = { success: false, message, data }
+})
+
+db.authenticate().then(() => app.listen(8000))
+
+// d.ts
+
+export interface Context extends _Context {
+  // ctx.services
+  services: {
+    problems: ProblemService,
+    submissions: SubmissionService,
+    users: UserService
+  },
+  // ctx.ok & ctx.error
+  ok <T> (data?: T, message?: string): { success: true, message: string, data: T },
+  error <T> (data?: T, message?: string): { success: false, message: string, data: T }
+}

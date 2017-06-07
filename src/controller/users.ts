@@ -1,5 +1,5 @@
-import { Context } from 'koa'
 import { Body, Controller, Ctx, Get, Param, Post, QueryParam } from 'routing-controllers'
+import { Context } from '..'
 import * as UserService from '../service/users'
 
 export interface UserMsg {
@@ -12,22 +12,19 @@ export interface UserMsg {
 export class UsersController {
   @Get('/')
   async index (@Ctx() ctx: Context) {
-    const user = await UserService.show(ctx.state.user.id)
-    ctx.status = 200
-    ctx.body = user
+    const user = await ctx.services.users.show(ctx.state.user.id)
+    ctx.ok(user)
   }
 
   @Post('/register')
   async register (@Ctx() ctx: Context, @Body() user: UserMsg) {
-    const data = await UserService.register(user.name, user.email, user.password)
-    ctx.status = 200
-    ctx.body = data
+    const data = await ctx.services.users.register(user.name, user.email, user.password)
+    ctx.ok(data)
   }
 
   @Post('/login')
   async login (@Ctx() ctx: Context, @Body() user: UserMsg) {
-    const data = await UserService.login(user.name, user.password)
-    ctx.status = 200
-    ctx.body = user
+    const data = await ctx.services.users.login(user.name, user.password)
+    ctx.ok(user)
   }
 }

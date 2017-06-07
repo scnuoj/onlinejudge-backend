@@ -1,4 +1,3 @@
-/// <reference path="./mockjs.d.ts" />
 import { Random } from 'mockjs'
 import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript'
 import sequelize from '../library/database'
@@ -8,24 +7,24 @@ import { User } from './user'
 @Table
 export class Problem extends Model<Problem> {
   @PrimaryKey
-    @AutoIncrement
-    @Column
-    public id: number
+  @AutoIncrement
+  @Column
+  public id: number
 
   @Column
-    public title: string
+  public title: string
 
   @Column(DataType.TEXT)
-    public description: string
+  public description: string
 
   @Column
-    public lang: string
+  public lang: string
 
   @Column(DataType.TEXT)
-    public input: string
+  public input: string
 
   @Column(DataType.TEXT)
-    public output
+  public output
 
   @Column({
     type: DataType.FLOAT,
@@ -33,47 +32,47 @@ export class Problem extends Model<Problem> {
       return (this.getDataValue('passCount') / this.getDataValue('submitCount')).toFixed(2)
     }
   })
-    public percent: number
+  public percent: number
 
   @Column
-    public sampleInput: string
+  public sampleInput: string
 
   @Column
-    public sampleOutput: string
+  public sampleOutput: string
 
   @Column(DataType.TEXT)
-    public inputData: string
+  public inputData: string
 
   @Column(DataType.TEXT)
-    public outputData: string
+  public outputData: string
 
   @Column
-    public submitCount: number
+  public submitCount: number
 
   @Column
-    public passCount: number
+  public passCount: number
 
   @Column
-    public maxCpuTime: number
+  public maxCpuTime: number
 
   @Column
-    public maxRealTime: number
+  public maxRealTime: number
 
   @Column
-    public maxMemory: number
+  public maxMemory: number
 
   @Column
-    public maxProcessNumber: number
+  public maxProcessNumber: number
 
   @Column
-    public maxOutputSize: number
+  public maxOutputSize: number
 
   @ForeignKey(() => User)
-    @Column(DataType.UUID)
-    public userId: string
+  @Column(DataType.UUID)
+  public userId: string
 
   @BelongsTo(() => User)
-    public user: User
+  public user: User
 
   static mock (item?: object) {
     return {

@@ -1,7 +1,6 @@
-import { Context } from 'koa'
 import { Body, Controller, Ctx, Param, Post, QueryParam, UseBefore } from 'routing-controllers'
+import { Context } from '..'
 import authorization from '../middleware/authorization'
-import * as SubmissionService from '../service/submissions'
 
 export interface PostSubmissionData {
   id: number
@@ -14,8 +13,7 @@ export class SubmissionsController {
   @Post('/')
   @UseBefore(authorization())
   async index (@Ctx() ctx: Context, @Body({ required: true }) submission: PostSubmissionData) {
-    const submissionId = await SubmissionService.create(ctx.state.user.id, submission.id, submission.code, submission.lang)
-    ctx.status = 200
-    ctx.body = submissionId
+    const submissionId = await ctx.services.submissions.create(ctx.state.user.id, submission.id, submission.code, submission.lang)
+    ctx.ok(submissionId)
   }
 }
