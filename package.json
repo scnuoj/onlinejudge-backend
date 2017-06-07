@@ -7,7 +7,11 @@
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
     "mock": "./node_modules/.bin/ts-node ./src/task/mock.ts",
-    "test": "tsc && mocha build/test --ui mocha-typescript --require source-map-support/register --timeout=60000"
+    "test": "tsc && mocha build/test --ui mocha-typescript --require source-map-support/register --timeout=60000",
+    "lint": "tslint src",
+    "precommit": "npm run lint",
+    "commit": "git-cz",
+    "commitmsg": "validate-commit-msg"
   },
   "dependencies": {
     "class-validator": "^0.7.0",
@@ -45,6 +49,8 @@
     "@types/sequelize": "4.0.55",
     "@types/supertest": "^2.0.0",
     "chai": "^3.5.0",
+    "cz-conventional-changelog": "^2.0.0",
+    "husky": "^0.13.4",
     "mocha": "^3.3.0",
     "mocha-typescript": "^1.1.4",
     "mockjs": "^1.0.1-beta3",
@@ -54,6 +60,12 @@
     "ts-node": "^3.0.4",
     "tslint": "^5.4.2",
     "tslint-config-standard": "^5.0.2",
-    "typescript": "^2.3.4"
+    "typescript": "^2.3.4",
+    "validate-commit-msg": "^2.12.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
