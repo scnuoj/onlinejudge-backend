@@ -4,9 +4,11 @@
   "main": "serevr.js",
   "license": "MIT",
   "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
+    "mock": "./node_modules/.bin/ts-node ./src/task/mock.ts",
     "test": "nyc mocha --compilers js:babel-core/register ./test/index.js --timeout=60000",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "mock": "mock=true mocha --compilers js:babel-core/register ./task/mock.js --timeout=60000"
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "dependencies": {
     "callsite": "^1.0.0",
@@ -17,14 +19,18 @@
     "ioredis": "^2.5.0",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.0.0",
     "mysql": "^2.13.0",
     "mysql2": "^1.3.2",
     "pg": "^6.2.3",
     "reflect-metadata": "^0.1.10",
     "require-dir": "^0.3.1",
     "routing-controllers": "^0.7.0-alpha.15",
+    "sequelize": "4.0.0-1",
     "sequelize-decorators": "^0.0.4",
+    "sequelize-typescript": "^0.3.2",
     "toolkit": "https://github.com/ruiming/toolkit.git",
+    "typemoq": "^1.7.0",
     "typeorm": "^0.1.0-alpha.3",
     "uuid": "^3.0.1",
     "wubi": "^0.5.0-0",

@@ -7,9 +7,9 @@ export class PostsController {
   @Get('/')
   async index (
     @Ctx() ctx: Context, @QueryParam('offset') offset: number, 
-    @QueryParam('limit') limit: number, @QueryParam('sortby') sortby: number, @QueryParam('order') order: string
+    @QueryParam('limit') limit: number, @QueryParam('sortby') sortby: string, @QueryParam('order') order: string
   ) {
-    const problems = await ProblemService.list(ctx.query.offset, ctx.query.limit, ctx.query.sortby, ctx.query.order)
+    const problems = await ProblemService.list(offset, limit, sortby, order)
     ctx.status = 200
     ctx.body = problems
   }

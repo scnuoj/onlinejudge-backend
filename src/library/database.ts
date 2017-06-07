@@ -1,11 +1,16 @@
+import * as path from 'path'
 import * as config from 'config'
 import 'reflect-metadata'
-import { createConnection } from 'typeorm'
+import { Sequelize } from 'sequelize-typescript'
+
+import { User } from '../model/user'
+import { Submission } from '../model/submission'
+import { Problem } from '../model/problem'
 
 
 const dbConfig = config.get('Database') as DB
 
-interface DB {
+export interface DB {
   name: string
   host: string
   port: number
@@ -13,21 +18,24 @@ interface DB {
   password: string
 }
 
+console.log(dbConfig)
 
-createConnection({
-    driver: {
-        type: 'mysql',
-        host: dbConfig.host,
-        port: dbConfig.port,
-        username: dbConfig.username,
-        password: dbConfig.password,
-        database: dbConfig.name
-    },
-    entities: [
-        __dirname + '/entity/*.js'
-    ],
-    autoSchemaSync: true,
-}).then(connection => {
-  global.Database = connection
-    // Here you can start to work with your entities
-}).catch(error => console.log(error));
+const sequelize = new Sequelize({
+    name: dbConfig.name,
+    dialect: 'mysql',
+    host: dbConfig.host,
+    port: dbConfig.port,
+    username: dbConfig.username,
+    password: dbConfig.password,
+    modelPaths: [
+      path.resolve(__dirname, '..', 'model')
+    ]
+})
+
+sequelize.addModels([ Submission, Problem, User ])
+
+sequelize.authenticate().then(async db => {
+  console.log('DB SUCCESS')
+})
+
+export default sequelize

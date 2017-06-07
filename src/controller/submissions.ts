@@ -9,7 +9,7 @@ export class SubmissionsController {
     @Ctx() ctx: Context, @Body('id') id: number, 
     @Body('code') code: number, @Body('lang') lang: number
   ) {
-    const submissionId = await SubmissionService.create(ctx.state.user.id, ctx.request.body.id, ctx.request.body.code, ctx.request.body.lang)
+    const submissionId = await SubmissionService.create(ctx.state.user.id, id, code, lang)
     ctx.status = 200
     ctx.body = submissionId
   }

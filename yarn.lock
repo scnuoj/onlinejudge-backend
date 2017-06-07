@@ -2,9 +2,37 @@
 # yarn lockfile v1
 
 
+"@types/bluebird@*":
+  version "3.5.5"
+  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.5.tgz#3c7e8cf660b9d60ea25c787fdd258ddb6abb384d"
+
 "@types/geojson@^1.0.0":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-1.0.2.tgz#b02d10ab028e2928ac592a051aaa4981a1941d03"
+
+"@types/lodash@*":
+  version "4.14.65"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.65.tgz#a0f78d71ffcd3c02628d5f616410c98c424326d5"
+
+"@types/node@6.0.41":
+  version "6.0.41"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.41.tgz#578cf53aaec65887bcaf16792f8722932e8ff8ea"
+
+"@types/reflect-metadata@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@types/reflect-metadata/-/reflect-metadata-0.0.4.tgz#b6477ca9a97e5265f2ac67f9ea704eae5e0eaf4d"
+
+"@types/sequelize@4.0.39":
+  version "4.0.39"
+  resolved "https://registry.yarnpkg.com/@types/sequelize/-/sequelize-4.0.39.tgz#a36ed0c83a648d36d9bd04d83b2fb2b7668246e9"
+  dependencies:
+    "@types/bluebird" "*"
+    "@types/lodash" "*"
+    "@types/validator" "*"
+
+"@types/validator@*":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-6.2.0.tgz#020322fe1929f69889eb675a1bdb5a98394b71f0"
 
 abbrev@1:
   version "1.1.0"
@@ -777,7 +805,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^3.3.4, bluebird@^3.4.6, bluebird@^3.5.0:
+bluebird@^3.3.4, bluebird@^3.4.1, bluebird@^3.4.6, bluebird@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
@@ -839,6 +867,10 @@ busboy@0.2.13:
 bytes@2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.4.0.tgz#7d97196f9d5baf7f6935e25985549edd2a6c2339"
+
+bytes@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.5.0.tgz#4c9423ea2d252c270c41b2bdefeff9bb6b62c06a"
 
 caching-transform@^1.0.0:
   version "1.0.1"
@@ -1410,6 +1442,10 @@ es6-set@~0.1.5:
     es6-iterator "~2.0.1"
     es6-symbol "3.1.1"
     event-emitter "~0.3.5"
+
+es6-shim@0.35.3:
+  version "0.35.3"
+  resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.35.3.tgz#9bfb7363feffff87a6cdb6cd93e405ec3c4b6f26"
 
 es6-symbol@3.1.1, es6-symbol@^3.1, es6-symbol@^3.1.1, es6-symbol@~3.1, es6-symbol@~3.1.1:
   version "3.1.1"
@@ -2023,6 +2059,10 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
+humanize-number@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/humanize-number/-/humanize-number-0.0.2.tgz#11c0af6a471643633588588048f1799541489c18"
+
 humps@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/humps/-/humps-2.0.0.tgz#dd4a423e9784626fe7b9f19fde0baff659b40173"
@@ -2523,6 +2563,15 @@ koa-jwt@^3.2.1:
     jsonwebtoken "7.4.1"
     koa-unless "1.0.0"
 
+koa-logger@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/koa-logger/-/koa-logger-3.0.0.tgz#6ca5bef929a10d17171ceb19b081600ff5add91d"
+  dependencies:
+    bytes "^2.5.0"
+    chalk "^1.1.3"
+    humanize-number "0.0.2"
+    passthrough-counter "^1.0.0"
+
 "koa-router@git+https://github.com/aheckmann/koa-router.git#19e60d9":
   version "7.0.1"
   resolved "git+https://github.com/aheckmann/koa-router.git#19e60d9"
@@ -2705,7 +2754,7 @@ lodash@4.15.0:
   version "4.15.0"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.15.0.tgz#3162391d8f0140aa22cf8f6b3c34d6b7f63d3aa9"
 
-lodash@^4.0.0, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.8.2:
+lodash@^4.0.0, lodash@^4.16.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.8.2:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -3193,6 +3242,10 @@ parseurl@^1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.1.tgz#c8ab8c9223ba34888aa64a297b28853bec18da56"
 
+passthrough-counter@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/passthrough-counter/-/passthrough-counter-1.0.0.tgz#1967d9e66da572b5c023c787db112a387ab166fa"
+
 path-exists@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-2.1.0.tgz#0feb6c64f0fc518d9a754dd5efb62c7022761f4b"
@@ -3337,6 +3390,10 @@ postgres-interval@^1.1.0:
   dependencies:
     xtend "^4.0.0"
 
+postinstall-build@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/postinstall-build/-/postinstall-build-2.1.3.tgz#9d1886ab2949619f4c206afbe1aea95debe45c94"
+
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -3379,13 +3436,13 @@ punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
-qs@^6.1.0, qs@~6.3.0:
-  version "6.3.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.2.tgz#e75bd5f6e268122a2a0e0bda630b2550c166502c"
-
-qs@^6.4.0, qs@~6.4.0:
+qs@^6.1.0, qs@^6.4.0, qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
+
+qs@~6.3.0:
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.2.tgz#e75bd5f6e268122a2a0e0bda630b2550c166502c"
 
 randomatic@^1.1.3:
   version "1.1.6"
@@ -3742,6 +3799,37 @@ sequelize-decorators@^0.0.4:
   dependencies:
     reflect-metadata "^0.1.3"
 
+sequelize-typescript@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/sequelize-typescript/-/sequelize-typescript-0.3.2.tgz#a00f4202f546a9d65a175f95de92fb7824710873"
+  dependencies:
+    "@types/node" "6.0.41"
+    "@types/reflect-metadata" "0.0.4"
+    "@types/sequelize" "4.0.39"
+    es6-shim "0.35.3"
+
+sequelize@4.0.0-1:
+  version "4.0.0-1"
+  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.0.0-1.tgz#e9b592cbece8777652ab1cb5d8d151bec08d7858"
+  dependencies:
+    bluebird "^3.4.1"
+    debug "^2.2.0"
+    depd "^1.1.0"
+    dottie "^1.0.0"
+    generic-pool "2.4.2"
+    inflection "1.10.0"
+    lodash "4.15.0"
+    moment "^2.13.0"
+    moment-timezone "^0.5.4"
+    node-uuid "~1.4.4"
+    retry-as-promised "^2.0.0"
+    semver "^5.0.1"
+    shimmer "1.1.0"
+    terraformer-wkt-parser "^1.1.2"
+    toposort-class "^1.0.1"
+    validator "^5.2.0"
+    wkx "0.3.0"
+
 sequelize@4.0.0-2:
   version "4.0.0-2"
   resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.0.0-2.tgz#8143f50fa00ac62ba95394f4c81bd97e7c3600d5"
@@ -3794,7 +3882,7 @@ shelljs@^0.7.5:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-shimmer@^1.1.0:
+shimmer@1.1.0, shimmer@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/shimmer/-/shimmer-1.1.0.tgz#97d7377137ffbbab425522e429fe0aa89a488b35"
 
@@ -4234,6 +4322,14 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
+typemoq@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/typemoq/-/typemoq-1.7.0.tgz#4b4ad735792295ce6e9b6ba32c516a038af3999b"
+  dependencies:
+    circular-json "^0.3.1"
+    lodash "^4.16.4"
+    postinstall-build "^2.1.3"
+
 typeorm@^0.1.0-alpha.3:
   version "0.1.0-alpha.3"
   resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.1.0-alpha.3.tgz#a7d912f6e63c0d30eff6bc60941e6073d8aba9ba"
@@ -4330,7 +4426,7 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
-validator@^5.6.0:
+validator@^5.2.0, validator@^5.6.0:
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-5.7.0.tgz#7a87a58146b695ac486071141c0c49d67da05e5c"
 

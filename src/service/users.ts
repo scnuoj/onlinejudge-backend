@@ -1,24 +1,19 @@
+import { Model } from 'sequelize-typescript'
 import * as jwt from 'jsonwebtoken'
 import { SHA256 } from 'crypto-js'
 import { AuthError } from '../library/error'
 import * as config from 'config'
-import { getEntityManager } from 'typeorm'
-import { Problem } from '../entity/problem'
-import { User } from '../entity/user'
+import { User } from '../model/user'
 
 const jwtConfig = config.get('Jwt') as Jwt
 
-const ProblemRepository = getEntityManager().getRepository(Problem)
-const UserRepository = getEntityManager().getRepository(User)
-
 interface Jwt {
   secret: string
-  algorithm: string
   exp: number
 }
 
 export async function register (name: string, email: string, password: string) {
-  const user = await UserRepository.create({
+  const user = await User.create<User>({
     name,
     email,
     password: SHA256(password).toString()
@@ -30,7 +25,7 @@ export async function register (name: string, email: string, password: string) {
 }
 
 export async function login (name: string, password) {
-  const user = await UserRepository.findOne({
+  const user = await User.findOne<User>({
     where: {
       name: name
     }
@@ -50,7 +45,7 @@ export async function login (name: string, password) {
 }
 
 export async function show (userId) {
-  const user = await UserRepository.findOneById(userId)
+  const user = await User.findById<User>(userId)
   if (user) {
     return user
   } else {
