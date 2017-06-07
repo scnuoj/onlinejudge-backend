@@ -5,4 +5,5 @@ WORKDIR /onlinejudge
 COPY . /onlinejudge/
 RUN yarn install
 EXPOSE 8000
-ENTRYPOINT node index.js
+# TODO: Compile code then run
+ENTRYPOINT node server.js

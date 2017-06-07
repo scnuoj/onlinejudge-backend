@@ -1,0 +1,25 @@
+machine:
+  pre:
+    - mkdir ~/.yarn-cache
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+  node:
+    version: 7.6.0
+  environment:
+    NODE_ENV: test
+  services:
+    - mysql
+    - redis
+
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  cache_directories:
+    - ~/.yarn-cache
+  override:
+    - yarn install
+
+test:
+  override:
+    - yarn run mock
+    - yarn run test
+    - yarn run report-coverage
