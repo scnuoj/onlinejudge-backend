@@ -1,6 +1,4 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey } from 'sequelize-typescript';
-import sequelize from '../library/database'
-import { DataTypes } from 'sequelize'
+import { DataType, Table, Column, Model, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey } from 'sequelize-typescript';
 import { User } from './user'
 import { Problem } from './problem'
 
@@ -23,7 +21,7 @@ export class Submission extends Model<Submission> {
   @BelongsTo(() => User, 'userId')
   public user: User
 
-  @Column(DataTypes.TEXT)
+  @Column(DataType.TEXT)
   public code: string
 
   @Column

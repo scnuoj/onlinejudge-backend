@@ -1,14 +1,12 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement, Default, ForeignKey, HasMany } from 'sequelize-typescript';
-import sequelize from '../library/database'
-import { DataTypes } from 'sequelize'
+import { DataType, Table, Column, Model, PrimaryKey, AutoIncrement, Default, ForeignKey, HasMany } from 'sequelize-typescript';
 import { Problem } from './problem'
 import { Submission } from './submission'
 
 @Table
 export class User extends Model<User> {
   @PrimaryKey
-  @Default(DataTypes.UUIDV1)
-  @Column(DataTypes.UUID)
+  @Default(DataType.UUIDV1)
+  @Column(DataType.UUID)
   public id: string
 
   @Column

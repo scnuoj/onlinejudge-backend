@@ -1,6 +1,5 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
+import { DataType, Table, Column, Model, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
 import sequelize from '../library/database'
-import { DataTypes } from 'sequelize'
 import { User } from './user'
 import { Submission } from './submission'
 
@@ -14,20 +13,20 @@ export class Problem extends Model<Problem> {
     @Column
     public title: string
 
-    @Column(DataTypes.TEXT)
+    @Column(DataType.TEXT)
     public description: string
 
     @Column
     public lang: string
 
-    @Column(DataTypes.TEXT)
+    @Column(DataType.TEXT)
     public input: string
 
-    @Column(DataTypes.TEXT)
+    @Column(DataType.TEXT)
     public output
 
     @Column({
-        type: DataTypes.FLOAT,
+        type: DataType.FLOAT,
         get () {
             return (this.getDataValue('passCount') / this.getDataValue('submitCount')).toFixed(2)
         }
@@ -40,10 +39,10 @@ export class Problem extends Model<Problem> {
     @Column
     public sampleOutput: string
 
-    @Column(DataTypes.TEXT)
+    @Column(DataType.TEXT)
     public inputData: string
 
-    @Column(DataTypes.TEXT)
+    @Column(DataType.TEXT)
     public outputData: string
 
     @Column
@@ -68,7 +67,7 @@ export class Problem extends Model<Problem> {
     public maxOutputSize: number
 
     @ForeignKey(() => User)
-    @Column(DataTypes.UUID)
+    @Column(DataType.UUID)
     public userId: string
 
     @BelongsTo(() => User)

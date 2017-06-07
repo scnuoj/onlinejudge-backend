@@ -55,7 +55,7 @@ export async function show (userId) {
 
 function issueToken (id: string) {
   return jwt.sign({
-    id,
+    id: id,
     exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
-  }, jwtConfig.secret)
+  } as {}, jwtConfig.secret)
 }
