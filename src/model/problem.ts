@@ -1,3 +1,5 @@
+/// <reference path="./mockjs.d.ts" />
+import { Random } from 'mockjs'
 import { DataType, Table, Column, Model, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
 import sequelize from '../library/database'
 import { User } from './user'
@@ -72,4 +74,17 @@ export class Problem extends Model<Problem> {
 
     @BelongsTo(() => User)
     public user: User
+
+    static mock (item) {
+        return {
+            avatar: Random.string(),
+            email: Random.email(),
+            gender: Random.integer(0, 2000),
+            name: Random.string(),
+            password: Random.string(),
+            remark: Random.string(),
+            school: Random.string(),
+            ...item
+        }
+    }
 }

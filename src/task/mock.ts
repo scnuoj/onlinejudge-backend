@@ -1,4 +1,3 @@
-import './mock.d'
 import { Random } from 'mockjs'
 import sequelize from '../library/database'
 import { User } from '../model/user'
