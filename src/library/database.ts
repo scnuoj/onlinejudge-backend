@@ -18,8 +18,6 @@ export interface DB {
   password: string
 }
 
-console.log(dbConfig)
-
 const sequelize = new Sequelize({
     name: dbConfig.name,
     dialect: 'mysql',
@@ -33,9 +31,5 @@ const sequelize = new Sequelize({
 })
 
 sequelize.addModels([ Submission, Problem, User ])
-
-sequelize.authenticate().then(async db => {
-  console.log('DB SUCCESS')
-})
 
 export default sequelize

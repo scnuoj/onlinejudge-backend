@@ -3,27 +3,25 @@ import * as logger from 'koa-logger'
 import * as config from 'config'
 import * as jwt from 'koa-jwt'
 import { useKoaServer } from 'routing-controllers'
-import connection from './library/database'
+import db from './library/database'
+import onerror from './middleware/onerror'
 
-(async () => {
+db.authenticate().then(() => {
 
-const jwtConfig = config.get('Jwt') as any
+  const jwtConfig = config.get('Jwt') as any
 
-const app = new Koa()
+  const app = new Koa()
 
-await connection
+  app.use(onerror())
+  app.use(logger())
+  app.use(jwt({
+    secret: jwtConfig.secret,
+    passthrough: true
+  }))
 
-useKoaServer(app, {
-  controllers: [__dirname + '/controller/*{js,ts}']
+  useKoaServer(app, {
+    controllers: [__dirname + '/controller/*{js,ts}']
+  })
+
+  app.listen(8000, () => console.log('listening'))
 })
-
-app.use(logger())
-
-app.use(jwt({
-  secret: jwtConfig.secret,
-  passthrough: true
-}))
-
-app.listen(8000, () => console.log('listening'))
-
-})()
