@@ -2,6 +2,12 @@ import { Controller, Ctx, Param, QueryParam, Body, Get, Post } from 'routing-con
 import { Context } from 'koa'
 import * as UserService from '../service/users'
 
+export interface UserMsg {
+  email: string
+  name: string
+  password: string
+}
+
 @Controller('/v1/users')
 export class UsersController {
   @Get('/')
@@ -12,21 +18,15 @@ export class UsersController {
   }
 
   @Post('/register')
-  async register (
-    @Ctx() ctx: Context, @Body('name') name: string, 
-    @Body('email') email: string, @Body('password') password: string
-  ) {
-    const user = await UserService.register(name, email, password)
+  async register (@Ctx() ctx: Context, @Body() user: UserMsg) {
+    const data = await UserService.register(user.name, user.email, user.password)
     ctx.status = 200
-    ctx.body = user
+    ctx.body = data
   }
 
   @Post('/login')
-  async login (
-    @Ctx() ctx: Context, @Body('name') name: string, 
-    @Body('password') password: string
-  ) {
-    const user = await UserService.login(name, password)
+  async login (@Ctx() ctx: Context, @Body() user: UserMsg) {
+    const data = await UserService.login(user.name, user.password)
     ctx.status = 200
     ctx.body = user
   }

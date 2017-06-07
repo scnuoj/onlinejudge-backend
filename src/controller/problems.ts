@@ -1,15 +1,19 @@
-import { Controller, Ctx, Param, QueryParam, Body, Get } from 'routing-controllers'
+import { Controller, Ctx, Param, QueryParams, Body, Get } from 'routing-controllers'
 import { Context } from 'koa'
 import * as ProblemService from '../service/problems'
+
+export interface Query {
+  offset: number
+  limit: number
+  sortby: string
+  order: 'asc' | 'desc'
+}
 
 @Controller('/v1/problems')
 export class PostsController {
   @Get('/')
-  async index (
-    @Ctx() ctx: Context, @QueryParam('offset') offset: number, 
-    @QueryParam('limit') limit: number, @QueryParam('sortby') sortby: string, @QueryParam('order') order: string
-  ) {
-    const problems = await ProblemService.list(offset, limit, sortby, order)
+  async index (@Ctx() ctx: Context, @QueryParams() query: Query) {
+    const problems = await ProblemService.list(query.offset, query.limit, query.sortby, query.order)
     ctx.status = 200
     ctx.body = problems
   }
