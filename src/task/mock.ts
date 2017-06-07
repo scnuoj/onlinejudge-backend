@@ -1,9 +1,9 @@
+import './mock.d'
 import { Random } from 'mockjs'
 import sequelize from '../library/database'
 import { User } from '../model/user'
 import { Problem } from '../model/problem'
 import { Submission } from '../model/submission'
-import * as typeorm from 'typeorm'
 
 sequelize.sync({
   force: true
@@ -64,7 +64,7 @@ sequelize.sync({
       signal: Random.integer(0, 2000),
       userId: user.id
     })
-    return submission.save(submission)
+    return submission.save()
   }))))
 })
   
