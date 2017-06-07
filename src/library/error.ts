@@ -30,7 +30,7 @@ export class NotFoundError extends Error {
 
 export class ServiceUnavailableError extends Error {
   readonly status: number
-  
+
   constructor (message) {
     super()
     this.message = message

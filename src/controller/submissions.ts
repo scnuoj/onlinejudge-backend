@@ -1,5 +1,5 @@
-import { Controller, Ctx, Param, QueryParam, Body, Post, UseBefore } from 'routing-controllers'
 import { Context } from 'koa'
+import { Body, Controller, Ctx, Param, Post, QueryParam, UseBefore } from 'routing-controllers'
 import authorization from '../middleware/authorization'
 import * as SubmissionService from '../service/submissions'
 

@@ -5,7 +5,7 @@ import { User } from '../model/user'
 
 /**
  * 根据题目 id 获取指定题目信息
- * @param id 
+ * @param id
  */
 export async function show (id: number) {
   const problem = await Problem.findById<Problem>(id, {
@@ -24,10 +24,10 @@ export async function show (id: number) {
 
 /**
  * 获取指定范围的题目列表
- * @param offset 
- * @param limit 
- * @param sortby 
- * @param order 
+ * @param offset
+ * @param limit
+ * @param sortby
+ * @param order
  */
 export async function list (offset = 0, limit = 10, sortby = 'id', order = 'desc') {
   const problems = await Problem.findAndCountAll<Problem>({

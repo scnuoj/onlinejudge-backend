@@ -1,90 +1,100 @@
 /// <reference path="./mockjs.d.ts" />
 import { Random } from 'mockjs'
-import { DataType, Table, Column, Model, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
+import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript'
 import sequelize from '../library/database'
-import { User } from './user'
 import { Submission } from './submission'
+import { User } from './user'
 
 @Table
 export class Problem extends Model<Problem> {
-    @PrimaryKey
+  @PrimaryKey
     @AutoIncrement
     @Column
     public id: number
 
-    @Column
+  @Column
     public title: string
 
-    @Column(DataType.TEXT)
+  @Column(DataType.TEXT)
     public description: string
 
-    @Column
+  @Column
     public lang: string
 
-    @Column(DataType.TEXT)
+  @Column(DataType.TEXT)
     public input: string
 
-    @Column(DataType.TEXT)
+  @Column(DataType.TEXT)
     public output
 
-    @Column({
-        type: DataType.FLOAT,
-        get () {
-            return (this.getDataValue('passCount') / this.getDataValue('submitCount')).toFixed(2)
-        }
-    })
+  @Column({
+    type: DataType.FLOAT,
+    get () {
+      return (this.getDataValue('passCount') / this.getDataValue('submitCount')).toFixed(2)
+    }
+  })
     public percent: number
 
-    @Column
+  @Column
     public sampleInput: string
 
-    @Column
+  @Column
     public sampleOutput: string
 
-    @Column(DataType.TEXT)
+  @Column(DataType.TEXT)
     public inputData: string
 
-    @Column(DataType.TEXT)
+  @Column(DataType.TEXT)
     public outputData: string
 
-    @Column
+  @Column
     public submitCount: number
 
-    @Column
+  @Column
     public passCount: number
 
-    @Column
+  @Column
     public maxCpuTime: number
 
-    @Column
+  @Column
     public maxRealTime: number
 
-    @Column
+  @Column
     public maxMemory: number
 
-    @Column
+  @Column
     public maxProcessNumber: number
 
-    @Column
+  @Column
     public maxOutputSize: number
 
-    @ForeignKey(() => User)
+  @ForeignKey(() => User)
     @Column(DataType.UUID)
     public userId: string
 
-    @BelongsTo(() => User)
+  @BelongsTo(() => User)
     public user: User
 
-    static mock (item) {
-        return {
-            avatar: Random.string(),
-            email: Random.email(),
-            gender: Random.integer(0, 2000),
-            name: Random.string(),
-            password: Random.string(),
-            remark: Random.string(),
-            school: Random.string(),
-            ...item
-        }
+  static mock (item?: object) {
+    return {
+      description: Random.paragraph(),
+      title: Random.string(),
+      lang: Random.string(),
+      input: Random.string(),
+      output: Random.string(),
+      percent: Random.float(),
+      sampleInput: Random.string(),
+      sampleOutput: Random.string(),
+      submitCount: Random.integer(100, 200),
+      passCount: Random.integer(10, 20),
+      maxCpuTime: Random.integer(1000, 2000),
+      maxRealTime: Random.integer(1000, 2000),
+      maxMemory: Random.integer(1000, 2000),
+      maxProcessNumber: Random.integer(1000, 2000),
+      maxOutputSize: Random.integer(1000, 2000),
+      inputData: Random.string(),
+      outputData: Random.string(),
+      ...item
     }
+  }
 }

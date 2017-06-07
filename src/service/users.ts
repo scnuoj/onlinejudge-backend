@@ -1,8 +1,8 @@
-import { Model } from 'sequelize-typescript'
-import * as jwt from 'jsonwebtoken'
-import { SHA256 } from 'crypto-js'
-import { AuthError } from '../library/error'
 import * as config from 'config'
+import { SHA256 } from 'crypto-js'
+import * as jwt from 'jsonwebtoken'
+import { Model } from 'sequelize-typescript'
+import { AuthError } from '../library/error'
 import { User } from '../model/user'
 
 const jwtConfig = config.get('Jwt') as Jwt
@@ -27,7 +27,7 @@ export async function register (name: string, email: string, password: string) {
 export async function login (name: string, password) {
   const user = await User.findOne<User>({
     where: {
-      name: name
+      name
     }
   })
   if (user) {
@@ -55,7 +55,7 @@ export async function show (userId) {
 
 function issueToken (id: string) {
   return jwt.sign({
-    id: id,
+    id,
     exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
   } as {}, jwtConfig.secret)
 }

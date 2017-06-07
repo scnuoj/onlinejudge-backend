@@ -1,6 +1,6 @@
 /// <reference path="./mockjs.d.ts" />
 import { Random } from 'mockjs'
-import { DataType, Table, Column, Model, PrimaryKey, AutoIncrement, Default, ForeignKey, HasMany } from 'sequelize-typescript';
+import { AutoIncrement, Column, DataType, Default, ForeignKey, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript'
 import { Problem } from './problem'
 import { Submission } from './submission'
 
@@ -38,17 +38,15 @@ export class User extends Model<User> {
   @HasMany(() => Submission)
   public submissions: Submission[]
 
-  static mock (item) {
+  static mock (item?: object) {
     return {
-      code: Random.paragraph(),
-      cpuTime: Random.integer(0, 2000),
-      error: Random.integer(0, 2000),
-      exitCode: Random.integer(0, 2000),
-      lang: 'C',
-      memory: Random.integer(0, 2000),
-      realTime: Random.integer(0, 2000),
-      result: Random.integer(0, 2000),
-      signal: Random.integer(0, 2000),
+      avatar: Random.string(),
+      email: Random.email(),
+      gender: Random.integer(0, 2000),
+      name: Random.string(),
+      password: Random.string(),
+      remark: Random.string(),
+      school: Random.string(),
       ...item
     }
   }

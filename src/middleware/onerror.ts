@@ -1,7 +1,7 @@
 import { Context } from 'koa/lib/context'
 
 function onerror () {
-  return async function (ctx: Context, next) {
+  return async (ctx: Context, next) => {
     try {
       await next()
       if (ctx.status === 200) {

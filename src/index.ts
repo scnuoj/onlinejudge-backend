@@ -5,6 +5,8 @@ import * as jwt from 'koa-jwt'
 import { useKoaServer } from 'routing-controllers'
 import db from './library/database'
 import onerror from './middleware/onerror'
+import { Problem } from './model/problem'
+import 'reflect-metadata'
 
 db.authenticate().then(() => {
 

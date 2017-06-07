@@ -1,8 +1,8 @@
 /// <reference path="./mockjs.d.ts" />
 import { Random } from 'mockjs'
-import { DataType, Table, Column, Model, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey } from 'sequelize-typescript';
-import { User } from './user'
+import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, Model, PrimaryKey, Table } from 'sequelize-typescript'
 import { Problem } from './problem'
+import { User } from './user'
 
 @Table
 export class Submission extends Model<Submission> {
@@ -50,26 +50,18 @@ export class Submission extends Model<Submission> {
   @Column
   public error: number
 
-  static mock (item) {
+  static mock (item?: object) {
     return {
-      description: Random.paragraph(),
-      title: Random.string(),
-      lang: Random.string(),
-      input: Random.string(),
-      output: Random.string(),
-      percent: Random.float(),
-      sampleInput: Random.string(),
-      sampleOutput: Random.string(),
-      submitCount: Random.integer(100, 200),
-      passCount: Random.integer(10, 20),
-      maxCpuTime: Random.integer(1000, 2000),
-      maxRealTime: Random.integer(1000, 2000),
-      maxMemory: Random.integer(1000, 2000),
-      maxProcessNumber: Random.integer(1000, 2000),
-      maxOutputSize: Random.integer(1000, 2000),
-      inputData: Random.string(),
-      outputData: Random.string(),
-      ...item,
+      code: Random.paragraph(),
+      cpuTime: Random.integer(0, 2000),
+      error: Random.integer(0, 2000),
+      exitCode: Random.integer(0, 2000),
+      lang: 'C',
+      memory: Random.integer(0, 2000),
+      realTime: Random.integer(0, 2000),
+      result: Random.integer(0, 2000),
+      signal: Random.integer(0, 2000),
+      ...item
     }
   }
 }

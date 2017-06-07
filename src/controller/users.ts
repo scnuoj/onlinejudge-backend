@@ -1,5 +1,5 @@
-import { Controller, Ctx, Param, QueryParam, Body, Get, Post } from 'routing-controllers'
 import { Context } from 'koa'
+import { Body, Controller, Ctx, Get, Param, Post, QueryParam } from 'routing-controllers'
 import * as UserService from '../service/users'
 
 export interface UserMsg {

@@ -10,9 +10,9 @@ export async function create (userId: string, id: number, code: string, lang: st
     const submission = await Problem.create<Problem>({
       problemId: id,
       userId,
-      lang: lang,
+      lang,
       code
-    }) 
+    })
     await Queue.submitCheckCodeTask(submission.id)
     return submission.id
   } else {

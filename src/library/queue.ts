@@ -21,10 +21,10 @@ Q.on('disconnect', () => console.log('消息队列连接失败'))
 Q.on('error', () => console.log('消息队列连接出错'))
 
 const Queue = {
-  createJob: async function (target, data) {
+  async createJob (target, data) {
     await Q.lpush(target, JSON.stringify(data))
   },
-  submitCheckCodeTask: async function (submitId) {
+  async submitCheckCodeTask (submitId) {
     await Queue.createJob('JUDGER', {
       event: 'JUDGE_SUBMISSION',
       payload: {
