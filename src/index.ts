@@ -11,20 +11,15 @@ import { ProblemService } from './service/problems'
 import { SubmissionService } from './service/submissions'
 import { UserService } from './service/users'
 
-function createServer () {
-  return new Promise(resolve => {
-    db.authenticate().then(() => {
-      console.log('DB Connect')
-      app.listen(8080, () => {
-        console.log('APP Listen')
-        resolve(app.callback())
-      })
+export default new Promise(resolve => {
+  db.authenticate().then(() => {
+    console.log('DB Connect')
+    app.listen(8080, () => {
+      console.log('APP Listen')
+      resolve(app.callback())
     })
   })
-}
-
-// for test
-export default createServer()
+})
 
 Reflect.set(app.context, 'services', {
   problems: Container.get(ProblemService),
