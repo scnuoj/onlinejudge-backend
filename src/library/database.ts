@@ -23,10 +23,7 @@ const sequelize = new Sequelize({
   host: dbConfig.host,
   port: dbConfig.port,
   username: dbConfig.username,
-  password: dbConfig.password,
-  modelPaths: [
-    path.resolve(__dirname, '..', 'model')
-  ]
+  password: dbConfig.password
 })
 
 sequelize.addModels([ Submission, Problem, User ])

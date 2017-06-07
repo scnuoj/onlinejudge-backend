@@ -1,10 +1,16 @@
+import { IsEmail, Length } from 'class-validator'
 import { Body, Controller, Ctx, Get, Param, Post, QueryParam } from 'routing-controllers'
 import { Context } from '..'
 import * as UserService from '../service/users'
 
-export interface UserMsg {
+export class UserMsg {
+  @IsEmail()
   email: string
+
+  @Length(4, 8)
   name: string
+
+  @Length(6, 18)
   password: string
 }
 
