@@ -2,6 +2,7 @@ import { Model } from 'sequelize-typescript'
 import { Service } from 'typedi'
 import { BadRequestError } from '../library/error'
 import { Problem } from '../model/problem'
+import { Submission } from '../model/submission'
 
 import Queue from '../library/queue'
 
@@ -10,7 +11,7 @@ export class SubmissionService {
   public async create (userId: string, id: number, code: string, lang: string) {
     const problem = await Problem.findById<Problem>(id)
     if (problem) {
-      const submission = await Problem.create<Problem>({
+      const submission = await Submission.create<Submission>({
         problemId: id,
         userId,
         lang,
