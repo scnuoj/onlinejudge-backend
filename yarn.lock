@@ -375,7 +375,11 @@ ci-info@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.0.0.tgz#dc5285f2b4e251821683681c381c3388f46ec534"
 
-class-transformer@~0.1.6:
+class-transformer-validator@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/class-transformer-validator/-/class-transformer-validator-0.2.0.tgz#b0be77c458cb21082c169a03e49a4ff74b42d966"
+
+class-transformer@^0.1.6, class-transformer@~0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.1.6.tgz#1139c149311c0c84ded3c00e2a879e3479f60fa0"
 

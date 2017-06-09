@@ -1,22 +1,23 @@
-import { IsEnum, IsNumberString, IsString, validate } from 'class-validator'
+import { plainToClass } from 'class-transformer'
+import { transformAndValidate } from 'class-transformer-validator'
+import { IsIn, IsNumberString, IsString, validate } from 'class-validator'
 import 'reflect-metadata'
-import { Body, Controller, Ctx, Get, Param, QueryParams } from 'routing-controllers'
+import { Body, Ctx, Get, JsonController, Param, QueryParam, QueryParams } from 'routing-controllers'
 import { Context } from '..'
 
-// TODO: QueryParams 不明原因无法使用, 会导致报错, 参数校验暂时只做简单处理. 后续解决加上.
 export class ProblemQuery {
-  @IsNumberString() limit: number
-  @IsNumberString() offset: number
+  @IsNumberString() limit: string
+  @IsNumberString() offset: string
+  @IsIn(['asc', 'desc']) order: string
   @IsString() sortby: string
-  @IsString() order: string
 }
 
-@Controller('/v1/problems')
+@JsonController('/v1/problems')
 export class ProblemsController {
   @Get('/')
-  async index (@Ctx() ctx: Context, @QueryParams() query: ProblemQuery) {
-    // TODO Query Validation
-    const problems = await ctx.services.problems.list(+ctx.query.offset, +ctx.query.limit, ctx.query.sortby, ctx.query.order)
+  async index (@Ctx() ctx: Context) {
+    await transformAndValidate(ProblemQuery, JSON.parse(JSON.stringify(ctx.query)))  // TODO: 直接检验 ctx.query 报错
+    const problems = await ctx.services.problems.list(parseInt(ctx.query.offset, 10), parseInt(ctx.query.limit, 10), ctx.query.sortby, ctx.query.order)
     ctx.ok(problems)
   }
 

@@ -1,3 +1,4 @@
+import { transformAndValidate } from 'class-transformer-validator'
 import { IsBooleanString, IsEnum, IsInt, IsNumberString, IsString } from 'class-validator'
 import { Body, Controller, Ctx, Get, Param, Post, QueryParams, UseBefore } from 'routing-controllers'
 import { Context } from '..'
@@ -39,7 +40,8 @@ export class SubmissionsController {
 
   @Get('/')
   @UseBefore(authorization())
-  async query (@Ctx() ctx: Context, @QueryParams() query: SubmissionQuery) {
+  async query (@Ctx() ctx: Context) {
+    await transformAndValidate(SubmissionQuery, JSON.parse(JSON.stringify(ctx.query)))  // TODO: 直接检验 ctx.query 报错
     // TODO
   }
 }
