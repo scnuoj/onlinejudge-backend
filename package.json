@@ -7,7 +7,8 @@
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
     "mock": "./node_modules/.bin/ts-node ./src/task/mock.ts",
-    "test": "tsc && mocha build/test --ui mocha-typescript --require source-map-support/register --timeout=60000",
+    "test": "tsc && nyc mocha build/test --ui mocha-typescript --require source-map-support/register --timeout=60000",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint": "tslint src",
     "precommit": "npm run lint",
     "commit": "git-cz",
@@ -51,12 +52,14 @@
     "@types/sequelize": "4.0.55",
     "@types/supertest": "^2.0.0",
     "chai": "^3.5.0",
+    "codecov": "^2.2.0",
     "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.13.4",
     "mocha": "^3.3.0",
     "mocha-typescript": "^1.1.4",
     "mockjs": "^1.0.1-beta3",
     "nodemon": "^1.11.0",
+    "nyc": "^11.0.2",
     "source-map-support": "^0.4.15",
     "supertest": "^3.0.0",
     "ts-node": "^3.0.4",
@@ -69,5 +72,12 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
+  },
+  "nyc": {
+    "cache": true,
+    "reporter": [
+      "lcov",
+      "text"
+    ]
   }
 }

@@ -19,7 +19,7 @@ test:
 
   script:
     - yarn run test
-    # - yarn run report-coverage
+    - yarn run report-coverage
 
 build:
   image:

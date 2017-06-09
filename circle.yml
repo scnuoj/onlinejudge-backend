@@ -22,4 +22,4 @@ test:
   override:
     - yarn run mock
     - yarn run test
-    # - yarn run report-coverage
+    - yarn run report-coverage
