@@ -18,28 +18,25 @@ export class SubmissionQuery {
 }
 
 @Controller('/v1/submissions')
+@UseBefore(authorization())
 export class SubmissionsController {
   @Post('/')
-  @UseBefore(authorization())
   async index (@Ctx() ctx: Context, @Body() submission: PostSubmissionData) {
     const submissionId = await ctx.services.submissions.create(ctx.state.user.id, submission.id, submission.code, submission.lang)
     ctx.ok(submissionId, '提交成功, 结果出来后系统会通知你')
   }
 
   @Get('/:submissionId/stat')
-  @UseBefore(authorization())
   async stat (@Ctx() ctx: Context, @Param('submissionId') submissionId: number) {
     // TODO
   }
 
   @Get('/:submissionId')
-  @UseBefore(authorization())
   async show (@Ctx() ctx: Context, @Param('submissionId') submissionId: number) {
     // TODO
   }
 
   @Get('/')
-  @UseBefore(authorization())
   async query (@Ctx() ctx: Context) {
     await transformAndValidate(SubmissionQuery, JSON.parse(JSON.stringify(ctx.query)))  // TODO: 直接检验 ctx.query 报错
     // TODO
