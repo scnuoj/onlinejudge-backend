@@ -1,6 +1,7 @@
 import { IsEmail, IsString, Length } from 'class-validator'
-import { Body, BodyParam, Controller, Ctx, Get, Param, Post, QueryParam } from 'routing-controllers'
+import { Body, BodyParam, Controller, Ctx, Get, Param, Post, QueryParam,UseBefore } from 'routing-controllers'
 import { Context } from '..'
+import authorization from '../middleware/authorization'
 import * as UserService from '../service/users'
 
 export class RegisterUserBody {
@@ -21,6 +22,7 @@ export class ForgetUserBody {
 @Controller('/v1/users')
 export class UsersController {
   @Get('/')
+  @UseBefore(authorization())
   async index (@Ctx() ctx: Context) {
     const user = await ctx.services.users.show(ctx.state.user.id)
     ctx.ok(user)
