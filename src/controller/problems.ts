@@ -2,7 +2,7 @@ import { plainToClass } from 'class-transformer'
 import { transformAndValidate } from 'class-transformer-validator'
 import { IsIn, IsNumberString, IsString, validate } from 'class-validator'
 import 'reflect-metadata'
-import { Body, Ctx, Get, JsonController, Param, QueryParam, QueryParams } from 'routing-controllers'
+import { Body, Ctx, Get, JsonController, Param, QueryParam, QueryParams, State } from 'routing-controllers'
 import { Context } from '..'
 
 export class ProblemQuery {
@@ -29,16 +29,8 @@ export class ProblemsController {
 
   @Get('/:id/recommend')  // 获取一道问题的相关推荐
   async recommend (@Ctx() ctx: Context, @Param('id') id: number) {
-    // TODO
+    const problems = await ctx.services.problems.recommend(id)
+    ctx.ok(problems)
   }
 
-  @Get('/:id/log')  // 获取一道问题的我的提交记录
-  async log (@Ctx() ctx: Context, @Param('id') id: number) {
-    // TODO
-  }
-
-  @Get('/:id/discussions')  // 获取一道问题的所有解决方案
-  async discussions (@Ctx() ctx: Context, @Param('id') id: number) {
-    // TODO
-  }
 }

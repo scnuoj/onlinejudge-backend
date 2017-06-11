@@ -5,6 +5,7 @@ import { User } from '../model/user'
 
 @Service()
 export class ProblemService {
+  // 获取一道问题的详细信息
   public async show (id: number) {
     const problem = await Problem.findById<Problem>(id, {
       include: [{
@@ -20,6 +21,7 @@ export class ProblemService {
     }
   }
 
+  // 获取全部问题
   public async list (offset = 0, limit = 10, sortby = 'id', order = 'desc') {
     const problems = await Problem.findAndCountAll<Problem>({
       limit,
@@ -30,6 +32,14 @@ export class ProblemService {
         as: 'user',
         attributes: ['name', 'id', 'avatar', 'gender', 'school', 'email', 'remark']
       }]
+    })
+    return problems
+  }
+
+  // TODO 题目随机推荐
+  public async recommend (id: number) {
+    const problems = await Problem.findAll<Problem>({
+      limit: 5
     })
     return problems
   }
