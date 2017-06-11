@@ -15,21 +15,38 @@ interface Jwt {
 @Service()
 export class UserService {
   public async register (name: string, email: string, password: string) {
-    const user = await User.create<User>({
-      name,
-      email,
-      password: SHA256(password).toString()
+    const user1 = await User.findOne<User>({
+      where: {
+        name
+      }
     })
-    return {
-      user,
-      token: this.issueToken(user.id)
+    const user2 = await User.findOne<User>({
+      where: {
+        email
+      }
+    })
+    if (user1) {
+      throw new AuthError('用户名已存在')
+    }
+    if (user2) {
+      throw new AuthError('邮箱已经被注册，请选择未被注册的的邮箱')
+    } else {
+      const user = await User.create<User>({
+        name,
+        email,
+        password: SHA256(password).toString()
+      })
+      return {
+        user,
+        token: this.issueToken(user.id)
+      }
     }
   }
 
-  public async login (nameOrEmail: string, password: string) {
+  public async login (name: string, password: string) {
     const user = await User.findOne<User>({
       where: {
-        nameOrEmail
+        name
       }
     })
     if (user) {
