@@ -42,7 +42,7 @@ export class UsersController {
 
   @Post('/forget')
   async forget (@Ctx() ctx: Context, @Body() body: ForgetUserBody) {
-    // TODO
+    const user = await ctx.services.users.forget(body.email)
     ctx.ok(null, '系统已经向您的邮箱发送了验证邮件, 请查收')
   }
 }

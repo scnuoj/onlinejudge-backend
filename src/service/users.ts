@@ -26,10 +26,10 @@ export class UserService {
     }
   }
 
-  public async login (name: string, password) {
+  public async login (nameOrEmail: string, password: string) {
     const user = await User.findOne<User>({
       where: {
-        name
+        nameOrEmail
       }
     })
     if (user) {
@@ -43,6 +43,19 @@ export class UserService {
       }
     } else {
       throw new AuthError('用户名不存在')
+    }
+  }
+
+  public async forget (email: string) {
+    const user = await User.findOne<User>({
+      where: {
+        email
+      }
+    })
+    if (user) {
+      return user
+    } else {
+      throw new AuthError('邮箱不存在')
     }
   }
 
