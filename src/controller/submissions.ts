@@ -11,10 +11,10 @@ export class PostSubmissionData {
 }
 
 export class SubmissionQuery {
-  @IsInt() offset: number
-  @IsInt() limit: number
+  @IsNumberString() offset: string
+  @IsNumberString() limit: string
   @IsBooleanString() all: boolean
-  @IsNumberString() problemId: number
+  @IsNumberString() problemId: string
 }
 
 @Controller('/v1/submissions')
@@ -28,17 +28,24 @@ export class SubmissionsController {
 
   @Get('/:submissionId/stat')
   async stat (@Ctx() ctx: Context, @Param('submissionId') submissionId: number) {
-    // TODO
+    const submission = await ctx.services.submissions.stat(submissionId)
+    if (submission === null) {
+      ctx.ok(null, null)
+    } else {
+      ctx.ok(submission, 'TODO')
+    }
   }
 
   @Get('/:submissionId')
   async show (@Ctx() ctx: Context, @Param('submissionId') submissionId: number) {
-    // TODO
+    const submission = await ctx.services.submissions.show(submissionId)
+    ctx.ok(submission)
   }
 
   @Get('/')
   async query (@Ctx() ctx: Context) {
     await transformAndValidate(SubmissionQuery, JSON.parse(JSON.stringify(ctx.query)))  // TODO: 直接检验 ctx.query 报错
-    // TODO
+    const submissions = await ctx.services.submissions.list(parseInt(ctx.query.limit, 10), parseInt(ctx.query.offset, 10), ctx.query.problemId, ctx.query.all)
+    ctx.ok(submissions)
   }
 }
