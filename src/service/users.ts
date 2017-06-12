@@ -43,13 +43,18 @@ export class UserService {
     }
   }
 
-  public async login (name: string, password: string) {
+  public async login (name: string,email: string, password: string) {
     const user = await User.findOne<User>({
       where: {
         name
       }
     })
-    if (user) {
+    const user1 = await User.findOne<User>({
+      where: {
+        email
+      }
+    })
+    if (user || user1) {
       if (user.password === SHA256(password).toString()) {
         return {
           user,
@@ -59,7 +64,7 @@ export class UserService {
         throw new AuthError('密码错误')
       }
     } else {
-      throw new AuthError('用户名不存在')
+      throw new AuthError('用户名不存在或邮箱有误')
     }
   }
 

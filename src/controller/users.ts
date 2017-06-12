@@ -11,7 +11,8 @@ export class RegisterUserBody {
 }
 
 export class LoginUserBody {
-  @IsString() nameOrEmail: string
+  @IsString() name: string
+  @IsEmail() email: string
   @Length(6, 18) password: string
 }
 
@@ -36,7 +37,7 @@ export class UsersController {
 
   @Post('/login')
   async login (@Ctx() ctx: Context, @Body() body: LoginUserBody) {
-    const user = await ctx.services.users.login(body.nameOrEmail, body.password)
+    const user = await ctx.services.users.login(body.name,body.email, body.password)
     ctx.ok(user)
   }
 
