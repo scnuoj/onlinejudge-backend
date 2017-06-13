@@ -30,6 +30,42 @@ let app
       .get('/v1/users')
       .set('Authorization', `Bearer ${token}`)
       .expect(200)
-    assert.equal(res.body.data.id,user.id)
+    assert.equal(res.body.data.id, user.id)
+  }
+
+  @test async register () {
+    const res = await request(app)
+    .post('/v1/users')
+    .expect(200)
+    assert.isTrue(res.body.success)
+    assert.isString(res.body.token)
+    assert.equal(res.body.message, '注册成功')
+    user = res.body.User
+  }
+
+  @test async login () {
+    const res = await request(app)
+    .post('/v1/users')
+    .expect(200)
+    assert.isTrue(res.body.success)
+    assert.isString(res.body.token)
+    assert.equal(res.body.message, '登录成功')
+    user = res.body.User
+  }
+
+  @test async forget () {
+    const res = await request(app)
+    .post('/v1/users')
+    .expect(200)
+    assert.isTrue(res.body.success)
+    assert.equal(res.body.message, '系统已经向您的邮箱发送了验证邮件, 请查收')
+  }
+
+  @test async password () {
+    const res = await request(app)
+    .patch('/v1/users')
+    .expect(200)
+    assert.isTrue(res.body.success)
+    assert.equal(res.body.message, '密码修改成功')
   }
 }
