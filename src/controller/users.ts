@@ -1,5 +1,5 @@
 import { IsEmail, IsString, Length } from 'class-validator'
-import { Body, BodyParam, Controller, Ctx, Get, Param, Post, QueryParam,UseBefore } from 'routing-controllers'
+import { Body, BodyParam, Controller, Ctx, Get, Param, Patch, Post, QueryParam,UseBefore } from 'routing-controllers'
 import { Context } from '..'
 import authorization from '../middleware/authorization'
 import * as UserService from '../service/users'
@@ -17,6 +17,11 @@ export class LoginUserBody {
 
 export class ForgetUserBody {
   @IsEmail() email: string
+}
+
+export class PasswordUserBody {
+  @Length(6, 18) password: string
+  @Length(6, 18) newpassword: string
 }
 
 @Controller('/v1/users')
@@ -45,4 +50,11 @@ export class UsersController {
     await ctx.services.users.forget(body.email)
     ctx.ok(null, '系统已经向您的邮箱发送了验证邮件, 请查收')
   }
+
+  @Patch('/password')
+  async password (@Ctx() ctx: Context, @Body() body: PasswordUserBody) {
+    await ctx.services.users.password(body.password, body.newpassword)
+    ctx.ok(null, '密码修改成功')
+  }
+
 }

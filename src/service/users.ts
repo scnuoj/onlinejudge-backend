@@ -80,6 +80,14 @@ export class UserService {
       throw new BadRequestError('邮箱不存在')
     }
   }
+  public async password (password: string, newpassword: string) {
+    const user = await User.findOne<User>({
+      where: {
+        password
+      }
+    })
+    user.password = newpassword
+  }
 
   public async show (userId) {
     const user = await User.findById<User>(userId)
