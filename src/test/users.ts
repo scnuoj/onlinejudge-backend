@@ -42,4 +42,22 @@ let app
     assert.equal(res.body.message, '注册成功')
     user = res.body.User
   }
+
+  @test async login () {
+    const res = await request(app)
+    .post('/v1/users')
+    .expect(200)
+    assert.isTrue(res.body.success)
+    assert.isString(res.body.token)
+    assert.equal(res.body.message, '登录成功')
+    user = res.body.User
+  }
+
+  @test async forget () {
+    const res = await request(app)
+    .post('/v1/users')
+    .expect(200)
+    assert.isTrue(res.body.success)
+    assert.equal(res.body.message, '系统已经向您的邮箱发送了验证邮件, 请查收')
+  }
 }

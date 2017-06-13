@@ -30,7 +30,7 @@ export class UsersController {
 
   @Post('/register')
   async register (@Ctx() ctx: Context, @Body() body: RegisterUserBody) {
-    const user = await ctx.services.users.register(body.name, body.password)
+    const user = await ctx.services.users.register(body.name, body.email, body.password)
     ctx.ok(user,'注册成功')
   }
 

@@ -15,22 +15,35 @@ interface Jwt {
 
 @Service()
 export class UserService {
-  public async register (name: string, password: string) {
-    const user1 = await User.findAll<User>({
+  public async register (name: string, email: string, password: string) {
+    const model = await User.findAll<User>({
       where: {
-        name
+        or: {
+          name,
+          email
+        }
       }
     })
-    if (user1) {
-      throw new BadRequestError('用户名已存在')
-    } else {
+    if (!model) {
       const user = await User.create<User>({
         name,
+        email,
         password: SHA256(password).toString()
       })
       return {
         user,
         token: this.issueToken(user.id)
+      }
+    }else {
+      const model1 = await User.findAll<User>({
+        where: {
+          name
+        }
+      })
+      if (model1) {
+        throw new BadRequestError('用户名已存在')
+      }else {
+        throw new BadRequestError('邮箱已经被注册')
       }
     }
   }
@@ -56,7 +69,7 @@ export class UserService {
   }
 
   public async forget (email: string) {
-    const user = await User.findAll<User>({
+    const user = await User.findOne<User>({
       where: {
         email
       }
