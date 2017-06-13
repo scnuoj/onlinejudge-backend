@@ -3,6 +3,7 @@ import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
 import { Service } from 'typedi'
 import { AuthError } from '../library/error'
+import {BadRequestError} from '../library/error'
 import { User } from '../model/user'
 
 const jwtConfig = config.get('Jwt') as Jwt
@@ -14,26 +15,17 @@ interface Jwt {
 
 @Service()
 export class UserService {
-  public async register (name: string, email: string, password: string) {
-    const user1 = await User.findOne<User>({
+  public async register (name: string, password: string) {
+    const user1 = await User.findAll<User>({
       where: {
         name
       }
     })
-    const user2 = await User.findOne<User>({
-      where: {
-        email
-      }
-    })
     if (user1) {
-      throw new AuthError('用户名已存在')
-    }
-    if (user2) {
-      throw new AuthError('邮箱已经被注册，请选择未被注册的的邮箱')
+      throw new BadRequestError('用户名已存在')
     } else {
       const user = await User.create<User>({
         name,
-        email,
         password: SHA256(password).toString()
       })
       return {
@@ -43,33 +35,28 @@ export class UserService {
     }
   }
 
-  public async login (name: string,email: string, password: string) {
+  public async login (nameOrEmail: string, password: string) {
     const user = await User.findOne<User>({
       where: {
-        name
+        nameOrEmail
       }
     })
-    const user1 = await User.findOne<User>({
-      where: {
-        email
-      }
-    })
-    if (user || user1) {
+    if (user) {
       if (user.password === SHA256(password).toString()) {
         return {
           user,
           token: this.issueToken(user.id)
         }
       } else {
-        throw new AuthError('密码错误')
+        throw new BadRequestError('密码错误')
       }
     } else {
-      throw new AuthError('用户名不存在或邮箱有误')
+      throw new BadRequestError('用户名不存在或邮箱有误')
     }
   }
 
   public async forget (email: string) {
-    const user = await User.findOne<User>({
+    const user = await User.findAll<User>({
       where: {
         email
       }
@@ -77,7 +64,7 @@ export class UserService {
     if (user) {
       return user
     } else {
-      throw new AuthError('邮箱不存在')
+      throw new BadRequestError('邮箱不存在')
     }
   }
 
@@ -86,7 +73,7 @@ export class UserService {
     if (user) {
       return user
     } else {
-      throw new AuthError('用户不存在')
+      throw new BadRequestError('用户不存在')
     }
   }
 

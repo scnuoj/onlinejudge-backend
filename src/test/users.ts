@@ -33,4 +33,13 @@ let app
     assert.equal(res.body.data.id,user.id)
   }
 
+  @test async register () {
+    const res = await request(app)
+    .post('/v1/users')
+    .expect(200)
+    assert.isTrue(res.body.success)
+    assert.isString(res.body.token)
+    assert.equal(res.body.message, '注册成功')
+    user = res.body.User
+  }
 }
