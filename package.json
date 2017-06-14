@@ -7,7 +7,7 @@
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
     "mock": "./node_modules/.bin/ts-node ./src/task/mock.ts",
-    "test": "tsc && nyc mocha build/test --ui mocha-typescript --require source-map-support/register --timeout=60000",
+    "test": "./node_modules/.bin/tsc && nyc mocha build/test --ui mocha-typescript --require source-map-support/register --timeout=60000",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint": "tslint src",
     "precommit": "npm run lint",
