@@ -3,7 +3,7 @@ machine:
     - mkdir ~/.yarn-cache
     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
   node:
-    version: 7.6.0
+    version: 8.0.0
   environment:
     NODE_ENV: test
   services:
