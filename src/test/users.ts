@@ -38,7 +38,7 @@ let extraUserId
 
   @test async index () {
     const res = await request(app)
-      .get('/v1/users')
+      .get('/v1/user')
       .set('Authorization', `Bearer ${token}`)
       .expect(200)
     assert.equal(res.body.data.id, user.id)
@@ -46,7 +46,7 @@ let extraUserId
 
   @test async register () {
     const res = await request(app)
-      .post('/v1/users/register')
+      .post('/v1/user/register')
       .send({
         name: '测试注册用户',
         email: 'test@test2.com',
@@ -60,7 +60,7 @@ let extraUserId
 
   @test async login () {
     const res = await request(app)
-      .post('/v1/users/login')
+      .post('/v1/user/login')
       .send({
         nameOrEmail: '测试名',
         password: '111111111'
@@ -73,7 +73,7 @@ let extraUserId
 
   @test async forget () {
     const res = await request(app)
-      .post('/v1/users/forget')
+      .post('/v1/user/forget')
       .send({
         email: 'test@test.com'
       })
@@ -82,7 +82,7 @@ let extraUserId
 
   @test async password () {
     const res = await request(app)
-      .patch('/v1/users/password')
+      .patch('/v1/user/password')
       .set('Authorization', `Bearer ${token}`)
       .send({
         password: '111111111',
