@@ -6,7 +6,7 @@ import * as UserService from '../service/user'
 
 export class RegisterUserBody {
   @IsEmail() email: string
-  @Length(4, 8) name: string
+  @Length(2, 8) name: string
   @Length(6, 18) password: string
 }
 

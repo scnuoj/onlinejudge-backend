@@ -72,9 +72,6 @@ export class UserService {
     const user = await User.findOne<User>({
       where: {
         email
-      },
-      attributes: {
-        exclude: ['password']
       }
     })
     if (!user) {
