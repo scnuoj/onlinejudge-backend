@@ -21,7 +21,7 @@ export class ForgetUserBody {
 
 export class PasswordUserBody {
   @Length(6, 18) password: string
-  @Length(6, 18) newpassword: string
+  @Length(6, 18) newPassword: string
 }
 
 @Controller('/v1/users')
@@ -52,8 +52,9 @@ export class UsersController {
   }
 
   @Patch('/password')
+  @UseBefore(authorization())
   async password (@Ctx() ctx: Context, @Body() body: PasswordUserBody) {
-    await ctx.services.users.password(body.password, body.newpassword)
+    await ctx.services.users.password(ctx.state.user.id, body.password, body.newPassword)
     ctx.ok(null, '密码修改成功')
   }
 

@@ -3,7 +3,7 @@ import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
 import { Service } from 'typedi'
 import { AuthError } from '../library/error'
-import {BadRequestError} from '../library/error'
+import { BadRequestError } from '../library/error'
 import { User } from '../model/user'
 
 const jwtConfig = config.get('Jwt') as Jwt
@@ -16,56 +16,54 @@ interface Jwt {
 @Service()
 export class UserService {
   public async register (name: string, email: string, password: string) {
-    const model = await User.findAll<User>({
+    const duplicateUser = await User.find<User>({
       where: {
-        or: {
-          name,
+        $or: [{
+          name
+        }, {
           email
-        }
+        }]
       }
     })
-    if (!model) {
-      const user = await User.create<User>({
-        name,
-        email,
-        password: SHA256(password).toString()
-      })
-      return {
-        user,
-        token: this.issueToken(user.id)
+    if (duplicateUser) {
+      if (duplicateUser.name === name) {
+        throw new BadRequestError('用户名已被使用')
       }
-    }else {
-      const model1 = await User.findAll<User>({
-        where: {
-          name
-        }
-      })
-      if (model1) {
-        throw new BadRequestError('用户名已存在')
-      }else {
-        throw new BadRequestError('邮箱已经被注册')
+      if (duplicateUser.email === email) {
+        throw new BadRequestError('邮箱已被注册')
       }
+    }
+    const user = await User.create<User>({
+      name,
+      email,
+      password: SHA256(password).toString()
+    })
+    return {
+      ...user.toJSON(),
+      token: this.issueToken(user.id)
     }
   }
 
   public async login (nameOrEmail: string, password: string) {
-    const user = await User.findOne<User>({
+    const user = await User.find<User>({
       where: {
-        nameOrEmail
+        $or: [{
+          name: nameOrEmail
+        }, {
+          email: nameOrEmail
+        }]
       }
     })
     if (user) {
       if (user.password === SHA256(password).toString()) {
         return {
-          user,
+          ...user.toJSON(),
           token: this.issueToken(user.id)
         }
-      } else {
-        throw new BadRequestError('密码错误')
       }
-    } else {
-      throw new BadRequestError('用户名不存在或邮箱有误')
+      throw new BadRequestError('密码错误')
     }
+    throw new BadRequestError('用户名或邮箱不存在')
   }
 
   public async forget (email: string) {
@@ -80,13 +78,20 @@ export class UserService {
       throw new BadRequestError('邮箱不存在')
     }
   }
-  public async password (password: string, newpassword: string) {
-    const user = await User.findOne<User>({
+
+  public async password (userId: string, password: string, newpassword: string) {
+    const user = await User.find<User>({
       where: {
-        password
+        id: userId,
+        password: SHA256(password).toString()
       }
     })
-    user.password = newpassword
+    if (user) {
+      user.password = SHA256(newpassword).toString()
+      await user.save()
+    } else {
+      throw new BadRequestError('密码不正确')
+    }
   }
 
   public async show (userId) {
