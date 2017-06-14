@@ -38,6 +38,7 @@ export class UserService {
       email,
       password: SHA256(password).toString()
     })
+    Reflect.deleteProperty(user.toJSON(), 'password')
     return {
       ...user.toJSON(),
       token: this.issueToken(user.id)
@@ -56,6 +57,7 @@ export class UserService {
     })
     if (user) {
       if (user.password === SHA256(password).toString()) {
+        Reflect.deleteProperty(user.toJSON(), 'password')
         return {
           ...user.toJSON(),
           token: this.issueToken(user.id)
@@ -70,11 +72,12 @@ export class UserService {
     const user = await User.findOne<User>({
       where: {
         email
+      },
+      attributes: {
+        exclude: ['password']
       }
     })
-    if (user) {
-      return user
-    } else {
+    if (!user) {
       throw new BadRequestError('邮箱不存在')
     }
   }
@@ -95,7 +98,11 @@ export class UserService {
   }
 
   public async show (userId) {
-    const user = await User.findById<User>(userId)
+    const user = await User.findById<User>(userId, {
+      attributes: {
+        exclude: ['password']
+      }
+    })
     if (user) {
       return user
     } else {

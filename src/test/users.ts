@@ -12,6 +12,7 @@ const jwtConfig = config.get('Jwt') as any
 let user: User
 let token: string
 let app
+let extraUserId
 
 @suite class Users {
   static async before () {
@@ -28,6 +29,11 @@ let app
 
   static async after () {
     await user.destroy()
+    await User.destroy({
+      where: {
+        id: extraUserId
+      }
+    })
   }
 
   @test async index () {
@@ -47,12 +53,9 @@ let app
         password: '123456789'
       })
       .expect(200)
+    extraUserId = res.body.data.id
     assert.equal(res.body.data.name, '测试注册用户')
-    await User.destroy({
-      where: {
-        id: res.body.data.id
-      }
-    })
+    assert.notProperty(res.body.data, 'password')
   }
 
   @test async login () {
@@ -65,6 +68,7 @@ let app
       .expect(200)
     assert.property(res.body.data, 'token')
     assert.equal(res.body.data.name, '测试名')
+    assert.notProperty(res.body.data, 'password')
   }
 
   @test async forget () {
@@ -74,8 +78,6 @@ let app
         email: 'test@test.com'
       })
       .expect(200)
-    assert.isTrue(res.body.success)
-    assert.equal(res.body.message, '系统已经向您的邮箱发送了验证邮件, 请查收')
   }
 
   @test async password () {
