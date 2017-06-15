@@ -1,4 +1,5 @@
 import { Random } from 'mockjs'
+import * as process from 'process'
 import sequelize from '../library/database'
 import { Problem } from '../model/problem'
 import { Submission } from '../model/submission'
@@ -17,4 +18,5 @@ sequelize.sync({
     userId: user.id,
     problemId: problem.id
   }))))))
+  process.exit()
 })

@@ -9,27 +9,22 @@ import { Container } from 'typedi'
 
 import { ProblemService } from './service/problems'
 import { SubmissionService } from './service/submissions'
-import { UserService } from './service/users'
+import { UserService } from './service/user'
 
-function createServer () {
-  return new Promise(resolve => {
-    db.authenticate().then(() => {
-      console.log('DB Connect')
-      app.listen(8080, () => {
-        console.log('APP Listen')
-        resolve(app.callback())
-      })
+export default new Promise(resolve => {
+  db.authenticate().then(() => {
+    console.log('DB Connect')
+    app.listen(8080, () => {
+      console.log('APP Listen')
+      resolve(app.callback())
     })
   })
-}
-
-// for test
-export default createServer()
+})
 
 Reflect.set(app.context, 'services', {
   problems: Container.get(ProblemService),
   submissions: Container.get(SubmissionService),
-  users: Container.get(UserService)
+  user: Container.get(UserService)
 })
 Reflect.set(app.context, 'ok', function (data?: any, message?: string) {
   this.body = { success: true, message, data }
@@ -45,7 +40,7 @@ export interface Context extends _Context {
   services: {
     problems: ProblemService,
     submissions: SubmissionService,
-    users: UserService
+    user: UserService
   },
   // ctx.ok & ctx.error
   ok <T> (data?: T, message?: string): { success: true, message: string, data: T },

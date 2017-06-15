@@ -37,3 +37,9 @@ export class ServiceUnavailableError extends Error {
     this.status = 503
   }
 }
+
+export class HttpError extends Error {
+  constructor (public status, public message) {
+    super()
+  }
+}

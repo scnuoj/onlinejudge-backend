@@ -16,8 +16,8 @@ const client = new Redis(queueConfig.port, queueConfig.host, {
   db: queueConfig.db
 })
 
-client.on('connect', () => console.log('消息队列连接成功'))
-client.on('disconnect', () => console.log('消息队列连接失败'))
-client.on('error', () => console.log('消息队列连接出错'))
+client.on('connect', () => console.log('缓存连接成功'))
+client.on('disconnect', () => console.log('缓存连接失败'))
+client.on('error', () => console.log('缓存连接出错'))
 
 export default client
