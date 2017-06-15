@@ -1,6 +1,6 @@
 {
   "name": "onlinejudge",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "main": "serevr.js",
   "license": "MIT",
   "scripts": {
