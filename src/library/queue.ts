@@ -32,7 +32,7 @@ Promise.resolve().then(async () => {
   for ( ; ; ) {
     const message = await comsumer.brpop(['JUDGER_FINISH'], 0)
     const payload: IJudgerPayload = JSON.parse(message[1])
-    Submission.update({
+    await Submission.update({
       realTime: payload.real_time,
       error: payload.error,
       exitCode: payload.exit_code,
