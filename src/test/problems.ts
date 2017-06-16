@@ -1,27 +1,27 @@
 import { assert } from 'chai'
 import { suite, test } from 'mocha-typescript'
+import { connection } from 'app/index'
+import { Problem } from 'app/model/Problem'
+import { User } from 'app/model/User'
 import * as request from 'supertest'
-import connection from '..'
-import { Problem } from '../model/problem'
-import { User } from '../model/user'
 
 let problem: Problem
 let user: User
 let app
 
 @suite class Problems {
-  async before () {
+  public async before (): Promise<void> {
     app = await connection
-    user = await User.create<User>(User.mock())
-    problem = await Problem.create<Problem>(Problem.mock({ userId: user.id }))
+    user = await User.create<User>(User.MOCK_DATA())
+    problem = await Problem.create<Problem>(Problem.MOCK_DATA({ userId: user.id }))
   }
 
-  async after () {
+  public async after (): Promise<void> {
     await problem.destroy()
     await user.destroy()
   }
 
-  @test async index () {
+  @test public async index (): Promise<void> {
     const res = await request(app)
       .get('/v1/problems')
       .query({
@@ -36,7 +36,7 @@ let app
     assert.lengthOf(res.body.data.rows, 1)
   }
 
-  @test async show () {
+  @test public async show (): Promise<void> {
     const res = await request(app)
       .get(`/v1/problems/${problem.id}`)
       .expect(200)

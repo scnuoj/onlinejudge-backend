@@ -1,7 +1,31 @@
+import { Problem } from 'app/model/Problem'
+import { User } from 'app/model/User'
 import { Random } from 'mockjs'
 import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, Model, PrimaryKey, Table } from 'sequelize-typescript'
-import { Problem } from './problem'
-import { User } from './user'
+
+enum RunError {
+  SUCCESS = 0,
+  INVALID_CONFIG = -1,
+  FORK_FAILED = -2,
+  PTHREAD_FAILED = -3,
+  WAIT_FAILED = -4,
+  ROOT_REQUIRED = -5,
+  LOAD_SECCOMP_FAILED = -6,
+  SETRLIMIT_FAILED = -7,
+  DUP2_FAILED = -8,
+  SETUID_FAILED = -9,
+  EXECVE_FAILED = -10,
+  SPJ_ERROR = -11
+}
+
+enum RunResult {
+  SUCCESS = 0,
+  CPU_TIME_LIMIT_EXCEEDED = 1,
+  REAL_TIME_LIMIT_EXCEEDED = 2,
+  MEMORY_LIMIT_EXCEEDED = 3,
+  RUNTIME_ERROR = 4,
+  SYSTEM_ERROR = 5
+}
 
 @Table
 export class Submission extends Model<Submission> {
@@ -49,7 +73,7 @@ export class Submission extends Model<Submission> {
   @Column
   public error: number
 
-  static mock (item?: object) {
+  public static MOCK_DATA (item?: {}): {} {
     return {
       code: Random.paragraph(),
       cpuTime: Random.integer(0, 2000),

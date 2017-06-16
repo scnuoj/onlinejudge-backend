@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
-    "mock": "./node_modules/.bin/ts-node ./src/task/mock.ts",
-    "test": "./node_modules/.bin/tsc && nyc mocha build/test --ui mocha-typescript --require source-map-support/register --timeout=60000",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r tsconfig-paths/register ./src/index.ts",
+    "mock": "./node_modules/.bin/ts-node -r tsconfig-paths/register ./src/task/mock.ts",
+    "test": "nyc mocha --compilers ts:ts-node/register -r tsconfig-paths/register src/test --ui mocha-typescript --require source-map-support/register --timeout=60000",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint": "tslint src",
     "precommit": "npm run lint",
@@ -63,8 +63,9 @@
     "source-map-support": "^0.4.15",
     "supertest": "^3.0.0",
     "ts-node": "^3.0.4",
+    "tsconfig-paths": "^2.2.0",
     "tslint": "^5.4.2",
-    "tslint-config-standard": "^5.0.2",
+    "tslint-microsoft-contrib": "^5.0.0",
     "typescript": "2.3.4",
     "validate-commit-msg": "^2.12.1"
   },

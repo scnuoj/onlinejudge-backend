@@ -1,21 +1,20 @@
 import * as config from 'config'
 import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
+import { IJwtConfig } from 'app/dts/config'
+import { AuthError, BadRequestError } from 'app/library/error'
+import { User } from 'app/model/User'
 import { Service } from 'typedi'
-import { AuthError } from '../library/error'
-import { BadRequestError } from '../library/error'
-import { User } from '../model/user'
 
-const jwtConfig = config.get('Jwt') as Jwt
+const jwtConfig = <IJwtConfig>config.get('Jwt')
 
-interface Jwt {
-  secret: string
-  exp: number
+export interface IUserMsgWithToken extends User {
+  token: string
 }
 
 @Service()
 export class UserService {
-  public async register (name: string, email: string, password: string) {
+  public async register (name: string, email: string, password: string): Promise<IUserMsgWithToken> {
     const duplicateUser = await User.find<User>({
       where: {
         $or: [{
@@ -39,13 +38,14 @@ export class UserService {
       password: SHA256(password).toString()
     })
     Reflect.deleteProperty(user.toJSON(), 'password')
+
     return {
       ...user.toJSON(),
       token: this.issueToken(user.id)
     }
   }
 
-  public async login (nameOrEmail: string, password: string) {
+  public async login (nameOrEmail: string, password: string): Promise<IUserMsgWithToken> {
     const user = await User.find<User>({
       where: {
         $or: [{
@@ -58,6 +58,7 @@ export class UserService {
     if (user) {
       if (user.password === SHA256(password).toString()) {
         Reflect.deleteProperty(user.toJSON(), 'password')
+
         return {
           ...user.toJSON(),
           token: this.issueToken(user.id)
@@ -68,7 +69,7 @@ export class UserService {
     throw new BadRequestError('用户名或邮箱不存在')
   }
 
-  public async forget (email: string) {
+  public async forget (email: string): Promise<void> {
     const user = await User.findOne<User>({
       where: {
         email
@@ -79,7 +80,7 @@ export class UserService {
     }
   }
 
-  public async password (userId: string, password: string, newpassword: string) {
+  public async password (userId: string, password: string, newpassword: string): Promise<void> {
     const user = await User.find<User>({
       where: {
         id: userId,
@@ -94,7 +95,7 @@ export class UserService {
     }
   }
 
-  public async show (userId) {
+  public async show (userId: string): Promise<User> {
     const user = await User.findById<User>(userId, {
       attributes: {
         exclude: ['password']
@@ -107,10 +108,10 @@ export class UserService {
     }
   }
 
-  private issueToken (id: string) {
-    return jwt.sign({
-      id,
+  private issueToken (id: string): string {
+    return jwt.sign(<object>{
+      id: id,
       exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
-    } as {}, jwtConfig.secret)
+    }, jwtConfig.secret)
   }
 }

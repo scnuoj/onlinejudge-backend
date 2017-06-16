@@ -3,21 +3,14 @@ import * as path from 'path'
 import 'reflect-metadata'
 import { Sequelize } from 'sequelize-typescript'
 
-import { Problem } from '../model/problem'
-import { Submission } from '../model/submission'
-import { User } from '../model/user'
+import { IDatabaseConfig } from 'app/dts/config'
+import { Problem } from 'app/model/Problem'
+import { Submission } from 'app/model/Submission'
+import { User } from 'app/model/User'
 
-const dbConfig = config.get('Database') as DB
+const dbConfig = <IDatabaseConfig>config.get('Database')
 
-export interface DB {
-  name: string
-  host: string
-  port: number
-  username: string,
-  password: string
-}
-
-const sequelize = new Sequelize({
+export const database = new Sequelize({
   name: dbConfig.name,
   dialect: 'mysql',
   host: dbConfig.host,
@@ -26,6 +19,4 @@ const sequelize = new Sequelize({
   password: dbConfig.password
 })
 
-sequelize.addModels([ Submission, Problem, User ])
-
-export default sequelize
+database.addModels([ Submission, Problem, User ])

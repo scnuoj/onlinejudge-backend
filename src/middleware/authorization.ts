@@ -1,8 +1,8 @@
 import { Context } from 'koa/lib/context'
-import { AuthError } from '../library/error'
+import { AuthError } from 'app/library/error'
 
-function authorization () {
-  return async (ctx: Context, next) => {
+export function authorization (): (ctx: Context, next: () => Promise<{}>) => Promise<void> {
+  return async (ctx: Context, next: () => Promise<{}>): Promise<void> => {
     if (ctx.request.header.authorization && ctx.state.user && ctx.state.user.id) {
       await next()
     } else {
@@ -10,5 +10,3 @@ function authorization () {
     }
   }
 }
-
-export default authorization

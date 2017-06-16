@@ -4,6 +4,7 @@ declare module 'mockjs' {
 
     namespace Random {
 
+      // tslint:disable-next-line
       export function string (): string
       export function email (): string
       export function integer (min: number, max: number): number
@@ -14,5 +15,6 @@ declare module 'mockjs' {
 
   }
 
-  export = Random;
+  // tslint:disable-next-line
+  export = Random
 }

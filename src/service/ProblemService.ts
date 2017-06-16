@@ -1,12 +1,11 @@
+import { BadRequestError } from 'app/library/error'
+import { Problem } from 'app/model/Problem'
+import { User } from 'app/model/User'
 import { Service } from 'typedi'
-import { BadRequestError } from '../library/error'
-import { Problem } from '../model/problem'
-import { User } from '../model/user'
 
 @Service()
 export class ProblemService {
-  // 获取一道问题的详细信息
-  public async show (id: number) {
+  public async show (id: number): Promise<Problem> {
     const problem = await Problem.findById<Problem>(id, {
       include: [{
         model: User,
@@ -21,9 +20,8 @@ export class ProblemService {
     }
   }
 
-  // 获取全部问题
-  public async list (offset = 0, limit = 10, sortby = 'id', order = 'desc') {
-    const problems = await Problem.findAndCountAll<Problem>({
+  public async list (offset: number, limit: number, sortby: string, order: string): Promise<{ rows: Problem[]; count: number; }> {
+    return await Problem.findAndCountAll<Problem>({
       limit,
       offset,
       order: [[sortby, order]],
@@ -33,14 +31,11 @@ export class ProblemService {
         attributes: ['name', 'id', 'avatar', 'gender', 'school', 'email', 'remark']
       }]
     })
-    return problems
   }
 
-  // TODO 题目随机推荐
-  public async recommend (id: number) {
-    const problems = await Problem.findAll<Problem>({
+  public async recommend (id: number): Promise<Problem[]> {
+    return await Problem.findAll<Problem>({
       limit: 5
     })
-    return problems
   }
 }

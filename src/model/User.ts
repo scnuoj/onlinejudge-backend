@@ -1,7 +1,7 @@
+import { Problem } from 'app/model/Problem'
+import { Submission } from 'app/model/Submission'
 import { Random } from 'mockjs'
 import { AutoIncrement, Column, DataType, Default, ForeignKey, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript'
-import { Problem } from './problem'
-import { Submission } from './submission'
 
 @Table
 export class User extends Model<User> {
@@ -37,7 +37,7 @@ export class User extends Model<User> {
   @HasMany(() => Submission)
   public submissions: Submission[]
 
-  static mock (item?: object) {
+  public static MOCK_DATA (item?: {}): {} {
     return {
       avatar: Random.string(),
       email: Random.email(),

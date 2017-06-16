@@ -3,11 +3,12 @@ import * as config from 'config'
 import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
 import { suite, test } from 'mocha-typescript'
+import { IJwtConfig } from 'app/dts/config'
+import { connection } from 'app/index'
+import { User } from 'app/model/User'
 import * as request from 'supertest'
-import connection from '..'
-import { User } from '../model/user'
 
-const jwtConfig = config.get('Jwt') as any
+const jwtConfig = <IJwtConfig>config.get('Jwt')
 
 let user: User
 let token: string
@@ -15,19 +16,19 @@ let app
 let extraUserId
 
 @suite class Users {
-  static async before () {
+  static async before (): Promise<void> {
     app = await connection
-    user = await User.create<User>(User.mock({
+    user = await User.create<User>(User.MOCK_DATA({
       name: '测试名',
       email: 'test@test.com',
       password: SHA256('111111111').toString()
     }))
-    token = jwt.sign({
+    token = jwt.sign(<object>{
       id: user.id
-    } as {}, jwtConfig.secret)
+    }, jwtConfig.secret)
   }
 
-  static async after () {
+  static async after (): Promise<void> {
     await user.destroy()
     await User.destroy({
       where: {
@@ -36,7 +37,7 @@ let extraUserId
     })
   }
 
-  @test async index () {
+  @test async index (): Promise<void> {
     const res = await request(app)
       .get('/v1/user')
       .set('Authorization', `Bearer ${token}`)
@@ -44,7 +45,7 @@ let extraUserId
     assert.equal(res.body.data.id, user.id)
   }
 
-  @test async register () {
+  @test async register (): Promise<void> {
     const res = await request(app)
       .post('/v1/user/register')
       .send({
@@ -58,7 +59,7 @@ let extraUserId
     assert.notProperty(res.body.data, 'password')
   }
 
-  @test async login () {
+  @test async login (): Promise<void> {
     const res = await request(app)
       .post('/v1/user/login')
       .send({
@@ -71,7 +72,7 @@ let extraUserId
     assert.notProperty(res.body.data, 'password')
   }
 
-  @test async forget () {
+  @test async forget (): Promise<void> {
     const res = await request(app)
       .post('/v1/user/forget')
       .send({
@@ -80,7 +81,7 @@ let extraUserId
       .expect(200)
   }
 
-  @test async password () {
+  @test async password (): Promise<void> {
     const res = await request(app)
       .patch('/v1/user/password')
       .set('Authorization', `Bearer ${token}`)

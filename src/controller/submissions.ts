@@ -1,33 +1,33 @@
 import { transformAndValidate } from 'class-transformer-validator'
 import { IsBooleanString, IsEnum, IsInt, IsNumberString, IsString } from 'class-validator'
+import { Context } from 'koa'
 import { Body, Controller, Ctx, Get, Param, Post, QueryParams, UseBefore } from 'routing-controllers'
-import { Context } from '..'
-import authorization from '../middleware/authorization'
+import { authorization } from 'app/middleware/authorization'
 
 export class PostSubmissionData {
-  @IsInt() id: number
-  @IsString() code: string
-  @IsString() lang: string
+  @IsInt() public id: number
+  @IsString() public code: string
+  @IsString() public lang: string
 }
 
 export class SubmissionQuery {
-  @IsNumberString() offset: string
-  @IsNumberString() limit: string
-  @IsBooleanString() all: boolean
-  @IsNumberString() problemId: string
+  @IsNumberString() public offset: string
+  @IsNumberString() public limit: string
+  @IsBooleanString() public all: boolean
+  @IsNumberString() public problemId: string
 }
 
 @Controller('/v1/submissions')
 @UseBefore(authorization())
 export class SubmissionsController {
   @Post('/')
-  async index (@Ctx() ctx: Context, @Body() submission: PostSubmissionData) {
+  public async index (@Ctx() ctx: Context, @Body() submission: PostSubmissionData): Promise<void> {
     const submissionId = await ctx.services.submissions.create(ctx.state.user.id, submission.id, submission.code, submission.lang)
     ctx.ok(submissionId, '提交成功, 结果出来后系统会通知你')
   }
 
   @Get('/:submissionId/stat')
-  async stat (@Ctx() ctx: Context, @Param('submissionId') submissionId: number) {
+  public async stat (@Ctx() ctx: Context, @Param('submissionId') submissionId: number): Promise<void> {
     const submission = await ctx.services.submissions.stat(submissionId)
     if (submission === null) {
       ctx.ok(null, null)
@@ -37,15 +37,17 @@ export class SubmissionsController {
   }
 
   @Get('/:submissionId')
-  async show (@Ctx() ctx: Context, @Param('submissionId') submissionId: number) {
+  public async show (@Ctx() ctx: Context, @Param('submissionId') submissionId: number): Promise<void> {
     const submission = await ctx.services.submissions.show(submissionId)
     ctx.ok(submission)
   }
 
   @Get('/')
-  async query (@Ctx() ctx: Context) {
-    await transformAndValidate(SubmissionQuery, JSON.parse(JSON.stringify(ctx.query)))  // TODO: 直接检验 ctx.query 报错
-    const submissions = await ctx.services.submissions.list(parseInt(ctx.query.limit, 10), parseInt(ctx.query.offset, 10), ctx.query.problemId, ctx.query.all)
+  public async query (@Ctx() ctx: Context): Promise<void> {
+    await transformAndValidate(SubmissionQuery, JSON.parse(JSON.stringify(ctx.query)))
+    const submissions = await ctx.services.submissions.list(
+      parseInt(ctx.query.limit, 10), parseInt(ctx.query.offset, 10), ctx.query.problemId, ctx.query.all
+    )
     ctx.ok(submissions)
   }
 }

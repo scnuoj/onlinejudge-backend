@@ -1,15 +1,15 @@
+import { BadRequestError } from 'app/library/error'
+import { Problem } from 'app/model/Problem'
+import { Submission } from 'app/model/Submission'
+import { User } from 'app/model/User'
 import { Model } from 'sequelize-typescript'
 import { Service } from 'typedi'
-import { BadRequestError } from '../library/error'
-import { Problem } from '../model/problem'
-import { Submission } from '../model/submission'
-import { User } from '../model/user'
 
-import Queue from '../library/queue'
+import { queue } from 'app/library/queue'
 
 @Service()
 export class SubmissionService {
-  public async create (userId: string, id: number, code: string, lang: string) {
+  public async create (userId: string, id: number, code: string, lang: string): Promise<number> {
     const problem = await Problem.findById<Problem>(id)
     if (!problem) {
       throw new BadRequestError('Problem 不存在')
@@ -20,11 +20,12 @@ export class SubmissionService {
       lang,
       code
     })
-    await Queue.submitCheckCodeTask(submission.id)
+    await queue.submitCheckCodeTask(submission.id)
+
     return submission.id
   }
 
-  public async stat (submissionId: number) {
+  public async stat (submissionId: number): Promise<Submission> {
     const submission = await Submission.findById<Submission>(submissionId)
     if (!submission) {
       throw new BadRequestError('Submission 不存在')
@@ -36,7 +37,7 @@ export class SubmissionService {
     }
   }
 
-  public async show (submissionId: number) {
+  public async show (submissionId: number): Promise<{ result: Submission, state: Submission[] }> {
     const submission = await Submission.findById<Submission>(submissionId, {
       include: [{
         model: Problem,
@@ -56,14 +57,15 @@ export class SubmissionService {
       },
       attributes: ['id', 'realTime']
     })
+
     return {
       result: submission,
       state: submissionList
     }
   }
 
-  public async list (limit = 0, offset = 10, problemId?: number, ALL_USER = false) {
-    const submissions = await Submission.findAndCountAll<Submission>({
+  public async list (limit: number, offset: number, allUser: boolean, problemId?: number): Promise<{ rows: Submission[], count: number }> {
+    return await Submission.findAndCountAll<Submission>({
       where: {
         problemId
       },
@@ -78,6 +80,5 @@ export class SubmissionService {
         as: 'problem'
       }]
     })
-    return submissions
   }
 }

@@ -1,8 +1,8 @@
+import { database } from 'app/library/database'
+import { Submission } from 'app/model/Submission'
+import { User } from 'app/model/User'
 import { Random } from 'mockjs'
 import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript'
-import sequelize from '../library/database'
-import { Submission } from './submission'
-import { User } from './user'
 
 @Table
 export class Problem extends Model<Problem> {
@@ -24,15 +24,16 @@ export class Problem extends Model<Problem> {
   public input: string
 
   @Column(DataType.TEXT)
-  public output
+  public output: string
 
-  @Column({
-    type: DataType.FLOAT,
-    get () {
-      return (this.getDataValue('passCount') / this.getDataValue('submitCount')).toFixed(2)
-    }
-  })
-  public percent: number
+  @Column(DataType.FLOAT)
+  get percent (): string {
+    return (this.getDataValue('passCount') / this.getDataValue('submitCount')).toFixed(2)
+  }
+
+  set percent (val: string) {
+    this.setDataValue('percent', val)
+  }
 
   @Column
   public sampleInput: string
@@ -74,7 +75,7 @@ export class Problem extends Model<Problem> {
   @BelongsTo(() => User)
   public user: User
 
-  static mock (item?: object) {
+  public static MOCK_DATA (item?: {}): {} {
     return {
       description: Random.paragraph(),
       title: Random.string(),

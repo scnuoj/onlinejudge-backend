@@ -1,8 +1,14 @@
 {
     "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "app": ["./src"],
+            "app/*": ["./src/*"]
+        },
+        "rootDir": "src",
+        "outDir": "build",
         "module": "commonjs",
         "target": "es6",
-        "outDir": "build",
         "declaration": true,
         "noImplicitAny": false,
         "sourceMap": true,

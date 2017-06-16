@@ -2,13 +2,14 @@ import { assert } from 'chai'
 import * as config from 'config'
 import * as jwt from 'jsonwebtoken'
 import { suite, test } from 'mocha-typescript'
+import { IJwtConfig } from 'app/dts/config'
+import { connection } from 'app/index'
+import { Problem } from 'app/model/Problem'
+import { Submission } from 'app/model/Submission'
+import { User } from 'app/model/User'
 import * as request from 'supertest'
-import connection from '..'
-import { Problem } from '../model/problem'
-import { Submission } from '../model/submission'
-import { User } from '../model/user'
 
-const jwtConfig = config.get('Jwt') as any
+const jwtConfig = <IJwtConfig>config.get('Jwt')
 
 let problem: Problem
 let user: User
@@ -17,16 +18,16 @@ let submissionId: number
 let app
 
 @suite class Problems {
-  static async before () {
+  static async before (): Promise<void> {
     app = await connection
-    user = await User.create<User>(User.mock())
-    problem = await Problem.create<Problem>(Problem.mock({ userId: user.id }))
-    token = jwt.sign({
+    user = await User.create<User>(User.MOCK_DATA())
+    problem = await Problem.create<Problem>(Problem.MOCK_DATA({ userId: user.id }))
+    token = jwt.sign(<object>{
       id: user.id
-    } as {}, jwtConfig.secret)
+    }, jwtConfig.secret)
   }
 
-  static async after () {
+  static async after (): Promise<void> {
     await Submission.destroy({
       where: {
         id: submissionId
@@ -36,7 +37,7 @@ let app
     await user.destroy()
   }
 
-  @test async index () {
+  @test async index (): Promise<void> {
     const res = await request(app)
       .post('/v1/submissions')
       .set('Authorization', `Bearer ${token}`)
@@ -51,7 +52,7 @@ let app
     submissionId = res.body.data
   }
 
-  @test async index2 () {
+  @test async index2 (): Promise<void> {
     const res = await request(app)
       .post('/v1/submissions')
       .send({
