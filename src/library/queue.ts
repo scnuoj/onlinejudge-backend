@@ -1,28 +1,61 @@
+import { ICacheConfig } from 'app/dts/config'
+import { Submission } from 'app/model/Submission'
 import * as config from 'config'
 import * as Redis from 'ioredis'
-import { ICacheConfig } from 'app/dts/config'
 
 const queueConfig = <ICacheConfig>config.get('Cache')
 
-const Q = new Redis(queueConfig.port, queueConfig.host, {
+const comsumer = new Redis(queueConfig.port, queueConfig.host, {
   password: queueConfig.password,
   db: queueConfig.db
 })
 
-Q.on('connect', () => console.log('消息队列连接成功'))
-Q.on('disconnect', () => console.log('消息队列连接失败'))
-Q.on('error', () => console.log('消息队列连接出错'))
+const producer = new Redis(queueConfig.port, queueConfig.host, {
+  password: queueConfig.password,
+  db: queueConfig.db
+})
+
+comsumer.on('connect', () => console.log('消息队列1连接成功'))
+comsumer.on('disconnect', () => console.log('消息队列1连接失败'))
+comsumer.on('error', () => console.log('消息队列1连接出错'))
+producer.on('connect', () => console.log('消息队列2连接成功'))
+producer.on('disconnect', () => console.log('消息队列2连接失败'))
+producer.on('error', () => console.log('消息队列2连接出错'))
 
 export const queue = {
-  async createJob (target: string, data: object): Promise<void> {
-    await Q.lpush(target, JSON.stringify(data))
-  },
-  async submitCheckCodeTask (submitId: number): Promise<void> {
-    await queue.createJob('JUDGER', {
-      event: 'JUDGE_SUBMISSION',
-      payload: {
-        submissionId: submitId
+  async submitCheckCodeTask (submissionId: number): Promise<void> {
+    await producer.lpush('JUDGER', submissionId)
+  }
+}
+
+Promise.resolve().then(async () => {
+  for ( ; ; ) {
+    const message = await comsumer.brpop(['JUDGER_FINISH'], 0)
+    const payload: IJudgerPayload = JSON.parse(message[1])
+    Submission.update({
+      realTime: payload.real_time,
+      error: payload.error,
+      exitCode: payload.exit_code,
+      cpuTime: payload.cpu_time,
+      result: payload.result,
+      signal: payload.signal,
+      memory: payload.memory
+    }, {
+      where: {
+        id: payload.submissionId
       }
     })
+    console.log(payload)
   }
+})
+
+export interface IJudgerPayload {
+  real_time: number
+  error: number
+  exit_code: number
+  cpu_time: number
+  result: number
+  signal: number
+  memory: number
+  submissionId: string
 }

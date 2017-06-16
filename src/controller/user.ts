@@ -1,7 +1,7 @@
+import { authorization } from 'app/middleware/authorization'
 import { IsEmail, IsString, Length } from 'class-validator'
 import { Context } from 'koa'
 import { Body, BodyParam, Controller, Ctx, Get, Param, Patch, Post, QueryParam, UseBefore } from 'routing-controllers'
-import { authorization } from 'app/middleware/authorization'
 
 export class RegisterUserBody {
   @IsEmail() public email: string

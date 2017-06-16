@@ -1,8 +1,8 @@
+import { authorization } from 'app/middleware/authorization'
 import { transformAndValidate } from 'class-transformer-validator'
 import { IsBooleanString, IsEnum, IsInt, IsNumberString, IsString } from 'class-validator'
 import { Context } from 'koa'
 import { Body, Controller, Ctx, Get, Param, Post, QueryParams, UseBefore } from 'routing-controllers'
-import { authorization } from 'app/middleware/authorization'
 
 export class PostSubmissionData {
   @IsInt() public id: number
