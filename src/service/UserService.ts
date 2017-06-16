@@ -1,9 +1,9 @@
-import * as config from 'config'
-import { SHA256 } from 'crypto-js'
-import * as jwt from 'jsonwebtoken'
 import { IJwtConfig } from 'app/dts/config'
 import { AuthError, BadRequestError } from 'app/library/error'
 import { User } from 'app/model/User'
+import * as config from 'config'
+import { SHA256 } from 'crypto-js'
+import * as jwt from 'jsonwebtoken'
 import { Service } from 'typedi'
 
 const jwtConfig = <IJwtConfig>config.get('Jwt')

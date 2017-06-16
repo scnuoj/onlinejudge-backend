@@ -1,8 +1,8 @@
-import { assert } from 'chai'
-import { suite, test } from 'mocha-typescript'
 import { connection } from 'app/index'
 import { Problem } from 'app/model/Problem'
 import { User } from 'app/model/User'
+import { assert } from 'chai'
+import { suite, test } from 'mocha-typescript'
 import * as request from 'supertest'
 
 let problem: Problem

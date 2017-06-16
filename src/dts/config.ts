@@ -25,7 +25,6 @@ export interface IConfig {
   Cache: ICacheConfig
   Queue: ICacheConfig
   Jwt: IJwtConfig
-  
   Env: string
   Port: number
 }

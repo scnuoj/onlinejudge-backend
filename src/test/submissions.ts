@@ -1,12 +1,12 @@
-import { assert } from 'chai'
-import * as config from 'config'
-import * as jwt from 'jsonwebtoken'
-import { suite, test } from 'mocha-typescript'
 import { IJwtConfig } from 'app/dts/config'
 import { connection } from 'app/index'
 import { Problem } from 'app/model/Problem'
 import { Submission } from 'app/model/Submission'
 import { User } from 'app/model/User'
+import { assert } from 'chai'
+import * as config from 'config'
+import * as jwt from 'jsonwebtoken'
+import { suite, test } from 'mocha-typescript'
 import * as request from 'supertest'
 
 const jwtConfig = <IJwtConfig>config.get('Jwt')

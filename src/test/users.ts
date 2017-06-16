@@ -1,11 +1,11 @@
+import { IJwtConfig } from 'app/dts/config'
+import { connection } from 'app/index'
+import { User } from 'app/model/User'
 import { assert } from 'chai'
 import * as config from 'config'
 import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
 import { suite, test } from 'mocha-typescript'
-import { IJwtConfig } from 'app/dts/config'
-import { connection } from 'app/index'
-import { User } from 'app/model/User'
 import * as request from 'supertest'
 
 const jwtConfig = <IJwtConfig>config.get('Jwt')

@@ -1,9 +1,9 @@
-import { Random } from 'mockjs'
-import * as process from 'process'
 import { database } from 'app/library/database'
 import { Problem } from 'app/model/Problem'
 import { Submission } from 'app/model/Submission'
 import { User } from 'app/model/User'
+import { Random } from 'mockjs'
+import * as process from 'process'
 
 database.sync({
   force: true
