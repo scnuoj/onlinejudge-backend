@@ -39,7 +39,6 @@ export class UserController {
   @Get('/')
   @UseBefore(authorization())
   public async index (@State('user') user: UserState) {
-    console.log(user)
     return await this.userService.show(user.id)
   }
 
