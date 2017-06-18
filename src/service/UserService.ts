@@ -1,4 +1,4 @@
-import { AuthError, BadRequestError } from 'app/library/error'
+import { BadRequestError } from 'routing-controllers'
 import { User } from 'app/model/User'
 import { IJwtConfig } from 'app/typing/config'
 import * as config from 'config'

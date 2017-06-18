@@ -1,4 +1,4 @@
-import { BadRequestError } from 'app/library/error'
+import { BadRequestError } from 'routing-controllers'
 import { Problem } from 'app/model/Problem'
 import { Submission } from 'app/model/Submission'
 import { User } from 'app/model/User'

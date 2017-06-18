@@ -33,6 +33,7 @@
         "missing-jsdoc": [
             false
         ],
+        "no-unused-variable": true,
         // 关闭该规则
         "ordered-imports": [
             false
