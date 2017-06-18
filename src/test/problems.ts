@@ -1,4 +1,4 @@
-import { connection } from 'app/index'
+import { connection } from 'app'
 import { Problem } from 'app/model/Problem'
 import { User } from 'app/model/User'
 import { assert } from 'chai'

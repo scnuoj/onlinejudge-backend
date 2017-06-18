@@ -1,4 +1,3 @@
-import { AuthError } from 'app/library/error'
 import { Context } from 'koa'
 
 export function transformer (): (ctx: Context, next: () => Promise<{}>) => Promise<void> {
@@ -29,7 +28,7 @@ export function transformer (): (ctx: Context, next: () => Promise<{}>) => Promi
           message: Object.values(e.errors[0].constraints).join(','),
           data: e.errors
         }
-      } else if (!e.status || e.status === 500) {
+      } else if ((!e.status && !e.httpCode) || e.status === 500) {
         // Log unknown error
         console.log(e)
         ctx.status = e.status || 500
@@ -38,7 +37,7 @@ export function transformer (): (ctx: Context, next: () => Promise<{}>) => Promi
           message: e.message
         }
       } else {
-        ctx.status = e.status
+        ctx.status = e.status || e.httpCode
         ctx.body = {
           success: false,
           message: e.message
