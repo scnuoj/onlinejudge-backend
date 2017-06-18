@@ -10,14 +10,14 @@ module.exports = {
   Cache: {
     host: process.env.RE_HOST,
     port: process.env.RE_PORT,
-    auth: process.env.RE_AUTH,
+    password: process.env.RE_PASSWORD,
     db: 0,
     prefix: 'onlinejudge-cache'
   },
   Queue: {
     host: process.env.RE_HOST,
     port: process.env.RE_PORT,
-    auth: process.env.RE_AUTH,
+    password: process.env.RE_PASSWORD,
     db: 1,
     prefix: 'onlinejudge-queue'
   },
