@@ -1,6 +1,6 @@
-import { IJwtConfig } from 'app/dts/config'
-import { connection } from 'app/index'
+import { connection } from 'app'
 import { User } from 'app/model/User'
+import { IJwtConfig } from 'app/typing/config'
 import { assert } from 'chai'
 import * as config from 'config'
 import { SHA256 } from 'crypto-js'

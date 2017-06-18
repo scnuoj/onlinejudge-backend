@@ -1,5 +1,5 @@
-import { ICacheConfig } from 'app/dts/config'
 import { Submission } from 'app/model/Submission'
+import { ICacheConfig } from 'app/typing/config'
 import * as config from 'config'
 import * as Redis from 'ioredis'
 

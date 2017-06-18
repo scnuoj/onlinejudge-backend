@@ -3,10 +3,10 @@ import * as path from 'path'
 import 'reflect-metadata'
 import { Sequelize } from 'sequelize-typescript'
 
-import { IDatabaseConfig } from 'app/dts/config'
 import { Problem } from 'app/model/Problem'
 import { Submission } from 'app/model/Submission'
 import { User } from 'app/model/User'
+import { IDatabaseConfig } from 'app/typing/config'
 
 const dbConfig = <IDatabaseConfig>config.get('Database')
 

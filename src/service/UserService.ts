@@ -1,6 +1,6 @@
-import { IJwtConfig } from 'app/dts/config'
 import { AuthError, BadRequestError } from 'app/library/error'
 import { User } from 'app/model/User'
+import { IJwtConfig } from 'app/typing/config'
 import * as config from 'config'
 import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
