@@ -3,7 +3,9 @@ import { Submission } from 'app/model/Submission'
 import { Random } from 'mockjs'
 import { AutoIncrement, Column, DataType, Default, ForeignKey, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript'
 
-@Table
+@Table({
+  tableName: 'user'
+})
 export class User extends Model<User> {
   @PrimaryKey
   @Default(DataType.UUIDV1)

@@ -4,7 +4,9 @@ import { User } from 'app/model/User'
 import { Random } from 'mockjs'
 import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript'
 
-@Table
+@Table({
+  tableName: 'problem'
+})
 export class Problem extends Model<Problem> {
   @PrimaryKey
   @AutoIncrement

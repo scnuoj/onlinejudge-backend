@@ -24,7 +24,6 @@
         // 强制要求声明 type
         "typedef": [
             true,
-            "arrow-parameter",
             "member-variable-declaration",
             "parameter",
             "property-declaration"
@@ -57,7 +56,8 @@
             false
         ],
         "newline-before-return": false,
-        "no-parameter-properties": false
+        "no-parameter-properties": false,
+        "no-reserved-keywords": false
     },
     "rulesDirectory": []
 }

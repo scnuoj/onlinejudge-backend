@@ -1,4 +1,4 @@
-import { database } from 'app/library/database'
+import { database, typeorm } from 'app/library/database'
 import { IJwtConfig } from 'app/typing/config'
 import 'app/typing/context'
 import * as Bluebird from 'bluebird'
@@ -8,11 +8,14 @@ import * as Koa from 'koa'
 import * as jwt from 'koa-jwt'
 import * as logger from 'koa-logger'
 import 'reflect-metadata'
-import { useKoaServer, useContainer } from 'routing-controllers'
+import { useKoaServer, useContainer as useContainerForRouting } from 'routing-controllers'
 import { Container } from 'typedi'
+import { useContainer as useContainerForOrm } from 'typeorm'
 import { transformer } from 'app/middleware/transformer'
+import { Problem } from 'app/entity/Problem'
 
-useContainer(Container)
+useContainerForOrm(Container)
+useContainerForRouting(Container)
 
 export const app = new Koa()
 
@@ -33,15 +36,14 @@ useKoaServer(app, {
   defaultErrorHandler: false
 })
 
-export const connection = new Promise((resolve: (res: (req: http.IncomingMessage, res: http.ServerResponse) => void) => void) => {
-  database.authenticate().then(() => {
-    console.log('DB Connect')
+export const connection = typeorm().then(async c => {
+  database.authenticate().then(() => new Promise(resolve => {
     app.listen(8080, () => {
       console.log('APP Listen')
       resolve(app.callback())
     })
   })
-})
+)})
 
 /**
  * Monkey-Patch to routing-controller

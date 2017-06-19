@@ -27,7 +27,9 @@ enum RunResult {
   SYSTEM_ERROR = 5
 }
 
-@Table
+@Table({
+  tableName: 'submission'
+})
 export class Submission extends Model<Submission> {
   @PrimaryKey
   @AutoIncrement

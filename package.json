@@ -39,6 +39,8 @@
     "sequelize": "^4.0.0-2",
     "sequelize-typescript": "^0.3.2",
     "typedi": "^0.5.2",
+    "typeorm": "^0.1.0-alpha.17",
+    "typeorm-typedi-extensions": "^0.0.12",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
