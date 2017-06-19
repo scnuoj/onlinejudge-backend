@@ -2,15 +2,20 @@ import { BadRequestError } from 'routing-controllers'
 import { Problem } from 'app/model/Problem'
 import { User } from 'app/model/User'
 import { Service } from 'typedi'
-import { OrmRepository } from 'typeorm-typedi-extensions'
+import { OrmRepository, OrmCustomRepository } from 'typeorm-typedi-extensions'
 import { Problem as TProblem } from 'app/entity/Problem'
+import { User as TUser } from 'app/entity/User'
 import { Repository } from 'typeorm'
+import { ProblemRepository } from 'app/repository/ProblemRepository'
 
 @Service()
 export class ProblemService {
 
-  @OrmRepository(TProblem)
-  private problemRepository: Repository<TProblem>
+  @OrmCustomRepository(ProblemRepository)
+  private problemRepository: ProblemRepository
+
+  @OrmRepository(TUser)
+  private userRepository: Repository<TUser>
 
   public async show (id: number): Promise<Problem> {
     const problem = await Problem.findById<Problem>(id, {
@@ -20,8 +25,8 @@ export class ProblemService {
         attributes: ['name', 'id', 'avatar', 'gender', 'school', 'email', 'remark']
       }]
     })
-    const rows = await this.problemRepository.findByIds([id])
-    console.log(rows)
+    const row = await this.problemRepository.getProblem(id)
+    console.log(row)
     if (problem) {
       return problem
     } else {
@@ -29,7 +34,7 @@ export class ProblemService {
     }
   }
 
-  public async list (offset: number, limit: number, sortby: string, order: string): Promise<{ rows: Problem[]; count: number; }> {
+  public async list (offset: number, limit: number, sortby: string, order: string): Promise<{ rows: Problem[]; count: number; } > {
     return await Problem.findAndCountAll<Problem>({
       limit,
       offset,
@@ -42,7 +47,7 @@ export class ProblemService {
     })
   }
 
-  public async recommend (id: number): Promise<Problem[]> {
+  public async recommend (id: number): Promise<Problem[] > {
     return await Problem.findAll<Problem>({
       limit: 5
     })
