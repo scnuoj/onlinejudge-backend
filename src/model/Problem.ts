@@ -75,6 +75,9 @@ export class Problem extends Model<Problem> {
   @BelongsTo(() => User)
   public user: User
 
+  @HasMany(() => Submission)
+  public submissions: Submission[]
+
   public static MOCK_DATA (item?: {}): {} {
     return {
       description: Random.paragraph(),
