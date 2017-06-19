@@ -4,7 +4,8 @@
   "main": "serevr.js",
   "license": "MIT",
   "scripts": {
-    "start": "npm run build:live",
+    "start": "tsc && npm run link && node ./build/index.js",
+    "dev": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r tsconfig-paths/register ./src/index.ts",
     "mock": "./node_modules/.bin/ts-node -r tsconfig-paths/register ./src/task/mock.ts",
     "test": "nyc mocha --compilers ts:ts-node/register -r tsconfig-paths/register src/test --ui mocha-typescript --require source-map-support/register --timeout=60000",
@@ -12,7 +13,8 @@
     "lint": "tslint src/**/*.ts",
     "precommit": "npm run lint",
     "commit": "git-cz",
-    "commitmsg": "validate-commit-msg"
+    "commitmsg": "validate-commit-msg",
+    "link": "ln -nsf ../build node_modules/app"
   },
   "dependencies": {
     "class-transformer": "^0.1.6",
