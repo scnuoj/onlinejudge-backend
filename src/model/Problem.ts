@@ -28,15 +28,6 @@ export class Problem extends Model<Problem> {
   @Column(DataType.TEXT)
   public output: string
 
-  @Column(DataType.FLOAT)
-  get percent (): string {
-    return (this.getDataValue('passCount') / this.getDataValue('submitCount')).toFixed(2)
-  }
-
-  set percent (val: string) {
-    this.setDataValue('percent', val)
-  }
-
   @Column
   public sampleInput: string
 
@@ -87,7 +78,6 @@ export class Problem extends Model<Problem> {
       lang: Random.string(),
       input: Random.string(),
       output: Random.string(),
-      percent: Random.float(),
       sampleInput: Random.string(),
       sampleOutput: Random.string(),
       submitCount: Random.integer(100, 200),

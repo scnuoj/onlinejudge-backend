@@ -5,9 +5,8 @@ import { User } from 'app/model/User'
 import { Random } from 'mockjs'
 import * as process from 'process'
 
-database.sync({
-  force: true
-}).then(async () => {
+(async () => {
+  await database
   const times = Array(5).fill({})
 
   const users = await Promise.all<User>(times.map((time: null) => User.create<User>(User.MOCK_DATA())))
@@ -23,4 +22,4 @@ database.sync({
     )
   )
   process.exit()
-})
+})()

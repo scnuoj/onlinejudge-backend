@@ -8,9 +8,9 @@ import { AutoIncrement, Column, DataType, Default, ForeignKey, HasMany, Model, P
 })
 export class User extends Model<User> {
   @PrimaryKey
-  @Default(DataType.UUIDV1)
-  @Column(DataType.UUID)
-  public id: string
+  @AutoIncrement
+  @Column
+  public id: number
 
   @Column
   public name: string
