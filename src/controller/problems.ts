@@ -1,4 +1,4 @@
-import { Problem } from 'app/model/Problem'
+import { Problem } from 'app/entity/Problem'
 import { ProblemService } from 'app/service/ProblemService'
 import { plainToClass } from 'class-transformer'
 import { transformAndValidate } from 'class-transformer-validator'

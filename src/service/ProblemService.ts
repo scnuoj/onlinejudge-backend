@@ -4,8 +4,6 @@ import { OrmRepository, OrmCustomRepository } from 'typeorm-typedi-extensions'
 import { Problem } from 'app/entity/Problem'
 import { ProblemRepository } from 'app/repository/ProblemRepository'
 
-export type IOrder = 'ASC' | 'DESC'
-
 @Service()
 export class ProblemService {
 
@@ -13,18 +11,18 @@ export class ProblemService {
   private problemRepository: ProblemRepository
 
   public async show (id: number) {
-    const problem = await this.problemRepository.getProblem(id)
+    const problem = await this.problemRepository.getById(id)
     if (!problem) {
       throw new BadRequestError(`题号有误: ${id}`)
     }
     return problem
   }
 
-  public async list (offset: number, limit: number, sortby: string, order: IOrder) {
-    return this.problemRepository.getProblems(offset, limit, sortby, order)
+  public async list (offset: number, limit: number, sortby: string, order: string) {
+    return this.problemRepository.getList(offset, limit, sortby, order)
   }
 
   public async recommend (id: number) {
-    return this.problemRepository.getRecommemdProblems(id)
+    return this.problemRepository.getRecommendList(id)
   }
 }
