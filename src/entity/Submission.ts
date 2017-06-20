@@ -7,7 +7,7 @@ export class Submission {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column('TEXT')
   code: string
 
   @Column()
@@ -35,8 +35,10 @@ export class Submission {
   error: number
 
   @OneToOne(type => Problem)
+  @JoinColumn()
   problem: Problem
 
   @OneToOne(type => User)
+  @JoinColumn()
   user: User
 }
