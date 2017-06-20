@@ -108,7 +108,7 @@ export class UserService {
     }
   }
 
-  private issueToken (id: string): string {
+  private issueToken (id: number): string {
     return jwt.sign(<object>{
       id: id,
       exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
