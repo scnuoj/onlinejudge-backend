@@ -1,84 +1,60 @@
 import { BadRequestError } from 'routing-controllers'
-import { Problem } from 'app/model/Problem'
-import { Submission } from 'app/model/Submission'
 import { User } from 'app/model/User'
 import { Model } from 'sequelize-typescript'
 import { Service } from 'typedi'
+import { OrmRepository, OrmCustomRepository } from 'typeorm-typedi-extensions'
+import { Problem } from 'app/entity/Problem'
+import { Submission } from 'app/entity/Submission'
+import { ProblemRepository } from 'app/repository/ProblemRepository'
+import { SubmissionRepository } from 'app/repository/SubmissionRepository'
 
 import { queue } from 'app/library/queue'
 
 @Service()
 export class SubmissionService {
-  public async create (userId: string, id: number, code: string, lang: string): Promise<number> {
-    const problem = await Problem.findById<Problem>(id)
+
+  @OrmCustomRepository(ProblemRepository)
+  private problemRepository: ProblemRepository
+
+  @OrmCustomRepository(SubmissionRepository)
+  private submissionRepository: SubmissionRepository
+
+  public async create (userId: string, id: number, code: string, lang: string) {
+    const problem = await this.problemRepository.findOneById(id)
     if (!problem) {
       throw new BadRequestError('Problem 不存在')
     }
-    const submission = await Submission.create<Submission>({
-      problemId: id,
-      userId,
-      lang,
-      code
+    const submission = await this.submissionRepository.create({
+      user: userId,
+      id,
+      code,
+      lang
     })
     await queue.submitCheckCodeTask(submission.id)
-
     return submission.id
   }
 
-  public async stat (submissionId: number): Promise<Submission> {
-    const submission = await Submission.findById<Submission>(submissionId)
+  public async stat (submissionId: number) {
+    const submission = await this.submissionRepository.findOneById(submissionId)
     if (!submission) {
       throw new BadRequestError('Submission 不存在')
     }
-    if (!submission.result && !submission.result) {
-      return null
-    } else {
-      return submission
-    }
+    return submission.result ? submission : null
   }
 
-  public async show (submissionId: number): Promise<{ result: Submission, state: Submission[] }> {
-    const submission = await Submission.findById<Submission>(submissionId, {
-      include: [{
-        model: Problem,
-        as: 'problem'
-      }, {
-        model: User,
-        as: 'user',
-        attributes: ['id']
-      }]
-    })
+  public async show (submissionId: number) {
+    const submission = await this.submissionRepository.getWithUserAndProblem(submissionId)
     if (!submission) {
       throw new BadRequestError('Submission 不存在')
     }
-    const submissionList = await Submission.findAll<Submission>({
-      where: {
-        problemId: submission.problemId
-      },
-      attributes: ['id', 'realTime']
-    })
-
+    const submissionList = await this.submissionRepository.getByProblemId(submission.problem.id)
     return {
       result: submission,
       state: submissionList
     }
   }
 
-  public async list (limit: number, offset: number, allUser: boolean, problemId?: number): Promise<{ rows: Submission[], count: number }> {
-    return await Submission.findAndCountAll<Submission>({
-      where: {
-        problemId
-      },
-      limit,
-      offset,
-      include: [{
-        model: User,
-        as: 'user',
-        attributes: ['name', 'id', 'avatar', 'gender', 'school', 'email', 'remark']
-      }, {
-        model: Problem,
-        as: 'problem'
-      }]
-    })
+  public async list (limit: number, offset: number, allUser: boolean, problemId?: number) {
+    return this.submissionRepository.getList(offset, limit, problemId)
   }
 }

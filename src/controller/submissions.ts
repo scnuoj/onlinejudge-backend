@@ -26,7 +26,6 @@ export class UserState {
 
 @Service()
 @Controller('/v1/submissions')
-@UseBefore(authorization())
 export class SubmissionsController {
 
   @Inject() private submissionService: SubmissionService
