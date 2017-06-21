@@ -57,6 +57,9 @@
         ],
         "newline-before-return": false,
         "no-parameter-properties": false,
+        "linebreak-style": [
+            false
+        ],
         "no-reserved-keywords": false
     },
     "rulesDirectory": []
