@@ -57,7 +57,10 @@
             false
         ],
         "newline-before-return": false,
-        "no-parameter-properties": false
+        "no-parameter-properties": false,
+        "linebreak-style": [
+            false
+        ]
     },
     "rulesDirectory": []
 }
