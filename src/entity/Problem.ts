@@ -59,6 +59,6 @@ export class Problem {
   @JoinColumn()
   user: User
 
-  @OneToMany(type => Submission, submission => submission.user)
+  @OneToMany(type => Submission, submission => submission.problem)
   submissions: Submission[]
 }
