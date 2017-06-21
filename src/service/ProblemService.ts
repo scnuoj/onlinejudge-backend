@@ -1,8 +1,8 @@
+import { Problem } from 'app/entity'
+import { ProblemRepository } from 'app/repository/ProblemRepository'
 import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
-import { OrmRepository, OrmCustomRepository } from 'typeorm-typedi-extensions'
-import { Problem } from 'app/entity/Problem'
-import { ProblemRepository } from 'app/repository/ProblemRepository'
+import { OrmCustomRepository, OrmRepository } from 'typeorm-typedi-extensions'
 
 @Service()
 export class ProblemService {

@@ -1,5 +1,5 @@
+import { Context } from 'koa'
 import { UnauthorizedError } from 'routing-controllers'
-import { Context } from 'koa/lib/context'
 
 export function authorization (): (ctx: Context, next: () => Promise<{}>) => Promise<void> {
   return async (ctx: Context, next: () => Promise<{}>): Promise<void> => {

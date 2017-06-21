@@ -1,28 +1,9 @@
+import { PostSubmissionData, SubmissionQuery, UserState } from 'app/controller/interface'
+import { Submission } from 'app/entity'
 import { authorization } from 'app/middleware/authorization'
 import { SubmissionService } from 'app/service/SubmissionService'
-import { transformAndValidate } from 'class-transformer-validator'
-import { IsBooleanString, IsEnum, IsInt, IsNumberString, IsString } from 'class-validator'
-import { Context } from 'koa'
-import { Body, Controller, Ctx, Get, Param, Post, QueryParams, UseBefore, State } from 'routing-controllers'
-import { Service, Inject } from 'typedi'
-import { Submission } from 'app/model/Submission'
-
-export class PostSubmissionData {
-  @IsInt() public id: number
-  @IsString() public code: string
-  @IsString() public lang: string
-}
-
-export class SubmissionQuery {
-  @IsNumberString() public offset: string
-  @IsNumberString() public limit: string
-  @IsBooleanString() public all: boolean
-  @IsNumberString() public problemId: number
-}
-
-export class UserState {
-  public id: string
-}
+import { Body, Controller, Get, Param, Post, QueryParams, State, UseBefore } from 'routing-controllers'
+import { Inject, Service } from 'typedi'
 
 @Service()
 @Controller('/v1/submissions')

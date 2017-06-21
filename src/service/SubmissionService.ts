@@ -1,12 +1,11 @@
-import { BadRequestError } from 'routing-controllers'
-import { User } from 'app/model/User'
-import { Model } from 'sequelize-typescript'
-import { Service } from 'typedi'
-import { OrmRepository, OrmCustomRepository } from 'typeorm-typedi-extensions'
-import { Problem } from 'app/entity/Problem'
+import { Problem } from 'app/entity'
 import { Submission } from 'app/entity/Submission'
 import { ProblemRepository } from 'app/repository/ProblemRepository'
 import { SubmissionRepository } from 'app/repository/SubmissionRepository'
+import { BadRequestError } from 'routing-controllers'
+import { Model } from 'sequelize-typescript'
+import { Service } from 'typedi'
+import { OrmCustomRepository, OrmRepository } from 'typeorm-typedi-extensions'
 
 import { queue } from 'app/library/queue'
 
@@ -19,7 +18,7 @@ export class SubmissionService {
   @OrmCustomRepository(SubmissionRepository)
   private submissionRepository: SubmissionRepository
 
-  public async create (userId: string, id: number, code: string, lang: string) {
+  public async create (userId: number, id: number, code: string, lang: string) {
     const problem = await this.problemRepository.findOneById(id)
     if (!problem) {
       throw new BadRequestError('Problem 不存在')

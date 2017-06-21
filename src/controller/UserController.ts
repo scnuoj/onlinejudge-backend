@@ -1,34 +1,11 @@
+import { ForgetUserBody, LoginUserBody, PasswordUserBody, RegisterUserBody, UserState } from 'app/controller/interface'
+import { Problem, Submission, User } from 'app/entity'
 import { authorization } from 'app/middleware/authorization'
-import { UserService, IUserMsgWithToken } from 'app/service/UserService'
+import { UserService } from 'app/service/UserService'
 import { IsEmail, IsString, Length } from 'class-validator'
 import { Context } from 'koa'
-import { Body, BodyParam, Controller, Ctx, Get, Param, Patch, Post, QueryParam, UseBefore, State } from 'routing-controllers'
-import { Service, Inject } from 'typedi'
-import { User } from 'app/model/User'
-
-export class RegisterUserBody {
-  @IsEmail() public email: string
-  @Length(2, 8) public name: string
-  @Length(6, 18) public password: string
-}
-
-export class LoginUserBody {
-  @IsString() public nameOrEmail: string
-  @Length(6, 18) public password: string
-}
-
-export class ForgetUserBody {
-  @IsEmail() public email: string
-}
-
-export class PasswordUserBody {
-  @Length(6, 18) public password: string
-  @Length(6, 18) public newPassword: string
-}
-
-export class UserState {
-  public id: string
-}
+import { Body, BodyParam, Controller, Get, Param, Patch, Post, QueryParam, State, UseBefore } from 'routing-controllers'
+import { Inject, Service } from 'typedi'
 
 @Service()
 @Controller('/v1/user')

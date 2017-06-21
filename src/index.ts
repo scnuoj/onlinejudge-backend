@@ -1,4 +1,5 @@
 import { database, typeorm } from 'app/library/database'
+import { transformer } from 'app/middleware/transformer'
 import { IJwtConfig } from 'app/typing/config'
 import 'app/typing/context'
 import * as Bluebird from 'bluebird'
@@ -8,11 +9,9 @@ import * as Koa from 'koa'
 import * as jwt from 'koa-jwt'
 import * as logger from 'koa-logger'
 import 'reflect-metadata'
-import { useKoaServer, useContainer as useContainerForRouting } from 'routing-controllers'
+import { useContainer as useContainerForRouting, useKoaServer } from 'routing-controllers'
 import { Container } from 'typedi'
 import { useContainer as useContainerForOrm } from 'typeorm'
-import { transformer } from 'app/middleware/transformer'
-import { Problem } from 'app/entity/Problem'
 
 useContainerForOrm(Container)
 useContainerForRouting(Container)
@@ -37,12 +36,12 @@ useKoaServer(app, {
 })
 
 export const connection = typeorm().then(async c => {
-  database.authenticate().then(() => new Promise(resolve => {
+  await new Promise(resolve => {
     app.listen(8080, () => {
       console.log('APP Listen')
       resolve(app.callback())
     })
-  })
+  }
 )})
 
 /**

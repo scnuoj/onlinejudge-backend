@@ -7,7 +7,7 @@ import { Problem } from 'app/model/Problem'
 import { Submission } from 'app/model/Submission'
 import { User } from 'app/model/User'
 import { IDatabaseConfig } from 'app/typing/config'
-import { createConnection, Connection } from 'typeorm'
+import { Connection, createConnection } from 'typeorm'
 
 const dbConfig = <IDatabaseConfig>config.get('Database')
 
@@ -37,5 +37,7 @@ export const typeorm = () => createConnection({
     TProblem,
     TSubmission,
     TUser
-  ]
+  ],
+  autoSchemaSync: true,
+  autoMigrationsRun: true
 })

@@ -1,19 +1,8 @@
-import { Problem } from 'app/entity/Problem'
+import { ProblemQuery } from 'app/controller/interface'
+import { Problem } from 'app/entity'
 import { ProblemService } from 'app/service/ProblemService'
-import { plainToClass } from 'class-transformer'
-import { transformAndValidate } from 'class-transformer-validator'
-import { IsIn, IsNumberString, IsString, validate } from 'class-validator'
-import { Context } from 'koa'
-import 'reflect-metadata'
 import { Body, Ctx, Get, JsonController, Param, QueryParam, QueryParams, State } from 'routing-controllers'
-import { Inject, Service, Container } from 'typedi'
-
-export class ProblemQuery {
-  @IsNumberString() public limit: string
-  @IsNumberString() public offset: string
-  @IsIn(['asc', 'desc']) public order: string
-  @IsString() public sortby: string
-}
+import { Container, Inject, Service } from 'typedi'
 
 @Service()
 @JsonController('/v1/problems')

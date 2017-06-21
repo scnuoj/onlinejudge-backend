@@ -1,7 +1,7 @@
-import { EntityRepository, Repository } from 'typeorm'
 import { Submission } from 'app/entity/Submission'
-import { Service } from 'typedi'
 import { BadRequestError } from 'routing-controllers'
+import { Service } from 'typedi'
+import { EntityRepository, Repository } from 'typeorm'
 import { OrmConnection } from 'typeorm-typedi-extensions'
 
 @Service()

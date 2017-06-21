@@ -33,10 +33,10 @@
             false
         ],
         "no-unused-variable": true,
-        // 关闭该规则
         "ordered-imports": [
-            false
+            true
         ],
+        // 关闭该规则
         "no-import-side-effect": [
             false
         ],

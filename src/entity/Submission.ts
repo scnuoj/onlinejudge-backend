@@ -1,6 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm'
-import { User } from 'app/entity/User'
 import { Problem } from 'app/entity/Problem'
+import { User } from 'app/entity/User'
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Submission {
