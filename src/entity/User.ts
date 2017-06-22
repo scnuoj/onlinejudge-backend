@@ -1,5 +1,6 @@
 import { Problem } from 'app/entity/Problem'
 import { Submission } from 'app/entity/Submission'
+import { Exclude } from 'class-transformer'
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
@@ -13,6 +14,7 @@ export class User {
   @Column()
   email: string
 
+  @Exclude()
   @Column()
   password: string
 

@@ -1,7 +1,6 @@
-import { database, typeorm } from 'app/library/database'
+import { database } from 'app/library/database'
 import { transformer } from 'app/middleware/transformer'
 import { IJwtConfig } from 'app/typing/config'
-import 'app/typing/context'
 import * as Bluebird from 'bluebird'
 import * as config from 'config'
 import * as http from 'http'
@@ -11,7 +10,7 @@ import * as logger from 'koa-logger'
 import 'reflect-metadata'
 import { useContainer as useContainerForRouting, useKoaServer } from 'routing-controllers'
 import { Container } from 'typedi'
-import { useContainer as useContainerForOrm } from 'typeorm'
+import { Connection, useContainer as useContainerForOrm } from 'typeorm'
 
 useContainerForOrm(Container)
 useContainerForRouting(Container)
@@ -35,7 +34,9 @@ useKoaServer(app, {
   defaultErrorHandler: false
 })
 
-export const connection = typeorm().then(async c => {
+export const createConnection = database()
+
+export const connection = createConnection.then(async c => {
   await new Promise(resolve => {
     app.listen(8080, () => {
       console.log('APP Listen')
@@ -43,15 +44,3 @@ export const connection = typeorm().then(async c => {
     })
   }
 )})
-
-/**
- * Monkey-Patch to routing-controller
- * 关闭 classTransformer 对 response 的转换
- * 以避免返回 sequelize instance 的出错转换
- */
-import { KoaDriver } from 'routing-controllers/driver/koa/KoaDriver'
-const originHandleSuccess = KoaDriver.prototype.handleSuccess
-KoaDriver.prototype.handleSuccess = function () {
-  this.useClassTransformer = false
-  return originHandleSuccess.apply(this, arguments)
-}

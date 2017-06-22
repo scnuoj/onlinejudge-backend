@@ -29,6 +29,10 @@
   version "3.1.33"
   resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-3.1.33.tgz#7e6c91603533e0cd9f279a8405a9b9e379880c5d"
 
+"@types/faker@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.0.tgz#751cd99436a71d7856f33f65f9c5e58e5bc2711e"
+
 "@types/geojson@^1.0.0":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-1.0.2.tgz#b02d10ab028e2928ac592a051aaa4981a1941d03"
@@ -932,6 +936,10 @@ extglob@^0.3.1:
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+
+faker@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
 
 figlet@^1.1.1:
   version "1.2.0"

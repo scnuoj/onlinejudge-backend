@@ -1,25 +1,24 @@
-import { database } from 'app/library/database'
-import { Problem } from 'app/model/Problem'
-import { Submission } from 'app/model/Submission'
-import { User } from 'app/model/User'
-import { Random } from 'mockjs'
+import { createConnection } from 'app'
+import { Problem, Submission, User } from 'app/entity'
+import { ProblemRepository } from 'app/repository/ProblemRepository'
+import { SubmissionRepository } from 'app/repository/SubmissionRepository'
+import { UserRepository } from 'app/repository/UserRepository'
+import { autobind } from 'core-decorators'
 import * as process from 'process'
+import { Service } from 'typedi'
+import { OrmCustomRepository } from 'typeorm-typedi-extensions'
 
-(async () => {
-  await database
-  const times = Array(5).fill({})
-
-  const users = await Promise.all<User>(times.map((time: null) => User.create<User>(User.MOCK_DATA())))
-
-  const problems = await Promise.all<Problem>(users.map((user: User) => Problem.create<Problem>(Problem.MOCK_DATA({ userId: user.id }))))
-
-  const submissions = await Promise.all(problems.map((problem: Problem) =>
-    Promise.all<Submission>(users.map((user: User) =>
-      Submission.create(Submission.MOCK_DATA({
-        userId: user.id,
-        problemId: problem.id
-      }))))
-    )
-  )
+createConnection.then(async connection => {
+  const userRepository: UserRepository = connection.getCustomRepository(UserRepository)
+  const problemRepository: ProblemRepository = connection.getCustomRepository(ProblemRepository)
+  const submissionRepository: SubmissionRepository = connection.getCustomRepository(SubmissionRepository)
+  const users = await Promise.all([
+    userRepository.fake(),
+    userRepository.fake(),
+    userRepository.fake()
+  ])
+  await userRepository.persist(users)
+  const problems = await Promise.all(users.map(user => problemRepository.fake({ user: user })))
+  await problemRepository.persist(problems)
   process.exit()
-})()
+})
