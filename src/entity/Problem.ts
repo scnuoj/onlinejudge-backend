@@ -1,5 +1,4 @@
-import { Submission } from 'app/entity/Submission'
-import { User } from 'app/entity/User'
+import { Submission, User } from 'app/entity'
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()

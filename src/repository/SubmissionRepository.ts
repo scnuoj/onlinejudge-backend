@@ -1,4 +1,4 @@
-import { Submission } from 'app/entity/Submission'
+import { Submission } from 'app/entity'
 import * as faker from 'faker'
 import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'

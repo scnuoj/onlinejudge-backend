@@ -1,9 +1,6 @@
-import { Problem } from 'app/entity'
-import { Submission } from 'app/entity/Submission'
-import { ProblemRepository } from 'app/repository/ProblemRepository'
-import { SubmissionRepository } from 'app/repository/SubmissionRepository'
+import { Problem, Submission } from 'app/entity'
+import { ProblemRepository, SubmissionRepository } from 'app/repository'
 import { BadRequestError } from 'routing-controllers'
-import { Model } from 'sequelize-typescript'
 import { Service } from 'typedi'
 import { OrmCustomRepository, OrmRepository } from 'typeorm-typedi-extensions'
 

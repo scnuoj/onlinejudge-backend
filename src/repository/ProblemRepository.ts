@@ -1,4 +1,4 @@
-import { Problem } from 'app/entity/Problem'
+import { Problem } from 'app/entity'
 import * as faker from 'faker'
 import 'reflect-metadata'
 import { BadRequestError } from 'routing-controllers'
@@ -33,7 +33,7 @@ export class ProblemRepository extends Repository<Problem> {
 
   public fake (item?: DeepPartial<Problem>) {
     return this.persist(this.create({
-      title: faker.lorem.text(),
+      title: faker.lorem.sentence(),
       description: faker.lorem.paragraphs(),
       lang: 'c',
       input: faker.lorem.sentence(),

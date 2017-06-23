@@ -1,9 +1,7 @@
 import { ForgetUserBody, LoginUserBody, PasswordUserBody, RegisterUserBody, UserState } from 'app/controller/interface'
 import { Problem, Submission, User } from 'app/entity'
 import { authorization } from 'app/middleware/authorization'
-import { UserService } from 'app/service/UserService'
-import { IsEmail, IsString, Length } from 'class-validator'
-import { Context } from 'koa'
+import { UserService } from 'app/service'
 import { Body, BodyParam, Controller, Get, Param, Patch, Post, QueryParam, State, UseBefore } from 'routing-controllers'
 import { Inject, Service } from 'typedi'
 

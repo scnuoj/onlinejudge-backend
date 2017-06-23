@@ -1,4 +1,4 @@
-import { Submission } from 'app/model/Submission'
+import { Submission } from 'app/entity/Submission'
 import { ICacheConfig } from 'app/typing/config'
 import * as config from 'config'
 import * as Redis from 'ioredis'
@@ -32,19 +32,19 @@ Promise.resolve().then(async () => {
   for ( ; ; ) {
     const message = await comsumer.brpop(['JUDGER_FINISH'], 0)
     const payload: IJudgerPayload = JSON.parse(message[1])
-    await Submission.update({
-      realTime: payload.real_time,
-      error: payload.error,
-      exitCode: payload.exit_code,
-      cpuTime: payload.cpu_time,
-      result: payload.result,
-      signal: payload.signal,
-      memory: payload.memory
-    }, {
-      where: {
-        id: payload.submissionId
-      }
-    })
+    // await Submission.update({
+    //   realTime: payload.real_time,
+    //   error: payload.error,
+    //   exitCode: payload.exit_code,
+    //   cpuTime: payload.cpu_time,
+    //   result: payload.result,
+    //   signal: payload.signal,
+    //   memory: payload.memory
+    // }, {
+    //   where: {
+    //     id: payload.submissionId
+    //   }
+    // })
     console.log(payload)
   }
 })

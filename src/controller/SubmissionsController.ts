@@ -1,7 +1,7 @@
 import { PostSubmissionData, SubmissionQuery, UserState } from 'app/controller/interface'
 import { Submission } from 'app/entity'
 import { authorization } from 'app/middleware/authorization'
-import { SubmissionService } from 'app/service/SubmissionService'
+import { SubmissionService } from 'app/service'
 import { Body, Controller, Get, Param, Post, QueryParams, State, UseBefore } from 'routing-controllers'
 import { Inject, Service } from 'typedi'
 

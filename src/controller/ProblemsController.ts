@@ -1,7 +1,7 @@
 import { ProblemQuery } from 'app/controller/interface'
 import { Problem } from 'app/entity'
-import { ProblemService } from 'app/service/ProblemService'
-import { Body, Ctx, Get, JsonController, Param, QueryParam, QueryParams, State } from 'routing-controllers'
+import { ProblemService } from 'app/service'
+import { Body, Get, JsonController, Param, QueryParam, QueryParams, State } from 'routing-controllers'
 import { Container, Inject, Service } from 'typedi'
 
 @Service()

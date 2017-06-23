@@ -1,5 +1,5 @@
 import { Problem, Submission, User } from 'app/entity'
-import { UserRepository } from 'app/repository/UserRepository'
+import { UserRepository } from 'app/repository'
 import { IJwtConfig } from 'app/typing/config'
 import * as config from 'config'
 import { SHA256 } from 'crypto-js'

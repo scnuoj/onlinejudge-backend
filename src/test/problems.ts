@@ -1,45 +1,51 @@
-import { connection } from 'app'
-import { Problem } from 'app/model/Problem'
-import { User } from 'app/model/User'
+import { connection, createConnection } from 'app'
+import { Problem, User } from 'app/entity'
+import { ProblemRepository, UserRepository } from 'app/repository'
 import { assert } from 'chai'
-import { suite, test } from 'mocha-typescript'
+import 'mocha'
 import * as request from 'supertest'
+import { Connection } from 'typeorm'
 
-let problem: Problem
+let app: {}
+let db: Connection
 let user: User
-let app
+let problem: Problem
+let userRepository: UserRepository
+let problemRepository: ProblemRepository
 
-@suite class Problems {
-  public async before (): Promise<void> {
-    app = await connection
-    user = await User.create<User>(User.MOCK_DATA())
-    problem = await Problem.create<Problem>(Problem.MOCK_DATA({ userId: user.id }))
-  }
+before('', async () => {
+  db = await createConnection
+  app = await connection
+  userRepository = db.getCustomRepository(UserRepository)
+  problemRepository = db.getCustomRepository(ProblemRepository)
 
-  public async after (): Promise<void> {
-    await problem.destroy()
-    await user.destroy()
-  }
+  user = await userRepository.fake()
+  problem = await problemRepository.fake()
+})
 
-  @test public async index (): Promise<void> {
-    const res = await request(app)
-      .get('/v1/problems')
-      .query({
-        limit: 1,
-        offset: 0,
-        sortby: 'id',
-        order: 'desc'
-      })
-      .expect(200)
-    assert.isNumber(res.body.data.count)
-    assert.isArray(res.body.data.rows)
-    assert.lengthOf(res.body.data.rows, 1)
-  }
+after(async () => {
+  await problemRepository.remove(problem)
+  await userRepository.remove(user)
+})
 
-  @test public async show (): Promise<void> {
-    const res = await request(app)
-      .get(`/v1/problems/${problem.id}`)
-      .expect(200)
-    assert.equal(res.body.data.id, problem.id)
-  }
-}
+it('', async () => {
+  const res = await request(app)
+    .get('/v1/problems')
+    .query({
+      limit: 1,
+      offset: 0,
+      sortby: 'title',
+      order: 'desc'
+    })
+    .expect(200)
+  assert.isNumber(res.body.data.count)
+  assert.isArray(res.body.data.rows)
+  assert.lengthOf(res.body.data.rows, 1)
+})
+
+it('', async () => {
+  const res = await request(app)
+    .get(`/v1/problems/${problem.id}`)
+    .expect(200)
+  assert.equal(res.body.data.id, problem.id)
+})

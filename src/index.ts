@@ -1,7 +1,6 @@
 import { database } from 'app/library/database'
 import { transformer } from 'app/middleware/transformer'
 import { IJwtConfig } from 'app/typing/config'
-import * as Bluebird from 'bluebird'
 import * as config from 'config'
 import * as http from 'http'
 import * as Koa from 'koa'
@@ -34,10 +33,12 @@ useKoaServer(app, {
   defaultErrorHandler: false
 })
 
+// For Fake
 export const createConnection = database()
 
-export const connection = createConnection.then(async c => {
-  await new Promise(resolve => {
+// For Route Test
+export const connection = createConnection.then(c => {
+  return <Promise<(req: http.IncomingMessage, res: http.ServerResponse) => void>>new Promise(resolve => {
     app.listen(8080, () => {
       console.log('APP Listen')
       resolve(app.callback())

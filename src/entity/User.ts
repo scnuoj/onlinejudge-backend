@@ -1,5 +1,4 @@
-import { Problem } from 'app/entity/Problem'
-import { Submission } from 'app/entity/Submission'
+import { Problem, Submission } from 'app/entity'
 import { Exclude } from 'class-transformer'
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 

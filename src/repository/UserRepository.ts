@@ -1,4 +1,4 @@
-import { User } from 'app/entity/User'
+import { User } from 'app/entity'
 import { SHA256 } from 'crypto-js'
 import * as faker from 'faker'
 import { BadRequestError } from 'routing-controllers'

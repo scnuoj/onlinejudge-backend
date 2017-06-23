@@ -1,5 +1,5 @@
 import { Problem } from 'app/entity'
-import { ProblemRepository } from 'app/repository/ProblemRepository'
+import { ProblemRepository } from 'app/repository'
 import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
 import { Transaction } from 'typeorm'
