@@ -32,7 +32,7 @@ export class ProblemRepository extends Repository<Problem> {
   }
 
   public fake (item?: DeepPartial<Problem>) {
-    return this.create({
+    return this.persist(this.create({
       title: faker.lorem.text(),
       description: faker.lorem.paragraphs(),
       lang: 'c',
@@ -50,7 +50,7 @@ export class ProblemRepository extends Repository<Problem> {
       maxProcessNumber: faker.random.number(),
       maxOutputSize: faker.random.number(),
       ...item
-    })
+    }))
   }
 
 }

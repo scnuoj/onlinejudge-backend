@@ -36,7 +36,7 @@ export class SubmissionRepository extends Repository<Submission> {
   }
 
   public fake (item?: DeepPartial<Submission>) {
-    return this.create({
+    return this.persist(this.create({
       code: faker.lorem.sentences(),
       lang: 'c',
       cpuTime: faker.random.number(),
@@ -47,7 +47,7 @@ export class SubmissionRepository extends Repository<Submission> {
       result: faker.random.number(),
       error: faker.random.number(),
       ...item
-    })
+    }))
   }
 
 }

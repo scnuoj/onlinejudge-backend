@@ -16,8 +16,8 @@ import { Submission as TSubmission } from 'app/entity/Submission'
 import { User as TUser } from 'app/entity/User'
 
 const root = path.resolve(__dirname, '..')
-const entityPath = `${root}/entity/*.js`
-const migrationPath = `${root}/migration/*.js`
+const entityPath = `${root}/entity/*.{js,ts}`
+const migrationPath = `${root}/migration/*.{js,ts}`
 
 export const database = () => createConnection({
   type: 'mysql',

@@ -17,8 +17,6 @@ createConnection.then(async connection => {
     userRepository.fake(),
     userRepository.fake()
   ])
-  await userRepository.persist(users)
   const problems = await Promise.all(users.map(user => problemRepository.fake({ user: user })))
-  await problemRepository.persist(problems)
   process.exit()
 })

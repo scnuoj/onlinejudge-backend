@@ -35,7 +35,7 @@ export class UserRepository extends Repository<User> {
   }
 
   public fake (item?: DeepPartial<User>) {
-    return this.create({
+    return this.persist(this.create({
       name: faker.name.lastName(),
       email: faker.internet.email(),
       password: faker.internet.password(),
@@ -44,7 +44,7 @@ export class UserRepository extends Repository<User> {
       avatar: faker.image.avatar(),
       remark: faker.lorem.lines(),
       ...item
-    })
+    }))
   }
 
 }
