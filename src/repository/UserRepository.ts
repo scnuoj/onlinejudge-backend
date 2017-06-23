@@ -1,30 +1,30 @@
 import { User } from 'app/entity'
 import { SHA256 } from 'crypto-js'
 import * as faker from 'faker'
-import { BadRequestError } from 'routing-controllers'
+
 import { Service } from 'typedi'
 import { EntityRepository, Repository } from 'typeorm'
-import { OrmConnection } from 'typeorm-typedi-extensions'
+
 import { DeepPartial } from 'typeorm/common/DeepPartial'
 
 @Service()
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
 
-  public getByEmail (email: string) {
+  public getByEmail (email: string): Promise<User | undefined> {
     return this.createQueryBuilder('user')
                .where('user.email=:email', { email })
                .getOne()
   }
 
-  public getByNameOrEmail (name: string, email: string) {
+  public getByNameOrEmail (name: string, email: string): Promise<User | undefined> {
     return this.createQueryBuilder('user')
                .where('user.name=:name', { name })
                .orWhere('user.email=:email', { email })
                .getOne()
   }
 
-  public updatePassword (userId: number, password: string, newPassword: string) {
+  public updatePassword (userId: number, password: string, newPassword: string): Promise<any> {
     return this.createQueryBuilder('user')
                .where('user.id=:id', { userId })
                .andWhere('user.password=:password', { password: SHA256(password) })
@@ -34,7 +34,7 @@ export class UserRepository extends Repository<User> {
                .execute()
   }
 
-  public fake (item?: DeepPartial<User>) {
+  public fake (item?: DeepPartial<User>): Promise<User> {
     return this.persist(this.create({
       name: faker.name.lastName(),
       email: faker.internet.email(),

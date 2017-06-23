@@ -1,9 +1,9 @@
-import { Submission } from 'app/entity/Submission'
+
 import { ICacheConfig } from 'app/typing/config'
 import * as config from 'config'
 import * as Redis from 'ioredis'
 
-const queueConfig = <ICacheConfig>config.get('Cache')
+const queueConfig = config.get('Cache') as ICacheConfig
 
 const comsumer = new Redis(queueConfig.port, queueConfig.host, {
   password: queueConfig.password,
@@ -28,6 +28,7 @@ export const queue = {
   }
 }
 
+// tslint:disable
 Promise.resolve().then(async () => {
   for ( ; ; ) {
     const message = await comsumer.brpop(['JUDGER_FINISH'], 0)
@@ -48,7 +49,7 @@ Promise.resolve().then(async () => {
     console.log(payload)
   }
 })
-
+// tslint:enable
 export interface IJudgerPayload {
   real_time: number
   error: number

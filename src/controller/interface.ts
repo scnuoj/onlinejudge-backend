@@ -1,4 +1,7 @@
-import { IsBooleanString, IsEmail, IsEnum, IsIn, IsInt, IsNumberString, IsString, Length } from 'class-validator'
+/**
+ * @file 请求接口
+ */
+import { IsBooleanString, IsEmail, IsIn, IsInt, IsNumberString, IsString, Length } from 'class-validator'
 
 export class ProblemQuery {
   @IsNumberString() public limit: string

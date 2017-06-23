@@ -1,21 +1,16 @@
 import * as config from 'config'
 import * as path from 'path'
 import 'reflect-metadata'
-
 import { IDatabaseConfig } from 'app/typing/config'
-import { Connection, createConnection } from 'typeorm'
+import { createConnection, Connection } from 'typeorm'
 
-const dbConfig = <IDatabaseConfig>config.get('Database')
-
-import { Problem as TProblem } from 'app/entity/Problem'
-import { Submission as TSubmission } from 'app/entity/Submission'
-import { User as TUser } from 'app/entity/User'
+const dbConfig = config.get('Database') as IDatabaseConfig
 
 const root = path.resolve(__dirname, '..')
 const entityPath = `${root}/entity/*.{js,ts}`
 const migrationPath = `${root}/migration/*.{js,ts}`
 
-export const database = () => createConnection({
+export const database: () => Promise<Connection> = () => createConnection({
   type: 'mysql',
   host: dbConfig.host,
   port: dbConfig.port,

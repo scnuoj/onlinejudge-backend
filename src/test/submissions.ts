@@ -9,7 +9,7 @@ import 'mocha'
 import * as request from 'supertest'
 import { Connection } from 'typeorm'
 
-const jwtConfig = <IJwtConfig>config.get('Jwt')
+const jwtConfig = config.get(' Jwt') as IJwtConfig
 
 let app: {}
 let db: Connection

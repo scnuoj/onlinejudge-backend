@@ -1,16 +1,16 @@
 import { Submission } from 'app/entity'
 import * as faker from 'faker'
-import { BadRequestError } from 'routing-controllers'
+
 import { Service } from 'typedi'
 import { EntityRepository, Repository } from 'typeorm'
-import { OrmConnection } from 'typeorm-typedi-extensions'
+
 import { DeepPartial } from 'typeorm/common/DeepPartial'
 
 @Service()
 @EntityRepository(Submission)
 export class SubmissionRepository extends Repository<Submission> {
 
-  public getWithUserAndProblem (id: number) {
+  public getWithUserAndProblem (id: number): Promise<Submission | undefined> {
     return this.createQueryBuilder('submission')
                .where('submission.id=:id', { id })
                .innerJoinAndSelect('submission.problem', 'problem')
@@ -18,24 +18,24 @@ export class SubmissionRepository extends Repository<Submission> {
                .getOne()
   }
 
-  public getByProblemId(id: number) {
+  public getByProblemId (id: number): Promise<Submission[]> {
     return this.createQueryBuilder('submission')
                .where('submission.problemId=:id', { id })
                .getMany()
   }
 
-  public getList(offset: number, limit: number, problemId?: number) {
+  public getList (offset: number, limit: number, problemId?: number): Promise<Submission[]> {
     const query = this.createQueryBuilder('submission')
                       .offset(offset)
                       .limit(limit)
                       .select(['submission.problem', 'submission.user', 'submission.id'])
                       .innerJoinAndSelect('submission.problem', 'problem')
                       .innerJoinAndSelect('submission.user', 'user')
-    return Number.isInteger(problemId) ? query.where('submission.problemId=:problemId', { problemId }).getMany()
-                                       : query.getMany()
+    return typeof problemId === 'number' ? query.where('submission.problemId=:problemId', { problemId }).getMany()
+                                         : query.getMany()
   }
 
-  public fake (item?: DeepPartial<Submission>) {
+  public fake (item?: DeepPartial<Submission>): Promise<Submission> {
     return this.persist(this.create({
       code: faker.lorem.sentences(),
       lang: 'c',

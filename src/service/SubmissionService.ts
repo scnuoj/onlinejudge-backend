@@ -1,8 +1,8 @@
-import { Problem, Submission } from 'app/entity'
+import { Submission } from 'app/entity'
 import { ProblemRepository, SubmissionRepository } from 'app/repository'
 import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
-import { OrmCustomRepository, OrmRepository } from 'typeorm-typedi-extensions'
+import { OrmCustomRepository } from 'typeorm-typedi-extensions'
 
 import { queue } from 'app/library/queue'
 
@@ -15,22 +15,23 @@ export class SubmissionService {
   @OrmCustomRepository(SubmissionRepository)
   private submissionRepository: SubmissionRepository
 
-  public async create (userId: number, id: number, code: string, lang: string) {
+  public async create (userId: number, id: number, code: string, lang: string): Promise<number> {
     const problem = await this.problemRepository.findOneById(id)
     if (!problem) {
       throw new BadRequestError('Problem 不存在')
     }
-    const submission = await this.submissionRepository.create({
+    const submission = this.submissionRepository.create({
       user: userId,
       id,
       code,
       lang
     })
+    await this.submissionRepository.persist(submission)
     await queue.submitCheckCodeTask(submission.id)
     return submission.id
   }
 
-  public async stat (submissionId: number) {
+  public async stat (submissionId: number): Promise<Submission | null> {
     const submission = await this.submissionRepository.findOneById(submissionId)
     if (!submission) {
       throw new BadRequestError('Submission 不存在')
@@ -38,7 +39,7 @@ export class SubmissionService {
     return submission.result ? submission : null
   }
 
-  public async show (submissionId: number) {
+  public async show (submissionId: number): Promise<{ result: Submission; state: Submission[]; }> {
     const submission = await this.submissionRepository.getWithUserAndProblem(submissionId)
     if (!submission) {
       throw new BadRequestError('Submission 不存在')
@@ -50,7 +51,7 @@ export class SubmissionService {
     }
   }
 
-  public async list (limit: number, offset: number, allUser: boolean, problemId?: number) {
+  public async list (limit: number, offset: number, allUser: boolean, problemId?: number): Promise<Submission[]> {
     return this.submissionRepository.getList(offset, limit, problemId)
   }
 }

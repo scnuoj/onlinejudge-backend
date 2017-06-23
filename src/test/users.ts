@@ -10,7 +10,7 @@ import 'mocha'
 import * as request from 'supertest'
 import { Connection } from 'typeorm'
 
-const jwtConfig = <IJwtConfig>config.get('Jwt')
+const jwtConfig = config.get('Jwt') as IJwtConfig
 
 let app: {}
 let db: Connection
@@ -78,7 +78,7 @@ it('', async () => {
 })
 
 it('', async () => {
-  const res = await request(app)
+  await request(app)
     .post('/v1/user/forget')
     .send({
       email: 'test@test.com'
@@ -87,7 +87,7 @@ it('', async () => {
 })
 
 it('', async () => {
-  const res = await request(app)
+  await request(app)
     .patch('/v1/user/password')
     .set('Authorization', `Bearer ${token}`)
     .send({
@@ -95,6 +95,7 @@ it('', async () => {
       newPassword: '222222222'
     })
     .expect(200)
-  user = await userRepository.findOneById(user.id)
-  assert.equal(user.password, SHA256('222222222'))
+  const result = await userRepository.findOneById(user.id)
+  assert.property(result, 'password')
+  assert.equal((result as User).password, SHA256('222222222'))
 })

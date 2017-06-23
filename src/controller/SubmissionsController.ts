@@ -1,8 +1,7 @@
 import { PostSubmissionData, SubmissionQuery, UserState } from 'app/controller/interface'
 import { Submission } from 'app/entity'
-import { authorization } from 'app/middleware/authorization'
 import { SubmissionService } from 'app/service'
-import { Body, Controller, Get, Param, Post, QueryParams, State, UseBefore } from 'routing-controllers'
+import { Body, Controller, Get, Param, Post, QueryParams, State } from 'routing-controllers'
 import { Inject, Service } from 'typedi'
 
 @Service()
@@ -12,7 +11,7 @@ export class SubmissionsController {
   @Inject() private submissionService: SubmissionService
 
   @Post('/')
-  public async index (@Body() submission: PostSubmissionData, @State('user') user: UserState) {
+  public async index (@Body() submission: PostSubmissionData, @State('user') user: UserState): Promise<{ data: number; message: string; }> {
     const submissionId = await this.submissionService.create(user.id, submission.id, submission.code, submission.lang)
     return {
       data: submissionId,
@@ -21,7 +20,7 @@ export class SubmissionsController {
   }
 
   @Get('/:submissionId/stat')
-  public async stat (@Param('submissionId') submissionId: number) {
+  public async stat (@Param('submissionId') submissionId: number): Promise<Submission | undefined> {
     const submission = await this.submissionService.stat(submissionId)
     if (submission !== null) {
       return submission
@@ -29,12 +28,12 @@ export class SubmissionsController {
   }
 
   @Get('/:submissionId')
-  public async show (@Param('submissionId') submissionId: number) {
+  public async show (@Param('submissionId') submissionId: number): Promise<{ result: Submission; state: Submission[]; }> {
     return await this.submissionService.show(submissionId)
   }
 
   @Get('/')
-  public async query (@QueryParams() query: SubmissionQuery) {
+  public async query (@QueryParams() query: SubmissionQuery): Promise<Submission[]> {
     return await this.submissionService.list(parseInt(query.limit, 10), parseInt(query.offset, 10), query.all, query.problemId)
   }
 }

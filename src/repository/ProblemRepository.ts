@@ -1,37 +1,36 @@
 import { Problem } from 'app/entity'
 import * as faker from 'faker'
 import 'reflect-metadata'
-import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
-import { EntityRepository, Repository, Transaction } from 'typeorm'
+import { EntityRepository, Repository } from 'typeorm'
 import { DeepPartial } from 'typeorm/common/DeepPartial'
 
 @Service()
 @EntityRepository(Problem)
 export class ProblemRepository extends Repository<Problem> {
 
-  public getById (id: number) {
+  public getById (id: number): Promise<Problem | undefined> {
     return this.createQueryBuilder('problem')
                .innerJoinAndSelect('problem.user', 'user')
                .getOne()
   }
 
-  public getList (offset: number, limit: number, sortby: string, order: string) {
+  public getList (offset: number, limit: number, sortby: string, order: string): Promise<[Problem[], number]> {
     return this.createQueryBuilder('problem')
                .limit(limit)
                .offset(offset)
-               .orderBy(sortby, <'ASC'|'DESC'>order)
+               .orderBy(sortby, order as 'ASC'|'DESC')
                .innerJoinAndSelect('problem.user', 'user')
                .getManyAndCount()
   }
 
-  public getRecommendList (id: number) {
+  public getRecommendList (id: number): Promise<Problem[]> {
     return this.createQueryBuilder('problem')
                .limit(5)
                .getMany()
   }
 
-  public fake (item?: DeepPartial<Problem>) {
+  public fake (item?: DeepPartial<Problem>): Promise<Problem> {
     return this.persist(this.create({
       title: faker.lorem.sentence(),
       description: faker.lorem.paragraphs(),

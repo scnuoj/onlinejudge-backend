@@ -16,7 +16,7 @@ useContainerForRouting(Container)
 
 export const app = new Koa()
 
-const jwtConfig = <IJwtConfig>config.get('Jwt')
+const jwtConfig = config.get('Jwt') as IJwtConfig
 
 app.use(transformer())
 
@@ -38,10 +38,10 @@ export const createConnection = database()
 
 // For Route Test
 export const connection = createConnection.then(c => {
-  return <Promise<(req: http.IncomingMessage, res: http.ServerResponse) => void>>new Promise(resolve => {
+  return new Promise(resolve => {
     app.listen(8080, () => {
       console.log('APP Listen')
       resolve(app.callback())
     })
   }
-)})
+) as Promise<(req: http.IncomingMessage, res: http.ServerResponse) => void>})

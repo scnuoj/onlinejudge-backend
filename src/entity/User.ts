@@ -1,6 +1,6 @@
 import { Problem, Submission } from 'app/entity'
 import { Exclude } from 'class-transformer'
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class User {
