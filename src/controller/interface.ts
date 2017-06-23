@@ -6,7 +6,7 @@ import { IsBooleanString, IsEmail, IsIn, IsInt, IsNumberString, IsString, Length
 export class ProblemQuery {
   @IsNumberString() public limit: string
   @IsNumberString() public offset: string
-  @IsIn(['asc', 'desc']) public order: string
+  @IsIn(['ASC', 'DESC']) public order: 'ASC' | 'DESC'
   @IsString() public sortby: string
 }
 

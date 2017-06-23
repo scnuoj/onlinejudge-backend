@@ -17,16 +17,16 @@ export class User {
   @Column()
   password: string
 
-  @Column()
+  @Column({ nullable: true })
   school: string
 
-  @Column()
+  @Column({ nullable: true })
   gender: number
 
-  @Column()
+  @Column({ nullable: true })
   avatar: string
 
-  @Column()
+  @Column({ nullable: true })
   remark: string
 
   @OneToMany(type => Problem, problem => problem.user)

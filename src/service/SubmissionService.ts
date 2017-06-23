@@ -4,8 +4,6 @@ import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
 import { OrmCustomRepository } from 'typeorm-typedi-extensions'
 
-import { queue } from 'app/library/queue'
-
 @Service()
 export class SubmissionService {
 
@@ -27,7 +25,7 @@ export class SubmissionService {
       lang
     })
     await this.submissionRepository.persist(submission)
-    await queue.submitCheckCodeTask(submission.id)
+    // await queue.submitCheckCodeTask(submission.id)
     return submission.id
   }
 

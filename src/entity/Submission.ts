@@ -12,25 +12,25 @@ export class Submission {
   @Column()
   lang: string
 
-  @Column()
+  @Column({ nullable: true })
   cpuTime: number
 
-  @Column()
+  @Column({ nullable: true })
   realTime: number
 
-  @Column()
+  @Column({ nullable: true })
   signal: number
 
-  @Column()
+  @Column({ nullable: true })
   memory: number
 
-  @Column()
+  @Column({ nullable: true })
   exitCode: number
 
-  @Column()
+  @Column({ nullable: true })
   result: number
 
-  @Column()
+  @Column({ nullable: true })
   error: number
 
   @OneToOne(type => Problem)

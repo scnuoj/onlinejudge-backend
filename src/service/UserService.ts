@@ -14,7 +14,7 @@ export class UserService {
   @OrmCustomRepository(UserRepository)
   private userRepository: UserRepository
 
-  public async register (name: string, email: string, password: string): Promise<User & { token: string }> {
+  public async register (name: string, email: string, password: string): Promise<{ user: User, token: string }> {
     const duplicateUser = await this.userRepository.getByNameOrEmail(name, email)
     if (duplicateUser) {
       if (duplicateUser.name === name) {
@@ -24,24 +24,23 @@ export class UserService {
         throw new BadRequestError('邮箱已被注册')
       }
     }
-    const user = this.userRepository.create({
+    const user = await this.userRepository.persist(this.userRepository.create({
       name,
       email,
       password: SHA256(password).toString()
-    })
-    await this.userRepository.persist(user)
+    }))
     return {
-      ...user,
+      user,
       token: this.issueToken(user.id)
     }
   }
 
-  public async login (nameOrEmail: string, password: string): Promise<User & { token: string }> {
+  public async login (nameOrEmail: string, password: string): Promise<{ user: User, token: string }> {
     const user = await this.userRepository.getByNameOrEmail(nameOrEmail, nameOrEmail)
     if (user) {
       if (user.password === SHA256(password).toString()) {
         return {
-          ...user,
+          user,
           token: this.issueToken(user.id)
         }
       }
@@ -58,8 +57,8 @@ export class UserService {
   }
 
   public async password (userId: number, password: string, newPassword: string): Promise<void> {
-    const status = this.userRepository.updatePassword(userId, password, newPassword)
-    if (!status) {
+    const status = await this.userRepository.updatePassword(userId, password, newPassword)
+    if (!status.affectedRows) {
       throw new BadRequestError('原密码不正确')
     }
   }

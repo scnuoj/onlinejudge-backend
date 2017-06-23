@@ -18,7 +18,7 @@ export class UserController {
   }
 
   @Post('/register')
-  public async register (@Body() body: RegisterUserBody): Promise<{ data: User, message: string }> {
+  public async register (@Body() body: RegisterUserBody): Promise<{ data: { user: User, token: string }, message: string }> {
     const user = await this.userService.register(body.name, body.email, body.password)
     return {
       data: user,
@@ -27,7 +27,7 @@ export class UserController {
   }
 
   @Post('/login')
-  public async login (@Body() body: LoginUserBody): Promise<{ data: User & { token: string; }; message: string; }> {
+  public async login (@Body() body: LoginUserBody): Promise<{ data: { user: User, token: string; }; message: string; }> {
     const user = await this.userService.login(body.nameOrEmail, body.password)
     return {
       data: user,

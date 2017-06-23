@@ -1,17 +1,19 @@
 import { PostSubmissionData, SubmissionQuery, UserState } from 'app/controller/interface'
 import { Submission } from 'app/entity'
 import { SubmissionService } from 'app/service'
-import { Body, Controller, Get, Param, Post, QueryParams, State } from 'routing-controllers'
+import { Body, Controller, Get, Param, Post, QueryParams, State, UseBefore } from 'routing-controllers'
 import { Inject, Service } from 'typedi'
+import { authorization } from 'app/middleware/authorization'
 
 @Service()
 @Controller('/v1/submissions')
+@UseBefore(authorization())
 export class SubmissionsController {
 
   @Inject() private submissionService: SubmissionService
 
   @Post('/')
-  public async index (@Body() submission: PostSubmissionData, @State('user') user: UserState): Promise<{ data: number; message: string; }> {
+  public async create (@Body() submission: PostSubmissionData, @State('user') user: UserState): Promise<{ data: number; message: string; }> {
     const submissionId = await this.submissionService.create(user.id, submission.id, submission.code, submission.lang)
     return {
       data: submissionId,

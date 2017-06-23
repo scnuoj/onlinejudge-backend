@@ -11,16 +11,17 @@ export class ProblemRepository extends Repository<Problem> {
 
   public getById (id: number): Promise<Problem | undefined> {
     return this.createQueryBuilder('problem')
+               .where('problem.id=:id', { id })
                .innerJoinAndSelect('problem.user', 'user')
                .getOne()
   }
 
   public getList (offset: number, limit: number, sortby: string, order: string): Promise<[Problem[], number]> {
     return this.createQueryBuilder('problem')
-               .limit(limit)
-               .offset(offset)
-               .orderBy(sortby, order as 'ASC'|'DESC')
+               .orderBy(`problem.${sortby}`, order as 'ASC'|'DESC')
                .innerJoinAndSelect('problem.user', 'user')
+               .setFirstResult(offset)
+               .setMaxResults(limit)
                .getManyAndCount()
   }
 

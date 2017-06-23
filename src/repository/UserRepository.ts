@@ -26,10 +26,10 @@ export class UserRepository extends Repository<User> {
 
   public updatePassword (userId: number, password: string, newPassword: string): Promise<any> {
     return this.createQueryBuilder('user')
-               .where('user.id=:id', { userId })
-               .andWhere('user.password=:password', { password: SHA256(password) })
+               .where('user.id=:id', { id: userId })
+               .andWhere('user.password=:password', { password: SHA256(password).toString() })
                .update({
-                 password: SHA256(newPassword)
+                 password: SHA256(newPassword).toString()
                })
                .execute()
   }
@@ -42,7 +42,7 @@ export class UserRepository extends Repository<User> {
       school: faker.random.words(4),
       gender: faker.random.number({ min: 1, max: 2 }),
       avatar: faker.image.avatar(),
-      remark: faker.lorem.lines(),
+      remark: faker.lorem.words(10),
       ...item
     }))
   }

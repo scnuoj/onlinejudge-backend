@@ -2,7 +2,6 @@ import { Problem } from 'app/entity'
 import { ProblemRepository } from 'app/repository'
 import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
-import { Transaction } from 'typeorm'
 import { OrmCustomRepository } from 'typeorm-typedi-extensions'
 
 @Service()
@@ -11,7 +10,6 @@ export class ProblemService {
   @OrmCustomRepository(ProblemRepository)
   private problemRepository: ProblemRepository
 
-  @Transaction()
   public async show (id: number): Promise<Problem> {
     const problem = await this.problemRepository.getById(id)
     if (!problem) {
@@ -20,7 +18,7 @@ export class ProblemService {
     return problem
   }
 
-  public async list (offset: number, limit: number, sortby: string, order: string): Promise<[Problem[], number]> {
+  public async list (offset: number, limit: number, sortby: string, order: 'ASC' | 'DESC'): Promise<[Problem[], number]> {
     return this.problemRepository.getList(offset, limit, sortby, order)
   }
 
