@@ -37,10 +37,10 @@ describe('SubmissionsController', () => {
     token = jwt.sign({ id: user.id }, jwtConfig.secret)
   })
 
-  after(async () => {
-    await problemRepository.remove(problem)
-    await userRepository.remove(user)
+  after('', async () => {
     await submissionRepository.removeById(submissionId)
+    await problemRepository.removeById(problem.id)
+    await userRepository.removeById(user.id)
   })
 
   it('POST /v1/submissions', async () => {
