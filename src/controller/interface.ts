@@ -19,7 +19,7 @@ export class PostSubmissionData {
 export class SubmissionQuery {
   @IsNumberString() public offset: string = '0'
   @IsNumberString() public limit: string = '20'
-  @IsBooleanString() public all: string = 'true'
+  @IsBooleanString() public selfOnly: string = 'true'
   @ValidateIf(o => !!o.problemId) @IsNumberString() public problemId?: string
 }
 

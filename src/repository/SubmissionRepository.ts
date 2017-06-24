@@ -25,7 +25,7 @@ export class SubmissionRepository extends Repository<Submission> {
                .getMany()
   }
 
-  public getList (offset: number, limit: number, problemId?: number): Promise<Submission[]> {
+  public getAllSubmissions (limit: number, offset: number, problemId?: number): Promise<Submission[]> {
     const query = this.createQueryBuilder('submission')
                       .offset(offset)
                       .limit(limit)
@@ -33,6 +33,19 @@ export class SubmissionRepository extends Repository<Submission> {
                       .innerJoinAndSelect('submission.problem', 'problem')
                       .innerJoinAndSelect('submission.user', 'user')
     return typeof problemId === 'number' ? query.where('submission.problemId=:problemId', { problemId }).getMany()
+                                         : query.getMany()
+  }
+
+  public getMySubmissions (userId: number, limit: number, offset: number, problemId?: number): Promise<Submission[]> {
+    console.log(offset, limit, problemId, userId)
+    const query = this.createQueryBuilder('submission')
+                      .select(['submission.problem', 'submission.user', 'submission.id'])
+                      .innerJoinAndSelect('submission.problem', 'problem')
+                      .innerJoinAndSelect('submission.user', 'user')
+                      .skip(offset)
+                      .take(limit)
+                      .where('user.id=:userId', { userId })
+    return typeof problemId === 'number' ? query.andWhere('submission.problemId=:problemId', { problemId }).getMany()
                                          : query.getMany()
   }
 

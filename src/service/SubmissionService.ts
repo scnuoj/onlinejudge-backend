@@ -53,7 +53,11 @@ export class SubmissionService {
     }
   }
 
-  public async list (limit: number, offset: number, allUser: boolean, problemId?: number): Promise<Submission[]> {
-    return this.submissionRepository.getList(offset, limit, problemId)
+  public async getAllSubmissions (limit: number, offset: number, problemId?: number): Promise<Submission[]> {
+    return this.submissionRepository.getAllSubmissions(offset, limit, problemId)
+  }
+
+  public async getMySubmissions (userId: number, limit: number, offset: number, problemId?: number): Promise<Submission[]> {
+    return this.submissionRepository.getMySubmissions(userId, offset, limit, problemId)
   }
 }

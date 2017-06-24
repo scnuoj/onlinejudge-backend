@@ -38,12 +38,12 @@ export class SubmissionsController {
   }
 
   @Get('/')
-  public async query (@QueryParams() query: SubmissionQuery): Promise<{ data: Submission[] }> {
+  public async query (@QueryParams() query: SubmissionQuery, @State('user') user: UserState): Promise<{ data: Submission[] }> {
     const limit = parseInt(query.limit, 10)
     const offset = parseInt(query.offset, 10)
-    const all = query.all === 'true'
     const problemId = query.problemId ? parseInt(query.problemId, 10) : undefined
-    const submissions = await this.submissionService.list(limit, offset, all, problemId)
+    const submissions = query.selfOnly === 'true' ? await this.submissionService.getMySubmissions(user.id, offset, limit, problemId)
+                                                  : await this.submissionService.getAllSubmissions(limit, offset, problemId)
     return {
       data: submissions
     }
