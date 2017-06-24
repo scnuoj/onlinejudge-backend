@@ -21,6 +21,7 @@ export class SubmissionRepository extends Repository<Submission> {
   public getByProblemId (id: number): Promise<Submission[]> {
     return this.createQueryBuilder('submission')
                .where('submission.problemId=:id', { id })
+               .andWhere('submission.result IS NOT NULL')
                .getMany()
   }
 

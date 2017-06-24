@@ -13,12 +13,15 @@ export class UserController {
 
   @Get('/')
   @UseBefore(authorization())
-  public async index (@State('user') user: UserState): Promise<User> {
-    return await this.userService.show(user.id)
+  public async index (@State('user') user: UserState): Promise<{ data: User }> {
+    const data = await this.userService.show(user.id)
+    return {
+      data
+    }
   }
 
   @Post('/register')
-  public async register (@Body() body: RegisterUserBody): Promise<{ data: { user: User, token: string }, message: string }> {
+  public async register (@Body() body: RegisterUserBody): Promise<any> {
     const user = await this.userService.register(body.name, body.email, body.password)
     return {
       data: user,

@@ -22,20 +22,30 @@ export class SubmissionsController {
   }
 
   @Get('/:submissionId/stat')
-  public async stat (@Param('submissionId') submissionId: number): Promise<Submission | undefined> {
+  public async stat (@Param('submissionId') submissionId: number): Promise<{ data: Submission | null }> {
     const submission = await this.submissionService.stat(submissionId)
-    if (submission !== null) {
-      return submission
+    return {
+      data: submission
     }
   }
 
   @Get('/:submissionId')
-  public async show (@Param('submissionId') submissionId: number): Promise<{ result: Submission; state: Submission[]; }> {
-    return await this.submissionService.show(submissionId)
+  public async show (@Param('submissionId') submissionId: number): Promise<{ data: { result: Submission; state: Submission[]; } }> {
+    const submission = await this.submissionService.show(submissionId)
+    return {
+      data: submission
+    }
   }
 
   @Get('/')
-  public async query (@QueryParams() query: SubmissionQuery): Promise<Submission[]> {
-    return await this.submissionService.list(parseInt(query.limit, 10), parseInt(query.offset, 10), query.all, query.problemId)
+  public async query (@QueryParams() query: SubmissionQuery): Promise<{ data: Submission[] }> {
+    const limit = parseInt(query.limit, 10)
+    const offset = parseInt(query.offset, 10)
+    const all = query.all === 'true'
+    const problemId = query.problemId ? parseInt(query.problemId, 10) : undefined
+    const submissions = await this.submissionService.list(limit, offset, all, problemId)
+    return {
+      data: submissions
+    }
   }
 }

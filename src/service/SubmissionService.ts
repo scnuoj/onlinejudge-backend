@@ -1,5 +1,5 @@
 import { Submission } from 'app/entity'
-import { ProblemRepository, SubmissionRepository } from 'app/repository'
+import { ProblemRepository, SubmissionRepository, UserRepository } from 'app/repository'
 import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
 import { OrmCustomRepository } from 'typeorm-typedi-extensions'
@@ -13,14 +13,18 @@ export class SubmissionService {
   @OrmCustomRepository(SubmissionRepository)
   private submissionRepository: SubmissionRepository
 
+  @OrmCustomRepository(UserRepository)
+  private userRepository: UserRepository
+
   public async create (userId: number, id: number, code: string, lang: string): Promise<number> {
     const problem = await this.problemRepository.findOneById(id)
-    if (!problem) {
-      throw new BadRequestError('Problem 不存在')
+    const user = await this.userRepository.findOneById(userId)
+    if (!problem || !user) {
+      throw new BadRequestError('提交失败')
     }
     const submission = this.submissionRepository.create({
-      user: userId,
-      id,
+      user: user,
+      problem: problem,
       code,
       lang
     })

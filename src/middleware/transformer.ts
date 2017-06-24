@@ -6,17 +6,15 @@ export function transformer (): (ctx: Context, next: () => Promise<{}>) => Promi
     Reflect.setPrototypeOf(ctx.query, {})
     try {
       await next()
-      // Format response
-      if (toString.call(ctx.body) === '[object Object]' && Reflect.has(ctx.body, 'data')) {
-        // Format response with data
+      if (ctx.status === 200) {
         ctx.body = {
           success: true,
           ...ctx.body
         }
       } else {
         ctx.body = {
-          success: true,
-          data: ctx.body
+          success: false,
+          message: '这里什么都没有'
         }
       }
     } catch (e) {

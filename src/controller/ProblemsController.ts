@@ -12,17 +12,26 @@ export class ProblemsController {
   private problemService: ProblemService
 
   @Get('/')
-  public async index (@QueryParams() query: ProblemQuery): Promise<[Problem[], number]> {
-    return await this.problemService.list(parseInt(query.offset, 10), parseInt(query.limit, 10), query.sortby, query.order)
+  public async index (@QueryParams() query: ProblemQuery): Promise<{ data: [Problem[], number]; }> {
+    const data = await this.problemService.list(parseInt(query.offset, 10), parseInt(query.limit, 10), query.sortby, query.order)
+    return {
+      data
+    }
   }
 
   @Get('/:id')
-  public async show (@Param('id') id: number): Promise<Problem> {
-    return await this.problemService.show(id)
+  public async show (@Param('id') id: number): Promise<{ data: Problem; }> {
+    const data = await this.problemService.show(id)
+    return {
+      data
+    }
   }
 
   @Get('/:id/recommend')
-  public async recommend (@Param('id') id: number): Promise<Problem[]> {
-    return await this.problemService.recommend(id)
+  public async recommend (@Param('id') id: number): Promise<{ data: Problem[]; }> {
+    const data = await this.problemService.recommend(id)
+    return {
+      data
+    }
   }
 }

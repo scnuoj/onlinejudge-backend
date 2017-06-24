@@ -1,13 +1,13 @@
 /**
  * @file 请求接口
  */
-import { IsBooleanString, IsEmail, IsIn, IsInt, IsNumberString, IsString, Length } from 'class-validator'
+import { IsBooleanString, IsEmail, IsIn, IsInt, IsNumberString, ValidateIf, IsString, Length } from 'class-validator'
 
 export class ProblemQuery {
-  @IsNumberString() public limit: string
-  @IsNumberString() public offset: string
-  @IsIn(['ASC', 'DESC']) public order: 'ASC' | 'DESC'
-  @IsString() public sortby: string
+  @IsNumberString() public limit: string = '20'
+  @IsNumberString() public offset: string = '0'
+  @IsIn(['ASC', 'DESC', 'asc', 'desc']) public order: 'ASC' | 'DESC' = 'ASC'
+  @IsString() public sortby: string = 'id'
 }
 
 export class PostSubmissionData {
@@ -17,10 +17,10 @@ export class PostSubmissionData {
 }
 
 export class SubmissionQuery {
-  @IsNumberString() public offset: string
-  @IsNumberString() public limit: string
-  @IsBooleanString() public all: boolean
-  @IsNumberString() public problemId: number
+  @IsNumberString() public offset: string = '0'
+  @IsNumberString() public limit: string = '20'
+  @IsBooleanString() public all: string = 'true'
+  @ValidateIf(o => !!o.problemId) @IsNumberString() public problemId?: string
 }
 
 export class UserState {
@@ -29,7 +29,7 @@ export class UserState {
 
 export class RegisterUserBody {
   @IsEmail() public email: string
-  @Length(2, 8) public name: string
+  @Length(2, 10) public name: string
   @Length(6, 18) public password: string
 }
 
