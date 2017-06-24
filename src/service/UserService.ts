@@ -1,29 +1,21 @@
-import { BadRequestError } from 'routing-controllers'
-import { User } from 'app/model/User'
+import { User } from 'app/entity'
+import { UserRepository } from 'app/repository'
 import { IJwtConfig } from 'app/typing/config'
 import * as config from 'config'
 import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
+import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
-
-const jwtConfig = <IJwtConfig>config.get('Jwt')
-
-export interface IUserMsgWithToken extends User {
-  token: string
-}
+import { OrmCustomRepository } from 'typeorm-typedi-extensions'
 
 @Service()
 export class UserService {
-  public async register (name: string, email: string, password: string): Promise<IUserMsgWithToken> {
-    const duplicateUser = await User.find<User>({
-      where: {
-        $or: [{
-          name
-        }, {
-          email
-        }]
-      }
-    })
+
+  @OrmCustomRepository(UserRepository)
+  private userRepository: UserRepository
+
+  public async register (name: string, email: string, password: string): Promise<{ user: User, token: string }> {
+    const duplicateUser = await this.userRepository.getByNameOrEmail(name, email)
     if (duplicateUser) {
       if (duplicateUser.name === name) {
         throw new BadRequestError('用户名已被使用')
@@ -32,35 +24,23 @@ export class UserService {
         throw new BadRequestError('邮箱已被注册')
       }
     }
-    const user = await User.create<User>({
+    const user = await this.userRepository.persist(this.userRepository.create({
       name,
       email,
       password: SHA256(password).toString()
-    })
-    Reflect.deleteProperty(user.toJSON(), 'password')
-
+    }))
     return {
-      ...user.toJSON(),
+      user,
       token: this.issueToken(user.id)
     }
   }
 
-  public async login (nameOrEmail: string, password: string): Promise<IUserMsgWithToken> {
-    const user = await User.find<User>({
-      where: {
-        $or: [{
-          name: nameOrEmail
-        }, {
-          email: nameOrEmail
-        }]
-      }
-    })
+  public async login (nameOrEmail: string, password: string): Promise<{ user: User, token: string }> {
+    const user = await this.userRepository.getByNameOrEmail(nameOrEmail, nameOrEmail)
     if (user) {
       if (user.password === SHA256(password).toString()) {
-        Reflect.deleteProperty(user.toJSON(), 'password')
-
         return {
-          ...user.toJSON(),
+          user,
           token: this.issueToken(user.id)
         }
       }
@@ -70,37 +50,21 @@ export class UserService {
   }
 
   public async forget (email: string): Promise<void> {
-    const user = await User.findOne<User>({
-      where: {
-        email
-      }
-    })
+    const user = this.userRepository.getByEmail(email)
     if (!user) {
       throw new BadRequestError('邮箱不存在')
     }
   }
 
-  public async password (userId: string, password: string, newpassword: string): Promise<void> {
-    const user = await User.find<User>({
-      where: {
-        id: userId,
-        password: SHA256(password).toString()
-      }
-    })
-    if (user) {
-      user.password = SHA256(newpassword).toString()
-      await user.save()
-    } else {
-      throw new BadRequestError('密码不正确')
+  public async password (userId: number, password: string, newPassword: string): Promise<void> {
+    const status = await this.userRepository.updatePassword(userId, password, newPassword)
+    if (!status.affectedRows) {
+      throw new BadRequestError('原密码不正确')
     }
   }
 
-  public async show (userId: string): Promise<User> {
-    const user = await User.findById<User>(userId, {
-      attributes: {
-        exclude: ['password']
-      }
-    })
+  public async show (userId: number): Promise<User> {
+    const user = await this.userRepository.findOneById(userId)
     if (user) {
       return user
     } else {
@@ -108,10 +72,10 @@ export class UserService {
     }
   }
 
-  private issueToken (id: string): string {
-    return jwt.sign(<object>{
+  private issueToken (id: number): string {
+    return jwt.sign({
       id: id,
       exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
-    }, jwtConfig.secret)
+    }, (config.get('Jwt') as IJwtConfig).secret)
   }
 }

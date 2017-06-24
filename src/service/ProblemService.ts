@@ -1,41 +1,28 @@
+import { Problem } from 'app/entity'
+import { ProblemRepository } from 'app/repository'
 import { BadRequestError } from 'routing-controllers'
-import { Problem } from 'app/model/Problem'
-import { User } from 'app/model/User'
 import { Service } from 'typedi'
+import { OrmCustomRepository } from 'typeorm-typedi-extensions'
 
 @Service()
 export class ProblemService {
+
+  @OrmCustomRepository(ProblemRepository)
+  private problemRepository: ProblemRepository
+
   public async show (id: number): Promise<Problem> {
-    const problem = await Problem.findById<Problem>(id, {
-      include: [{
-        model: User,
-        as: 'user',
-        attributes: ['name', 'id', 'avatar', 'gender', 'school', 'email', 'remark']
-      }]
-    })
-    if (problem) {
-      return problem
-    } else {
-      throw new BadRequestError('题号有误')
+    const problem = await this.problemRepository.getById(id)
+    if (!problem) {
+      throw new BadRequestError(`题号有误: ${id}`)
     }
+    return problem
   }
 
-  public async list (offset: number, limit: number, sortby: string, order: string): Promise<{ rows: Problem[]; count: number; }> {
-    return await Problem.findAndCountAll<Problem>({
-      limit,
-      offset,
-      order: [[sortby, order]],
-      include: [{
-        model: User,
-        as: 'user',
-        attributes: ['name', 'id', 'avatar', 'gender', 'school', 'email', 'remark']
-      }]
-    })
+  public async list (offset: number, limit: number, sortby: string, order: 'ASC' | 'DESC'): Promise<[Problem[], number]> {
+    return this.problemRepository.getList(offset, limit, sortby, order)
   }
 
   public async recommend (id: number): Promise<Problem[]> {
-    return await Problem.findAll<Problem>({
-      limit: 5
-    })
+    return this.problemRepository.getRecommendList(id)
   }
 }

@@ -1,66 +1,14 @@
 {
-    "defaultSeverity": "error",
+    "defaultSeverity": "warn",
     "extends": [
-        "tslint:recommended",
-        "tslint-microsoft-contrib"
+        "tslint-config-standard"
     ],
-    "jsRules": {},
     "rules": {
-        // 不允许分号
-        "semicolon": [
-            true,
-            "never"
-        ],
-        // 允许 console
-        "no-console":[
-            false
-        ],
-        // 参数对齐
-        "align": [
-            true, 
-            "parameters", 
-            "statements"
-        ],
-        // 强制要求声明 type
         "typedef": [
-            true,
-            "arrow-parameter",
-            "member-variable-declaration",
-            "parameter",
-            "property-declaration"
-        ],
-        // 不强制 jsdoc
-        "missing-jsdoc": [
-            false
-        ],
-        "no-unused-variable": true,
-        // 关闭该规则
-        "ordered-imports": [
-            false
-        ],
-        "no-import-side-effect": [
-            false
-        ],
-        "no-backbone-get-set-outside-model": [
-            false
-        ],
-        "no-invalid-this": [
-            false
-        ],
-        "max-classes-per-file": [
-            false
-        ],
-        "function-name": [
-            false
-        ],
-        "member-access": [
-            false
-        ],
-        "newline-before-return": false,
-        "no-parameter-properties": false,
-        "linebreak-style": [
-            false
+            true, 
+            "call-signature", 
+            "parameter", 
+            "member-variable-declaration"
         ]
-    },
-    "rulesDirectory": []
+    }
 }
