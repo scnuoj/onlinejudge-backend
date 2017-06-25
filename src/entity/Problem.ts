@@ -16,18 +16,6 @@ export class Problem {
   lang: string
 
   @Column('text')
-  input: string
-
-  @Column('text')
-  output: string
-
-  @Column()
-  sampleInput: string
-
-  @Column()
-  sampleOutput: string
-
-  @Column('text')
   inputData: string
 
   @Column('text')
