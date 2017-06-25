@@ -2,6 +2,9 @@
 import { ICacheConfig } from 'app/typing/config'
 import * as config from 'config'
 import * as Redis from 'ioredis'
+import { createConnection } from 'app'
+import { Connection } from 'typeorm'
+import { SubmissionRepository } from 'app/repository'
 
 const queueConfig = config.get('Cache') as ICacheConfig
 
@@ -30,22 +33,20 @@ export const queue = {
 
 // tslint:disable
 Promise.resolve().then(async () => {
+  const connection: Connection = await createConnection
+  const submissionRepository = connection.getCustomRepository(SubmissionRepository)
   for ( ; ; ) {
     const message = await comsumer.brpop(['JUDGER_FINISH'], 0)
     const payload: IJudgerPayload = JSON.parse(message[1])
-    // await Submission.update({
-    //   realTime: payload.real_time,
-    //   error: payload.error,
-    //   exitCode: payload.exit_code,
-    //   cpuTime: payload.cpu_time,
-    //   result: payload.result,
-    //   signal: payload.signal,
-    //   memory: payload.memory
-    // }, {
-    //   where: {
-    //     id: payload.submissionId
-    //   }
-    // })
+    await submissionRepository.updateById(payload.submissionId, {
+      realTime: payload.real_time,
+      error: payload.error,
+      exitCode: payload.exit_code,
+      cpuTime: payload.cpu_time,
+      result: payload.result,
+      signal: payload.signal,
+      memory: payload.memory
+    })
     console.log(payload)
   }
 })

@@ -10,6 +10,7 @@ import 'reflect-metadata'
 import { useContainer as useContainerForRouting, useKoaServer } from 'routing-controllers'
 import { Container } from 'typedi'
 import { Connection, useContainer as useContainerForOrm } from 'typeorm'
+import 'app/library/queue'
 
 useContainerForOrm(Container)
 useContainerForRouting(Container)
