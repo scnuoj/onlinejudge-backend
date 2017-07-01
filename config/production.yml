@@ -1,0 +1,26 @@
+database:
+  name: ENV:DB_NAME
+  host: ENV:DB_HOST
+  port: ENV:DB_PORT
+  username: ENV:DB_USERNAME
+  password: ENV:DB_PASSWORD
+
+cache:
+  host: ENV:RE_HOST
+  port: ENV:RE_PORT
+  db: 0
+  prefix: 'onlinejudge-cache:'
+
+queue:
+  host: ENV:RE_HOST
+  port: ENV:RE_PORT
+  db: 1
+  prefix: 'onlinejudge-queue:'
+
+jwt:
+  secret: ENV:JWT_SECRET
+  algorithm: ENV:JWT_ALGORITHM
+  exp: ENV:JWT_EXP
+
+env: production
+port: 8000
