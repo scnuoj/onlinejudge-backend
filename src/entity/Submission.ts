@@ -33,6 +33,9 @@ export class Submission {
   @Column({ nullable: true })
   error: number
 
+  @Column({ type: 'text', nullable: true })
+  log: string
+
   @OneToOne(type => Problem)
   @JoinColumn()
   problem: Problem

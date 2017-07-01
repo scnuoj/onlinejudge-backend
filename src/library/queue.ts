@@ -45,9 +45,9 @@ Promise.resolve().then(async () => {
       cpuTime: payload.cpu_time,
       result: payload.result,
       signal: payload.signal,
-      memory: payload.memory
+      memory: payload.memory,
+      log: payload.log
     })
-    console.log(payload)
   }
 })
 // tslint:enable
@@ -60,4 +60,5 @@ export interface IJudgerPayload {
   signal: number
   memory: number
   submissionId: string
+  log: string
 }

@@ -3,6 +3,7 @@ import { ProblemRepository, SubmissionRepository, UserRepository } from 'app/rep
 import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
 import { OrmCustomRepository } from 'typeorm-typedi-extensions'
+import { queue } from 'app/library/queue'
 
 @Service()
 export class SubmissionService {
@@ -29,7 +30,7 @@ export class SubmissionService {
       lang
     })
     await this.submissionRepository.persist(submission)
-    // await queue.submitCheckCodeTask(submission.id)
+    await queue.submitCheckCodeTask(submission.id)
     return submission.id
   }
 
@@ -38,7 +39,7 @@ export class SubmissionService {
     if (!submission) {
       throw new BadRequestError('Submission 不存在')
     }
-    return submission.result ? submission : null
+    return submission.result >= 0 ? submission : null
   }
 
   public async show (submissionId: number): Promise<{ result: Submission; state: Submission[]; }> {

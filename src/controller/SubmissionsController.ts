@@ -5,6 +5,16 @@ import { Body, Controller, Get, Param, Post, QueryParams, State, UseBefore } fro
 import { Inject, Service } from 'typedi'
 import { authorization } from 'app/middleware/authorization'
 
+const runResult: string[] = [
+  'PASS',
+  'CPU_TIME_LIMIT_EXCEEDED',
+  'REAL_TIME_LIMIT_EXCEEDED',
+  'MEMORY_LIMIT_EXCEEDED',
+  'RUNTIME_ERROR',
+  'SYSTEM_ERROR',
+  'COMPILE_ERROR' // 自定义的编译错误
+]
+
 @Service()
 @Controller('/v1/submissions')
 @UseBefore(authorization())
@@ -22,9 +32,10 @@ export class SubmissionsController {
   }
 
   @Get('/:submissionId/stat')
-  public async stat (@Param('submissionId') submissionId: number): Promise<{ data: Submission | null }> {
+  public async stat (@Param('submissionId') submissionId: number): Promise<{ data: Submission | null, message: string | null }> {
     const submission = await this.submissionService.stat(submissionId)
     return {
+      message: submission && runResult[submission.result],
       data: submission
     }
   }
