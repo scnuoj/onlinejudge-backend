@@ -9,11 +9,13 @@ cache:
   host: ENV:RE_HOST
   port: ENV:RE_PORT
   db: 0
+  password: ENV:RE_PASSWORD
   prefix: 'onlinejudge-cache:'
 
 queue:
   host: ENV:RE_HOST
   port: ENV:RE_PORT
+  password: ENV:RE_PASSWORD
   db: 1
   prefix: 'onlinejudge-queue:'
 
