@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import 'app/library/config'
 import { database } from 'app/library/database'
 import { transformer } from 'app/middleware/transformer'
 import * as config from 'config'
