@@ -1,17 +1,16 @@
+import 'mocha'
 import { connection, createConnection } from 'app'
 import { Problem, User } from 'app/entity'
 import { ProblemRepository, SubmissionRepository, UserRepository } from 'app/repository'
-import { IJwtConfig } from 'app/typing/config'
 import { assert } from 'chai'
 import * as config from 'config'
 import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
-import 'mocha'
 import * as request from 'supertest'
 import * as faker from 'faker'
 import { Connection } from 'typeorm'
 
-const jwtConfig = config.get('Jwt') as IJwtConfig
+const jwtConfig = config.jwt
 
 describe('UserController', () => {
   let app: {}
@@ -82,7 +81,7 @@ describe('UserController', () => {
     assert.equal(res.body.data.user.name, name)
     assert.notProperty(res.body.data.user, 'password')
 
-    const res2 = await request(app)
+    await request(app)
       .post('/v1/user/login')
       .send({
         nameOrEmail: email,

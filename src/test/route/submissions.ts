@@ -1,15 +1,14 @@
+import 'mocha'
 import { connection, createConnection } from 'app'
 import { Problem, User } from 'app/entity'
 import { ProblemRepository, SubmissionRepository, UserRepository } from 'app/repository'
-import { IJwtConfig } from 'app/typing/config'
 import { assert } from 'chai'
 import * as config from 'config'
 import * as jwt from 'jsonwebtoken'
-import 'mocha'
 import * as request from 'supertest'
 import { Connection } from 'typeorm'
 
-const jwtConfig = config.get('Jwt') as IJwtConfig
+const jwtConfig = config.jwt
 
 describe('SubmissionsController', () => {
 

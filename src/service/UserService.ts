@@ -1,6 +1,5 @@
 import { User } from 'app/entity'
 import { UserRepository } from 'app/repository'
-import { IJwtConfig } from 'app/typing/config'
 import * as config from 'config'
 import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
@@ -76,6 +75,6 @@ export class UserService {
     return jwt.sign({
       id: id,
       exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
-    }, (config.get('Jwt') as IJwtConfig).secret)
+    }, config.jwt.secret)
   }
 }

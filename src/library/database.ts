@@ -1,10 +1,9 @@
 import * as config from 'config'
 import * as path from 'path'
 import 'reflect-metadata'
-import { IDatabaseConfig } from 'app/typing/config'
 import { createConnection, Connection } from 'typeorm'
 
-const dbConfig = config.get('Database') as IDatabaseConfig
+const dbConfig = config.database
 
 const root = path.resolve(__dirname, '..')
 const entityPath = `${root}/entity/*.{js,ts}`

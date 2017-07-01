@@ -1,25 +1,25 @@
-Database:
+database:
   name: onlinejudge
   host: 127.0.0.1
   port: 2306
   username: root
 
-Cache:
+cache:
   host: 127.0.0.1
   port: 5379
   db: 0
   prefix: 'onlinejudge-cache:'
 
-Queue:
+queue:
   host: 127.0.0.1
   port: 5379
   db: 1
   prefix: 'onlinejudge-queue:'
 
-Jwt:
+jwt:
   secret: AQvZatQ7M5fzv1lt2lQboS3ge5z0HlCG
   algorithm: RS256
   exp: 5184000000
 
-Env: development
-Port: 8000
+env: development
+port: 8000

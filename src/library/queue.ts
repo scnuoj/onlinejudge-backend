@@ -1,12 +1,11 @@
 
-import { ICacheConfig } from 'app/typing/config'
 import * as config from 'config'
 import * as Redis from 'ioredis'
 import { createConnection } from 'app'
 import { Connection } from 'typeorm'
 import { SubmissionRepository } from 'app/repository'
 
-const queueConfig = config.get('Cache') as ICacheConfig
+const queueConfig = config.cache
 
 const comsumer = new Redis(queueConfig.port, queueConfig.host, {
   password: queueConfig.password,
