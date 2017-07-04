@@ -43,4 +43,5 @@ export const connection = createConnection.then(c => {
       resolve(app.callback())
     })
   }
-) as Promise<(req: http.IncomingMessage, res: http.ServerResponse) => void>})
+) as Promise<(req: http.IncomingMessage, res: http.ServerResponse) => void>
+})
