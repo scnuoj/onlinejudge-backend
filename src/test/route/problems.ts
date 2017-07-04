@@ -51,4 +51,10 @@ describe('ProblemController', () => {
     assert.equal(res.body.data.id, problem.id)
   })
 
+  it('GET /v1/problems/:id/recommend', async () => {
+    await request(app)
+      .get(`/v1/problems/:id/recommend`)
+      .expect(200)
+  })
+
 })
