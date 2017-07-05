@@ -3,7 +3,6 @@ import { ProblemRepository, SubmissionRepository, UserRepository } from 'app/rep
 import { Problem, User } from 'app/entity'
 import { Connection } from 'typeorm'
 import { Container } from 'typedi'
-import { ProblemService } from 'app/service'
 import { SubmissionService } from 'app/service'
 
 describe.skip('SubmissionService', () => {
@@ -13,7 +12,7 @@ describe.skip('SubmissionService', () => {
   let userRepository: UserRepository
   let problemRepository: ProblemRepository
   let submissionRepository: SubmissionRepository
-  let problemService: ProblemService
+
   let submissionService: SubmissionService
 
   let submissionId: string
@@ -23,7 +22,6 @@ describe.skip('SubmissionService', () => {
     userRepository = db.getCustomRepository(UserRepository)
     problemRepository = db.getCustomRepository(ProblemRepository)
     submissionRepository = db.getCustomRepository(SubmissionRepository)
-    problemService = Container.get(ProblemService)
     submissionService = Container.get(SubmissionService)
 
     user = await userRepository.fake()
