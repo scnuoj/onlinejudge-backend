@@ -4,7 +4,6 @@ import { ProblemRepository, SubmissionRepository, UserRepository } from 'app/rep
 import * as config from 'config'
 import { SHA256 } from 'crypto-js'
 import * as jwt from 'jsonwebtoken'
-import * as faker from 'faker'
 import { Connection } from 'typeorm'
 import { UserService } from 'app/service'
 import { Container } from 'typedi'
@@ -22,10 +21,6 @@ describe.skip('UserService', () => {
   let token: string
 
   let extraUserId: string
-
-  let name = faker.name.firstName()
-  let email = faker.internet.email()
-  let password = faker.internet.password()
 
   before('', async () => {
     db = await createConnection
