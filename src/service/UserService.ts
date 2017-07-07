@@ -1,11 +1,10 @@
 import { User } from 'app/entity'
 import { UserRepository } from 'app/repository'
-import * as config from 'config'
 import { SHA256 } from 'crypto-js'
-import * as jwt from 'jsonwebtoken'
 import { BadRequestError } from 'routing-controllers'
 import { Service } from 'typedi'
 import { OrmCustomRepository } from 'typeorm-typedi-extensions'
+import { issueToken } from 'app/util/issueToken'
 
 @Service()
 export class UserService {
@@ -30,7 +29,7 @@ export class UserService {
     }))
     return {
       user,
-      token: this.issueToken(user.id)
+      token: issueToken(user.id)
     }
   }
 
@@ -40,7 +39,7 @@ export class UserService {
       if (user.password === SHA256(password).toString()) {
         return {
           user,
-          token: this.issueToken(user.id)
+          token: issueToken(user.id)
         }
       }
       throw new BadRequestError('密码错误')
@@ -69,12 +68,5 @@ export class UserService {
     } else {
       throw new BadRequestError('用户不存在')
     }
-  }
-
-  private issueToken (id: number): string {
-    return jwt.sign({
-      id: id,
-      exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
-    }, config.jwt.secret)
   }
 }
