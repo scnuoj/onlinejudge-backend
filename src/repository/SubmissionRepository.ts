@@ -29,7 +29,7 @@ export class SubmissionRepository extends Repository<Submission> {
     const query = this.createQueryBuilder('submission')
                       .offset(offset)
                       .limit(limit)
-                      .select(['submission.problem', 'submission.user', 'submission.id'])
+                      // .select(['submission.problem', 'submission.user', 'submission.id'])
                       .innerJoinAndSelect('submission.problem', 'problem')
                       .innerJoinAndSelect('submission.user', 'user')
     return typeof problemId === 'number' ? query.where('submission.problemId=:problemId', { problemId }).getMany()
