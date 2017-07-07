@@ -3,7 +3,7 @@ import * as config from 'config'
 
 const jwtConfig = config.jwt
 
-export function issueToken (body: any): string {
+export function issueToken (id: number): string {
   const exp = (new Date().getTime() + 5184000000) / 1000
-  return sign({ ...body, exp }, jwtConfig.secret)
+  return sign({ id, exp }, jwtConfig.secret)
 }
