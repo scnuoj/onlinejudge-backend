@@ -22,6 +22,7 @@ describe('SubmissionsController', () => {
   let token: string
 
   let submissionId: string
+  let submissions: string
 
   before('', async () => {
     db = await createConnection
@@ -66,6 +67,19 @@ describe('SubmissionsController', () => {
       })
       .expect(401)
     assert.isFalse(res.body.success)
+  })
+
+  it('GET /v1/submissions', async () => {
+    const res = await request(app)
+      .get('/v1/submissions')
+      .set('Authorization', `Bearer ${token}`)
+      .query({
+        limit: 10,
+        offset: 10,
+        problemId: 10
+      })
+      .expect(200)
+    submissions = res.body.data
   })
 
 })
