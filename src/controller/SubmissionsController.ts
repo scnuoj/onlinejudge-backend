@@ -12,7 +12,8 @@ const runResult: string[] = [
   'MEMORY_LIMIT_EXCEEDED',
   'RUNTIME_ERROR',
   'SYSTEM_ERROR',
-  'COMPILE_ERROR' // 自定义的编译错误
+  'COMPILE_ERROR', // 自定义的编译错误 (具体看 log)
+  'RESULT_NO_MATCH' // 自定义的结果不匹配 (具体看 log)
 ]
 
 @Service()
