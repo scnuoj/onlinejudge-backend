@@ -22,6 +22,7 @@ describe('SubmissionsController', () => {
   let token: string
 
   let submissionId: string
+  let submission: string
   let submissions: string
 
   before('', async () => {
@@ -82,4 +83,11 @@ describe('SubmissionsController', () => {
     submissions = res.body.data
   })
 
+  it('GET /v1/submissions{submissionId}', async () => {
+    const res = await request(app)
+      .get(`/v1/submissions/${submissionId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200)
+    submission = res.body.data
+  })
 })
