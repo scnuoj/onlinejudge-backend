@@ -75,6 +75,7 @@ describe('SubmissionsController', () => {
       .get('/v1/submissions')
       .set('Authorization', `Bearer ${token}`)
       .query({
+        id: problem.id,
         limit: 10,
         offset: 10,
         problemId: 10
@@ -86,6 +87,14 @@ describe('SubmissionsController', () => {
   it('GET /v1/submissions{submissionId}', async () => {
     const res = await request(app)
       .get(`/v1/submissions/${submissionId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200)
+    submission = res.body.data
+  })
+
+  it('GET /v1/submissions/:submissionId/stat', async () => {
+    const res = await request(app)
+      .get(`/v1/submissions/:submissionId/stat/${submissionId}`)
       .set('Authorization', `Bearer ${token}`)
       .expect(200)
     submission = res.body.data
