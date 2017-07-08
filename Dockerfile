@@ -1,9 +1,14 @@
 FROM node:latest
 MAINTAINER ruiming <ruiming.zhuang@gmail.com>
 
+RUN mkdir /onlinejudge
+COPY ./package.json /onlinejudge
+COPY ./yarn.lock /onlinejudge
+RUN cd /onlinejudge && yarn
+
+COPY ./ /onlinejudge
+
 WORKDIR /onlinejudge
-COPY . /onlinejudge/
-RUN yarn install
 
 EXPOSE 8000
 
