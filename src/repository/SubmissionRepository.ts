@@ -25,18 +25,18 @@ export class SubmissionRepository extends Repository<Submission> {
                .getMany()
   }
 
-  public getAllSubmissions (limit: number, offset: number, problemId?: number): Promise<Submission[]> {
+  public getAllSubmissions (limit: number, offset: number, problemId?: number): Promise<[Submission[], number]> {
     const query = this.createQueryBuilder('submission')
                       .offset(offset)
                       .limit(limit)
                       .select(['submission.problem', 'submission.user', 'submission.id'])
                       .innerJoinAndSelect('submission.problem', 'problem')
                       .innerJoinAndSelect('submission.user', 'user')
-    return typeof problemId === 'number' ? query.where('submission.problemId=:problemId', { problemId }).getMany()
-                                         : query.getMany()
+    return typeof problemId === 'number' ? query.where('submission.problemId=:problemId', { problemId }).getManyAndCount()
+                                         : query.getManyAndCount()
   }
 
-  public getMySubmissions (userId: number, limit: number, offset: number, problemId?: number): Promise<Submission[]> {
+  public getMySubmissions (userId: number, limit: number, offset: number, problemId?: number): Promise<[Submission[], number]> {
     console.log(offset, limit, problemId, userId)
     const query = this.createQueryBuilder('submission')
                       .select(['submission.problem', 'submission.user', 'submission.id'])
@@ -45,8 +45,8 @@ export class SubmissionRepository extends Repository<Submission> {
                       .skip(offset)
                       .take(limit)
                       .where('user.id=:userId', { userId })
-    return typeof problemId === 'number' ? query.andWhere('submission.problemId=:problemId', { problemId }).getMany()
-                                         : query.getMany()
+    return typeof problemId === 'number' ? query.andWhere('submission.problemId=:problemId', { problemId }).getManyAndCount()
+                                         : query.getManyAndCount()
   }
 
   public fake (item?: DeepPartial<Submission>): Promise<Submission> {

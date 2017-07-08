@@ -49,7 +49,7 @@ export class SubmissionsController {
   }
 
   @Get('/')
-  public async query (@QueryParams() query: SubmissionQuery, @State('user') user: UserState): Promise<{ data: Submission[] }> {
+  public async query (@QueryParams() query: SubmissionQuery, @State('user') user: UserState): Promise<{ data: [Submission[], number] }> {
     const limit = parseInt(query.limit, 10)
     const offset = parseInt(query.offset, 10)
     const problemId = query.problemId ? parseInt(query.problemId, 10) : undefined
