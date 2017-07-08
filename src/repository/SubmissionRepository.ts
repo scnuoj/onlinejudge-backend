@@ -37,9 +37,8 @@ export class SubmissionRepository extends Repository<Submission> {
   }
 
   public getMySubmissions (userId: number, limit: number, offset: number, problemId?: number): Promise<[Submission[], number]> {
-    console.log(offset, limit, problemId, userId)
     const query = this.createQueryBuilder('submission')
-                      .select(['submission.problem', 'submission.user', 'submission.id'])
+                      // .select(['submission.problem', 'submission.user', 'submission.id'])
                       .innerJoinAndSelect('submission.problem', 'problem')
                       .innerJoinAndSelect('submission.user', 'user')
                       .skip(offset)

@@ -55,10 +55,10 @@ export class SubmissionService {
   }
 
   public async getAllSubmissions (limit: number, offset: number, problemId?: number): Promise<[Submission[], number]> {
-    return this.submissionRepository.getAllSubmissions(offset, limit, problemId)
+    return this.submissionRepository.getAllSubmissions(limit, offset, problemId)
   }
 
   public async getMySubmissions (userId: number, limit: number, offset: number, problemId?: number): Promise<[Submission[], number]> {
-    return this.submissionRepository.getMySubmissions(userId, offset, limit, problemId)
+    return this.submissionRepository.getMySubmissions(userId, limit, offset, problemId)
   }
 }

@@ -53,7 +53,7 @@ export class SubmissionsController {
     const limit = parseInt(query.limit, 10)
     const offset = parseInt(query.offset, 10)
     const problemId = query.problemId ? parseInt(query.problemId, 10) : undefined
-    const submissions = query.selfOnly === 'true' ? await this.submissionService.getMySubmissions(user.id, offset, limit, problemId)
+    const submissions = query.selfOnly === 'true' ? await this.submissionService.getMySubmissions(user.id, limit, offset, problemId)
                                                   : await this.submissionService.getAllSubmissions(limit, offset, problemId)
     return {
       data: submissions
