@@ -22,6 +22,5 @@ export const database: () => Promise<Connection> = () => createConnection({
     migrationsDir: `${root}/migration`
   },
   autoSchemaSync: true,
-  autoMigrationsRun: true,
-  logging: true
+  autoMigrationsRun: true
 })

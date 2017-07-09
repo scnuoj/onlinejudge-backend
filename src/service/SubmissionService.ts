@@ -29,6 +29,8 @@ export class SubmissionService {
       code,
       lang
     })
+    problem.submitCount ++
+    await this.problemRepository.persist(problem)
     await this.submissionRepository.persist(submission)
     await queue.submitCheckCodeTask(submission.id)
     return submission.id

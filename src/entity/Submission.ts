@@ -6,7 +6,7 @@ export class Submission {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column('TEXT')
+  @Column('text')
   code: string
 
   @Column()
